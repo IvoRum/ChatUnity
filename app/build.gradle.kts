@@ -1,14 +1,14 @@
-jdk.tools.jlink.resources.plugins {
+plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    namespace = "com.example.chat_inteface"
+    namespace = "com.example.chatprogram"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.chat_inteface"
+        applicationId = "com.example.chatprogram"
         minSdk = 33
         targetSdk = 33
         versionCode = 1
