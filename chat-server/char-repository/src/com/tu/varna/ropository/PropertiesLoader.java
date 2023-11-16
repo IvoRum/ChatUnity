@@ -6,18 +6,21 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesLoader {
-    public static String loadProperty() throws FileNotFoundException {
+    public static String loadProperty(String key) throws FileNotFoundException {
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream("path/filename"));
+            properties.load(new FileInputStream("database.properties"));
         } catch (IOException e) {
             throw new FileNotFoundException();
         }
 
         String value = null;
-        for(String key : properties.stringPropertyNames()) {
+        try {
             value = properties.getProperty(key);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e+key);
         }
+
         return value;
     }
 }
