@@ -7,9 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="chat-repository" />
+    <orderEntry type="library" name="postgresql-42.5.4" level="project" />
+    <orderEntry type="module" module-name="chat-common" />
   </component>
   <component name="SonarLintModuleSettings">
-    <option name="uniqueId" value="6acbac6c-6118-45dc-83a9-f8390f51fde7" />
+    <option name="uniqueId" value="6e362ff9-71e5-4dfe-bee5-ac9164f8e229" />
   </component>
 </module>

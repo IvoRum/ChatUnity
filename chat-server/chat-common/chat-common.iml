@@ -7,9 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="chat-repository" />
   </component>
   <component name="SonarLintModuleSettings">
-    <option name="uniqueId" value="6acbac6c-6118-45dc-83a9-f8390f51fde7" />
+    <option name="uniqueId" value="52540393-33e3-4587-8da0-dd23545afe8d" />
   </component>
 </module>
