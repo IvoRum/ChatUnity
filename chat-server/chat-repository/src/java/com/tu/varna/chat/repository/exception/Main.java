@@ -1,4 +1,4 @@
-package com.tu.varna.chat.ropository.exception;
+package java.com.tu.varna.chat.repository.exception;
 
 public
 class Main {
