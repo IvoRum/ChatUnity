@@ -1,2 +1,5 @@
-package com.tu.varna.chat.net;public class MultiEchoServer {
+package com.tu.varna.chat.net;
+
+public class MultiEchoServer {
+
 }

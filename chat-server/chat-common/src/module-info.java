@@ -1,2 +1,3 @@
-module $MODULE_NAME$ {
+module chat.common {
+    exports com.tu.varna.chat.common;
 }

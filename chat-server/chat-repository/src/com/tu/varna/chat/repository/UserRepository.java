@@ -24,7 +24,7 @@ public class UserRepository {
 
     public String userRepositoryHeathCheck() throws SQLException {
 
-        String sql= "select Unity_user.id from Unity_user order by Unity_user.id desc limit 1;";
+        String sql= "select Unity_user.id from Unity_user order by Unity_user.id asc limit 1;";
 
         Connection connection= DriverManager.getConnection(JDBC_URL);
 
@@ -49,7 +49,7 @@ public class UserRepository {
 
             int id=resultSet.getInt("id");
             String firstName=resultSet.getString("first_name");
-            String familyName=resultSet.getString("last_name");
+            String familyName=resultSet.getString("family_name");
             String password=resultSet.getString("password");
             String telephone= resultSet.getString("telephone");
             String email=resultSet.getString("email");
