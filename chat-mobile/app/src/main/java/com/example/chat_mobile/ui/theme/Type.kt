@@ -1,4 +1,4 @@
-package com.example.unity_mobile.ui.theme
+package com.example.chat_mobile.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

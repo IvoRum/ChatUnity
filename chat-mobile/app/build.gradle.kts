@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.unity_mobile"
+    namespace = "com.example.chat_mobile"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.unity_mobile"
+        applicationId = "com.example.chat_mobile"
         minSdk = 30
         targetSdk = 33
         versionCode = 1

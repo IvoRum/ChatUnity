@@ -1,4 +1,4 @@
-package com.example.unity_mobile
+package com.example.chat_mobile
 
 import org.junit.Test
 

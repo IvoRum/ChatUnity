@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "unity-mobile"
+rootProject.name = "chat-mobile"
 include(":app")
  
