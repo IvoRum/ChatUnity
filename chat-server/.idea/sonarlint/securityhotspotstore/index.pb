@@ -31,3 +31,11 @@ F
 ,chat-net/src/com/tu/varna/chat/net/Main.java,e\e\ee2100d1eb91d82dc964b32833651c16a439ac39
 g
 7chat-net/src/com/tu/varna/chat/net/MultiEchoServer.java,d\2\d23e5ea9388b5c42a160964f344454419a76f585
+r
+Bchat-net/src/com/tu/varna/chat/net/multi/echo/MultiEchoServer.java,f\7\f7084ffcbe196798b964bf201c30d74ef8f3f40c
+p
+@chat-net/src/com/tu/varna/chat/net/multi/echo/ClientHandler.java,f\6\f67ea5775289009f9e81f59343d21fb691fb70b2
+r
+Bchat-net/src/com/tu/varna/chat/net/multi/echo/MultiEchoClient.java,1\a\1a18f8465f0cd237565b01589a5accdcba3b3a6d
+p
+@chat-net/src/com/tu/varna/chat/net/multi/echo/ClientManager.java,f\b\fbe6c5fc5a7ec2885880f13d024ff6255eac5ec7
