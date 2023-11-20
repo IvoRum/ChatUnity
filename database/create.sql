@@ -4,7 +4,7 @@ CREATE TABLE Unity_user(
     telephone VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,
-    family_name VARCHAR(255) NOT NULL
+    family_name VARCHAR(255) NOT NULL,
     PRIMARY KEY(id)
 );
 

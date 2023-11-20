@@ -1,6 +1,6 @@
 package com.tu.varna.chat.application;
 
-import com.tu.varna.chat.ropository.UserRepository;
+import com.tu.varna.chat.repository.UserRepository;
 
 import java.sql.SQLException;
 
