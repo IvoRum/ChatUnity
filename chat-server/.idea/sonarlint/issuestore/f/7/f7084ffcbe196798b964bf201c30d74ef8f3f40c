@@ -1,7 +1,5 @@
 
 g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(âöã’ÿÿÿÿÿ8æ€üÈ¾1
-D
-java:S2189""Add an end condition to this loop.(ü§è½ùÿÿÿÿ8ŠüÈ¾1
 }
 java:S1450	"[Remove the "serverSocket" field and declare it as a local variable in the relevant methods.(±²º”üÿÿÿÿ8˜üÈ¾1
 G	java:S106"+Replace this use of System.out by a logger.(¬Ûù8´üÈ¾1
