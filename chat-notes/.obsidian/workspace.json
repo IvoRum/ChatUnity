@@ -1,0 +1,188 @@
+{
+  "main": {
+    "id": "b4d9f4ae2c7226b7",
+    "type": "split",
+    "children": [
+      {
+        "id": "912bca6ef4741ce8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4876229c64088466",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          },
+          {
+            "id": "a5d177971226da27",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Threads.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d6bba7ab4760f1ab",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "IO Steam.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a52e8885a228b606",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Socket.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7ed8ae70bd730fcd",
+    "type": "split",
+    "children": [
+      {
+        "id": "1d64513e1c81cfe6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9998f9d89712e439",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "0dcc1cc42a6b65bb",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "cb4d2b26987bc7b9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "79c2e2e0d758dcdb",
+    "type": "split",
+    "children": [
+      {
+        "id": "4b942283eda83b30",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "97961f45f90b5547",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Socket.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "9f8f3b9b19e21d7b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Socket.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "5dc5693752b76503",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "4113d4a7f0e27634",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Socket.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "a52e8885a228b606",
+  "lastOpenFiles": [
+    "IO Steam.md",
+    "Socket.md",
+    "Threads.md"
+  ]
+}
