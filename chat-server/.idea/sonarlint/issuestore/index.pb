@@ -138,3 +138,5 @@ C
 chat-net/.gitignore,e\c\ec406b0ca9bf2c41b371a6c1b377e4ba2698579d
 J
 chat-repository/.gitignore,4\f\4f892f50934b5895b42557fa3b24bbd7e0d90031
+s
+Cchat-net/src/com/tu/varna/chat/net/practice/thred/TelnetServer.java,c\9\c952dd572eae1e51cfaea520f16f52e6a6448ab2
