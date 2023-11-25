@@ -140,3 +140,5 @@ J
 chat-repository/.gitignore,4\f\4f892f50934b5895b42557fa3b24bbd7e0d90031
 s
 Cchat-net/src/com/tu/varna/chat/net/practice/thred/TelnetServer.java,c\9\c952dd572eae1e51cfaea520f16f52e6a6448ab2
+k
+;chat-repository/src/com/tu/varna/chat/entity/UnityUser.java,3\b\3b5af98e77799003b13df3938eef4b77a17e0d4b

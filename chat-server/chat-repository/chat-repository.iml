@@ -73,6 +73,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="jakarta.persistence-api-3.2.0-M1" level="project" />
+    <orderEntry type="library" name="jakarta.persistence-api-3.2.0-M11" level="project" />
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="c2e4dfb8-8b01-49f8-b047-5fd97e6b4044" />

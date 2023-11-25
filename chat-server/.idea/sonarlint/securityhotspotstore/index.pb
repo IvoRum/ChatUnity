@@ -140,3 +140,5 @@ w
 G.idea/sonarlint/issuestore/3/d/3dd6db822e787ed17686c11c58df27ea54f948ef,e\3\e3c64817c8d4ef3f1ac2b204f929f89cfa13e6f0
 s
 Cchat-net/src/com/tu/varna/chat/net/practice/thred/TelnetServer.java,c\9\c952dd572eae1e51cfaea520f16f52e6a6448ab2
+k
+;chat-repository/src/com/tu/varna/chat/entity/UnityUser.java,3\b\3b5af98e77799003b13df3938eef4b77a17e0d4b
