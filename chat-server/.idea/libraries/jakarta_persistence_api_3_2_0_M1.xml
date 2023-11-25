@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jakarta.persistence-api-3.2.0-M1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../libraries/jakarta.persistence-api-3.2.0-M1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

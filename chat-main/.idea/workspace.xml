@@ -5,53 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8c5f461-0012-4723-baab-f17b31519aa8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../chat-server/.idea/libraries/junit_jupiter_api_5_10_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chat-server/.idea/libraries/postgresql_42_6_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chat-server/.idea/sonarlint/issuestore/c/4/c4e9b47244881de9b4d073061370aff53a430b43" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chat-server/.idea/sonarlint/issuestore/c/8/c83439851d61ac9051f5c3a90d75cdb60598a502" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chat-server/.idea/sonarlint/issuestore/e/9/e97fca7f8e152f1ddee8408f685114035ae006e7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chat-server/.idea/sonarlint/securityhotspotstore/c/4/c4e9b47244881de9b4d073061370aff53a430b43" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chat-server/.idea/sonarlint/securityhotspotstore/c/8/c83439851d61ac9051f5c3a90d75cdb60598a502" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chat-server/.idea/sonarlint/securityhotspotstore/e/9/e97fca7f8e152f1ddee8408f685114035ae006e7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/.idea/libraries/postgresql_42_5_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-application/chat-application.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/chat-application/chat-application.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-application/src/com/tu/varna/chat/application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/chat-application/src/com/tu/varna/chat/application/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-application/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/chat-application/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-common/chat-common.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/chat-common/chat-common.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-common/src/com/tu/varna/common/dto/MessageDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-common/src/com/tu/varna/common/dto/UserDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-common/src/com/tu/varna/common/property/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-common/src/com/tu/varna/common/property/PropertiesLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-common/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/chat-common/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-repository/chat-repository.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/chat-repository/chat-repository.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-repository/src/java/com/tu/varna/chat/repository/MassageRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-repository/src/java/com/tu/varna/chat/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-repository/src/java/com/tu/varna/chat/repository/exception/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-repository/src/java/com/tu/varna/chat/repository/exception/PropertieNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-repository/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/chat-repository/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-repository/src/test/com/tu/varna/chat/repository/DatabaseHeth.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/chat-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/chat-server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-application/com/tu/varna/chat/application/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/out/production/chat-application/com/tu/varna/chat/application/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-application/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/out/production/chat-application/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-common/com/tu/varna/common/property/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-common/com/tu/varna/common/property/PropertiesLoader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-common/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/out/production/chat-common/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-repo/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-repo/com/tu/varna/chat/ropository/PropertiesLoader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-repo/com/tu/varna/chat/ropository/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-repo/com/tu/varna/chat/ropository/database.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-repo/com/tu/varna/chat/ropository/exception/PropertieNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-repo/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-repository/com/tu/varna/chat/ropository/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-repository/com/tu/varna/chat/ropository/exception/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-repository/com/tu/varna/chat/ropository/exception/PropertieNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-repository/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-server/out/production/chat-repository/module-info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/out/production/chat-server/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-server/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-mobile/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-mobile/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-mobile/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-mobile/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-mobile/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-mobile/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-notes/.obsidian/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-notes/.obsidian/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-notes/.obsidian/appearance.json" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-notes/.obsidian/appearance.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-notes/.obsidian/core-plugins-migration.json" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-notes/.obsidian/core-plugins-migration.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-notes/.obsidian/core-plugins.json" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-notes/.obsidian/core-plugins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-notes/.obsidian/workspace.json" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-notes/.obsidian/workspace.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-notes/IO Steam.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-notes/IO Steam.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-notes/Socket.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-notes/Socket.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +43,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "corretto-17",
     "last_opened_file_path": "C:/Users/ivail/_Spring/ChatUnity/chat-server",
     "node.js.detected.package.eslint": "true",
@@ -104,19 +69,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="chat-server" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="chat-server" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -132,6 +84,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700374798899</updated>
       <workItem from="1700374800208" duration="2226000" />
+      <workItem from="1700774422494" duration="50000" />
     </task>
     <servers />
   </component>
