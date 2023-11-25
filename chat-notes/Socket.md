@@ -116,3 +116,64 @@ public class MultiUserServer
     }   
 }
 ```
+# Multi Threaded server
+
+````
+package socket;
+import java.net.*;
+import java.io.*;
+
+public class MultiThreadedServer 
+{
+    public static void main(String [] args)
+    {
+        try
+        {
+            ServerSocket serverSocket = new ServerSocket(9090);
+            boolean stop = false;
+            while(!stop)
+            {
+                System.out.println("Waiting for clients...");
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Client is connected.");
+                ClientThread clientThread = new ClientThread(clientSocket);
+                clientThread.start();
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.toString());
+        }
+    }
+}
+```
+#InetAddress
+
+
+package socket;
+import java.io.*;
+import java.net.*;
+
+/**
+ *
+ * @author catalin
+ */
+public class InetAddressExample 
+{
+    public static void main(String [] args)
+    {
+        try
+        {
+            InetAddress address = InetAddress.getLocalHost();
+            System.out.println(address.getHostAddress());
+            System.out.println(address.getHostName());
+            InetAddress address2 = InetAddress.getByName("google.com");
+            System.out.println(address2.getHostAddress());
+            System.out.println(address2.getHostName());
+        }
+        catch(IOException e)
+        {
+            System.out.println(e.toString());
+        }
+    }
+}
