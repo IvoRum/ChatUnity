@@ -138,3 +138,5 @@ C
 chat-net/.gitignore,e\c\ec406b0ca9bf2c41b371a6c1b377e4ba2698579d
 J
 chat-repository/.gitignore,4\f\4f892f50934b5895b42557fa3b24bbd7e0d90031
+s
+Cchat-net/src/com/tu/varna/chat/net/practice/thred/ServerThread.java,1\6\16899e56151e5075a56e879e5bd11d578009d813
