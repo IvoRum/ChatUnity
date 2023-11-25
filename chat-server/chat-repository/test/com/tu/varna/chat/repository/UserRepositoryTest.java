@@ -1,20 +1,26 @@
 package com.tu.varna.chat.repository;
 
 import com.tu.varna.chat.common.UserDto;
-import org.junit.jupiter.api.BeforeAll;
+import com.tu.varna.chat.factory.jpa.JpaChatUnityRepositoryFactory;
+import com.tu.varna.chat.model.UnityUser;
+import jakarta.persistence.EntityTransaction;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserRepositoryTest {
+    private JpaChatUnityRepositoryFactory jpaChatUnityRepositoryFactory;
 
-    static UserRepository underTest;
+    private UserRepository underTest;
 
-    @BeforeAll
-     static void initUserRepo() {
-        underTest = new UserRepository();
+    @BeforeEach
+    void initUserRepo() {
+        jpaChatUnityRepositoryFactory=new JpaChatUnityRepositoryFactory();
+        underTest = jpaChatUnityRepositoryFactory.getUserRepository();
     }
 
     @Test
@@ -39,5 +45,15 @@ class UserRepositoryTest {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    void fildAllUsers(){
+        List<UnityUser> recivedUsers;
+        final EntityTransaction transaction=jpaChatUnityRepositoryFactory.getManager().getTransaction();
+        transaction.begin();
+
+        recivedUsers=underTest.getAllUsersSuccessful();
+        assertEquals(3,recivedUsers.size());
     }
 }

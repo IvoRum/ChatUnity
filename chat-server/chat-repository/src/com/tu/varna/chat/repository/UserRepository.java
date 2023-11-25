@@ -2,6 +2,8 @@ package com.tu.varna.chat.repository;
 
 import com.tu.varna.chat.common.PropertiesLoader;
 import com.tu.varna.chat.common.UserDto;
+import com.tu.varna.chat.model.UnityUser;
+import jakarta.persistence.EntityManager;
 
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -9,10 +11,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.List;
 
 
 public class UserRepository {
     private static final String JDBC_URL;
+    private final EntityManager entityManager;
+
+    public UserRepository(EntityManager entityManager) {
+        assert entityManager != null : "EntityManager should not be null!";
+
+        this.entityManager = entityManager;
+    }
 
     static {
         try {
@@ -56,5 +66,9 @@ public class UserRepository {
 
             return new UserDto(id,firstName,familyName, telephone,password,email);
         }
+    }
+
+    public List<UnityUser> getAllUsersSuccessful(){
+        return entityManager.createNamedQuery("unity_user.findAll", UnityUser.class).setMaxResults(3).getResultList();
     }
 }
