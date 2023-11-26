@@ -1,0 +1,91 @@
+
+^
+java:S1192Î"GDefine a constant instead of duplicating this literal "seller" 6 times.(Ê«Øù
+s
+java:S1192U"]Define a constant instead of duplicating this literal "Customer should not be null!" 5 times.(ôŠ¦Û
+r
+java:S1192”"[Define a constant instead of duplicating this literal "Seller should not be null!" 6 times.(üìœÆ
+u
+java:S1192¤"YDefine a constant instead of duplicating this literal "Item should not be null!" 4 times.(‘«¾§ùÿÿÿÿ
+u
+java:S11924"ZDefine a constant instead of duplicating this literal "Email should not be null!" 4 times.(Ÿûğ²şÿÿÿÿ
+b
+java:S1192Õ"FDefine a constant instead of duplicating this literal "items" 4 times.(ù†¦ğùÿÿÿÿ
+e
+java:S1192»"IDefine a constant instead of duplicating this literal "customer" 6 times.(ê¹Èûÿÿÿÿ
+C
+java:S4274-"(Replace this assert with a proper check.(ã†Êüÿÿÿÿ
+C
+java:S42744"(Replace this assert with a proper check.(Ÿûğ²şÿÿÿÿ
+C
+java:S42745"(Replace this assert with a proper check.(ª¢åÑùÿÿÿÿ
+>
+java:S42746"(Replace this assert with a proper check.(¶Ñ¦ş
+C
+java:S4274M"(Replace this assert with a proper check.(Ÿûğ²şÿÿÿÿ
+>
+java:S4274U"(Replace this assert with a proper check.(ôŠ¦Û
+C
+java:S4274V"(Replace this assert with a proper check.(±Çşèûÿÿÿÿ
+C
+java:S4274W"(Replace this assert with a proper check.(ÆşÒ¯øÿÿÿÿ
+=
+java:S4274X"(Replace this assert with a proper check.(–¨Šm
+>
+java:S4274Y"(Replace this assert with a proper check.( ×±Û
+C
+java:S4274d"(Replace this assert with a proper check.(Ÿûğ²şÿÿÿÿ
+C
+java:S4274e"(Replace this assert with a proper check.(ª¢åÑùÿÿÿÿ
+>
+java:S4274f"(Replace this assert with a proper check.(¶Ñ¦ş
+C
+java:S4274g"(Replace this assert with a proper check.(±Çşèûÿÿÿÿ
+C
+java:S4274h"(Replace this assert with a proper check.(ÆşÒ¯øÿÿÿÿ
+=
+java:S4274i"(Replace this assert with a proper check.(–¨Šm
+>
+java:S4274j"(Replace this assert with a proper check.( ×±Û
+D
+java:S4274…"(Replace this assert with a proper check.(Ÿûğ²şÿÿÿÿ
+D
+java:S4274Œ"(Replace this assert with a proper check.(è‹ìÛıÿÿÿÿ
+?
+java:S4274”"(Replace this assert with a proper check.(üìœÆ
+D
+java:S4274•"(Replace this assert with a proper check.(è‹ìÛıÿÿÿÿ
+?
+java:S4274–"(Replace this assert with a proper check.(ˆÁÚÂ
+?
+java:S4274£"(Replace this assert with a proper check.(üìœÆ
+D
+java:S4274¤"(Replace this assert with a proper check.(‘«¾§ùÿÿÿÿ
+?
+java:S4274­"(Replace this assert with a proper check.(ôŠ¦Û
+?
+java:S4274¶"(Replace this assert with a proper check.(ôŠ¦Û
+?
+java:S4274Ë"(Replace this assert with a proper check.(üìœÆ
+?
+java:S4274Ş"(Replace this assert with a proper check.(ôŠ¦Û
+?
+java:S4274ß"(Replace this assert with a proper check.(üìœÆ
+?
+java:S4274÷"(Replace this assert with a proper check.(ôŠ¦Û
+D
+java:S4274ø"(Replace this assert with a proper check.(‘«¾§ùÿÿÿÿ
+?
+java:S4274"(Replace this assert with a proper check.(üìœÆ
+D
+java:S4274‘"(Replace this assert with a proper check.(‘«¾§ùÿÿÿÿ
+D
+java:S4274ª"(Replace this assert with a proper check.(Ã”ÕÏüÿÿÿÿ
+?
+java:S4274«"(Replace this assert with a proper check.(üìœÆ
+D
+java:S4274¬"(Replace this assert with a proper check.(‘«¾§ùÿÿÿÿ
+D
+java:S4274¶"(Replace this assert with a proper check.(Ã”ÕÏüÿÿÿÿ
+D
+java:S4274·"(Replace this assert with a proper check.(şÅÿÿÿÿÿ

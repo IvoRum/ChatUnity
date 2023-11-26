@@ -10,6 +10,7 @@ public class MultiEchoClient {
     public static void main(String[] args){
         try{
             host=InetAddress.getLocalHost();
+            System.out.println(InetAddress.getLocalHost().getHostAddress());
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }

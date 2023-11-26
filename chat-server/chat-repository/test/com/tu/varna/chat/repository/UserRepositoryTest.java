@@ -1,6 +1,6 @@
 package com.tu.varna.chat.repository;
 
-import com.tu.varna.chat.common.UserDto;
+import com.tu.varna.chat.common.dto.UserDto;
 import com.tu.varna.chat.factory.jpa.JpaChatUnityRepositoryFactory;
 import com.tu.varna.chat.model.UnityUser;
 import jakarta.persistence.EntityTransaction;

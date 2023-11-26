@@ -100,7 +100,7 @@ public class MultiUserServer
             Socket socket = serverSocket.accept();
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             out.println("Hello  client!");
-            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedReader input = new BufferedReader(new  InputStreamReader(socket.getInputStream()));
             String clientInput = input.readLine();
             System.out.println(clientInput);
             input.close();

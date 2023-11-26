@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/chat-net/chat-net.iml" filepath="$PROJECT_DIR$/chat-net/chat-net.iml" />
       <module fileurl="file://$PROJECT_DIR$/chat-repository/chat-repository.iml" filepath="$PROJECT_DIR$/chat-repository/chat-repository.iml" />
       <module fileurl="file://$PROJECT_DIR$/chat-server.iml" filepath="$PROJECT_DIR$/chat-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chat-services/chat-services.iml" filepath="$PROJECT_DIR$/chat-services/chat-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chat-services-impl/chat-services-impl.iml" filepath="$PROJECT_DIR$/chat-services-impl/chat-services-impl.iml" />
     </modules>
   </component>
 </project>

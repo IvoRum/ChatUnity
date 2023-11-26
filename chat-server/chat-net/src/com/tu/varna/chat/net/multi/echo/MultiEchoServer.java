@@ -12,9 +12,9 @@ public class MultiEchoServer {
     public static void main(String[] args) throws IOException {
 
         try {
-            System.out.println("\n Creating socket \n");
             serverSocket=new ServerSocket(PORT);
-            System.out.println("\n Socket Created \n");
+            System.out.println(serverSocket.getInetAddress());
+            System.out.println(serverSocket.getLocalSocketAddress());
         } catch (IOException e) {
 
             throw new RuntimeException(e+"Socket did not open on port 1300");
@@ -22,9 +22,10 @@ public class MultiEchoServer {
         do{
             Socket clientSocket=serverSocket.accept();
             System.out.println("\n New client Accepted! \n");
-
+            System.out.println(serverSocket.getInetAddress());
+            System.out.println(serverSocket.getLocalSocketAddress());
             Thread handler = new ClientHandler(clientSocket);
             handler.start();
-        }while (true);
+        }while (!serverSocket.isClosed());
     }
 }
