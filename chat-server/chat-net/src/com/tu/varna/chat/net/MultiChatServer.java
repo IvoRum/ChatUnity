@@ -29,6 +29,12 @@ public class MultiChatServer {
             handler.start();
         }while (!serverSocket.isClosed());
     }
+    /*To access multible sockets use
+         for (;;) {
+            SocketHandler socketHander = new SocketHandler(serverSocket.accept());
+            socketHander.start();
+        }
+    */
 
 
 }

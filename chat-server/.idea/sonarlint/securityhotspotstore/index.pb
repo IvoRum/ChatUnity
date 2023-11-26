@@ -79,3 +79,5 @@ n
 >chat-common/src/com/tu/varna/chat/common/NetMessageStatus.java,e\7\e7569cc7c9640f6f5ce401cf71010c34b668f32a
 r
 Bchat-common/src/com/tu/varna/chat/common/net/NetMessageStatus.java,c\a\cab46f14423c3860270465aa2f949168dc419e21
+e
+5chat-net/src/com/tu/varna/chat/net/SocketHandler.java,f\0\f0a85915099fe268ef86af2241df49f3724cce05
