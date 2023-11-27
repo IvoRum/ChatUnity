@@ -1,8 +1,6 @@
 
 t
 Dchat-repository/src/com/tu/varna/chat/repository/UserRepository.java,5\e\5edc467489ac9ef4af46a03750cfdca2c8747fe4
-s
-Cchat-net/src/com/tu/varna/chat/net/practice/thred/TelnetServer.java,c\9\c952dd572eae1e51cfaea520f16f52e6a6448ab2
 r
 Bchat-net/src/com/tu/varna/chat/net/multi/echo/MultiEchoClient.java,1\a\1a18f8465f0cd237565b01589a5accdcba3b3a6d
 r
@@ -27,14 +25,6 @@ S
 chat-server.iml,3\d\3dd6db822e787ed17686c11c58df27ea54f948ef
 \
 ,chat-repository/src/META-INF/persistence.xml,7\b\7be6ff1c5a916830e3105bcb03f92ca8925206ba
-
-Q.idea/sonarlint/securityhotspotstore/7/8/78662e7d75f2024e0176c8178e6f56e5925b6332,c\3\c3297b97136b5a94d3e71cbd4a82e048605c567b
-
-Q.idea/sonarlint/securityhotspotstore/0/9/09705a88d8689d5ef3b5bf825072e3031f697a6f,5\d\5d78f053f90354ebb3088ee47c6951f0dc3c7424
-
-Q.idea/sonarlint/securityhotspotstore/a/2/a248edce0f76510a50395ba3c21715baf7be1656,9\c\9c779480d7c369627568a4e8cabbb0318cb25354
-
-Q.idea/sonarlint/securityhotspotstore/f/0/f002645071a11891037e61a900679f711808d4a5,4\9\4905e6dda8b9c0bd35762b3c90a0d17b37ce8a23
 ]
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
 
@@ -55,28 +45,10 @@ X
 (chat-repository/META-INF/persistence.xml,a\8\a88969890c14e7bb2ca08663e38740035e412677
 ^
 ..idea/libraries/hibernate_core_6_4_0_Final.xml,b\6\b6542e263de17ce7b8cf845a9d8044993beebbb9
-i
-9chat-net/src/com/tu/varna/chat/net/server/ChatServer.java,2\d\2d5e996a4cae0248dd1cf1b2b78795b3a194f11a
-i
-9chat-net/src/com/tu/varna/chat/net/server/MainServer.java,6\1\6183261536db312bbc5e5dd008c9579e28d59f88
-\
-,chat-net/src/com/tu/varna/chat/net/Main.java,e\e\ee2100d1eb91d82dc964b32833651c16a439ac39
-n
->chat-net/src/com/tu/varna/chat/net/server/MultiChatServer.java,7\2\72a5c54659f68508bdcbdc61f3c579d328e219a7
-s
-Cchat-net/src/com/tu/varna/chat/net/server/chat/MultiChatServer.java,5\d\5d80e220af588a84f954930486eb2f89ddecb7a1
-b
-2chat-net/src/com/tu/varna/chat/net/MainServer.java,f\9\f90556402db0edeb04ead1f9e383fe252270d254
 g
 7chat-net/src/com/tu/varna/chat/net/MultiChatServer.java,2\b\2b60a1c3bac51d049aea7233a96a8cde49671faa
 g
 7chat-net/src/com/tu/varna/chat/net/chat/MainServer.java,d\b\db5069a6821e4cbc80445f567e711e4fa756e2de
-K
-chat-services/src/Main.java,2\c\2c67d1c9a4686c9f86e14fd572b95e0cec68e91c
-P
- chat-services-impl/src/Main.java,8\2\8210338a3312fe17a38e602469ce5e1a4835ded4
-n
->chat-common/src/com/tu/varna/chat/common/NetMessageStatus.java,e\7\e7569cc7c9640f6f5ce401cf71010c34b668f32a
 r
 Bchat-common/src/com/tu/varna/chat/common/net/NetMessageStatus.java,c\a\cab46f14423c3860270465aa2f949168dc419e21
 e

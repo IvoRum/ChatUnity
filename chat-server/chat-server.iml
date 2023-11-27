@@ -6,10 +6,13 @@
       <sourceFolder url="file://$MODULE_DIR$/chat-net/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/chat-services-impl/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chat-services/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="postgresql-42.6.0" level="project" />
+    <orderEntry type="module" module-name="chat-common" />
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="8695ec6f-cc8c-4553-9049-712a8eec2a6f" />
