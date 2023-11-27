@@ -57,3 +57,39 @@ VALUES (19, '', '08345634', '', '', '');
 
 INSERT INTO Unity_user(id, email, telephone, password, first_name, family_name)
 VALUES (20, '', '0834563456', '', '', '');
+
+/*
+    Frientds creating a new chat
+*/
+
+INSERT INTO friend_relation(id_friend,id_user)
+VALUES(1,2);
+
+/* Create new conversation */
+
+INSERT INTO conversation(conversation_name,id)
+VALUES('Ivaylo_Damqn',1);
+
+/* Added ivo to chat 1*/
+INSERT INTO user_conversation_relation(id_conversation,id_user)
+VALUES(1,1);
+
+/* Added ivo to chat 2*/
+INSERT INTO user_conversation_relation(id_conversation,id_user)
+VALUES(1,2);
+
+/* Add 5 test massages */
+INSERT INTO message(content,id_reciver,id_sender,message_order,message_status,time_stamp)
+VALUES('Test messages - 1- Reciver Damqn; Sender Ivo  Order:1',1,1,1,3,'2023-11-27');
+
+INSERT INTO message(content,id_reciver,id_sender,message_order,message_status,time_stamp)
+VALUES('Test messages - 2- Reciver Ivo; Sender Damqn  Order:2',1,2,2,3,'2023-11-27');
+
+INSERT INTO message(content,id_reciver,id_sender,message_order,message_status,time_stamp)
+VALUES('Test messages - 3- Reciver Damqn; Sender Ivo  Order:3',1,1,3,3,'2023-11-27');
+
+INSERT INTO message(content,id_reciver,id_sender,message_order,message_status,time_stamp)
+VALUES('Test messages - 4- Reciver Ivo; Sender Damqn  Order:4',1,2,4,3,'2023-11-27');
+
+INSERT INTO message(content,id_reciver,id_sender,message_order,message_status,time_stamp)
+VALUES('Test messages - 5- Reciver Damqn; Sender Ivo  Order:5',1,1,5,3,'2023-11-27');

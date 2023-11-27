@@ -1,0 +1,10 @@
+com\dxc\basket\persistence\model\Login.class
+com\dxc\basket\persistence\repositories\BasketRepository.class
+com\dxc\basket\persistence\model\Customer.class
+com\dxc\basket\persistence\model\Country.class
+com\dxc\basket\persistence\model\Seller.class
+com\dxc\basket\persistence\model\SellerItem.class
+com\dxc\basket\persistence\model\Address.class
+com\dxc\basket\persistence\model\Item.class
+com\dxc\basket\persistence\model\OrderItem.class
+com\dxc\basket\persistence\model\Order.class

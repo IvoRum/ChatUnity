@@ -1,0 +1,13 @@
+com\dxc\basket\persistence\entities\jpa\JpaLogin.class
+com\dxc\basket\persistence\repositories\jpa\JpaBasketRepository$Mode.class
+com\dxc\basket\persistence\entities\jpa\JpaSellerItemId.class
+com\dxc\basket\persistence\repositories\jpa\JpaBasketRepository.class
+com\dxc\basket\persistence\entities\jpa\JpaSeller.class
+com\dxc\basket\persistence\factories\jpa\JpaBasketRepositoryFactory.class
+com\dxc\basket\persistence\entities\jpa\JpaItem.class
+com\dxc\basket\persistence\entities\jpa\JpaOrderItemId.class
+com\dxc\basket\persistence\entities\jpa\JpaOrder.class
+com\dxc\basket\persistence\entities\jpa\JpaOrderItem.class
+com\dxc\basket\persistence\entities\jpa\JpaSellerItem.class
+com\dxc\basket\persistence\entities\jpa\JpaCustomer.class
+com\dxc\basket\persistence\entities\jpa\JpaAddress.class

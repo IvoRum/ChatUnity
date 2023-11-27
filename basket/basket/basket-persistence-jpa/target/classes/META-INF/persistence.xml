@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+    version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence 
+                        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+>
+
+    <persistence-unit name="basket-jpa-hibernate">
+
+        <!-- All entities to work with in JPA. -->
+        <class>com.dxc.basket.persistence.entities.jpa.JpaAddress</class>
+        <class>com.dxc.basket.persistence.entities.jpa.JpaCustomer</class>
+        <class>com.dxc.basket.persistence.entities.jpa.JpaItem</class>
+        <class>com.dxc.basket.persistence.entities.jpa.JpaLogin</class>
+        <class>com.dxc.basket.persistence.entities.jpa.JpaOrder</class>
+        <class>com.dxc.basket.persistence.entities.jpa.JpaOrderItem</class>
+        <class>com.dxc.basket.persistence.entities.jpa.JpaOrderItemId</class>
+        <class>com.dxc.basket.persistence.entities.jpa.JpaSeller</class>
+        <class>com.dxc.basket.persistence.entities.jpa.JpaSellerItem</class>
+        <class>com.dxc.basket.persistence.entities.jpa.JpaSellerItemId</class>
+
+        <!-- Configure JDBC & hibernate -->
+        <properties>
+            <property
+                name="javax.persistence.jdbc.driver"
+                value="org.hsqldb.jdbcDriver" />
+            <property
+                name="javax.persistence.jdbc.url"
+                value="jdbc:hsqldb:mem:sample;shutdown=true" />
+            <property
+                name="javax.persistence.jdbc.user"
+                value="sa" />
+            <property
+                name="javax.persistence.jdbc.password"
+                value="" />
+            <property
+                name="javax.persistence.schema-generation.database.action"
+                value="drop-and-create" />
+
+            <property
+                name="hibernate.dialect"
+                value="org.hibernate.dialect.HSQLDialect" />
+            <property
+                name="hibernate.hbm2ddl.auto"
+                value="validate" />
+
+            <property
+                name="hibernate.jpa.compliance.transaction"
+                value="true" />
+            <property
+                name="hibernate.jpa.compliance.query"
+                value="true" />
+            <property
+                name="hibernate.jpa.compliance.list"
+                value="true" />
+            <property
+                name="hibernate.jpa.compliance.closed"
+                value="true" />
+            <property
+                name="hibernate.jpa.compliance.proxy"
+                value="true" />
+            <property
+                name="hibernate.jpa.compliance.global_id_generators"
+                value="true" />
+
+            <property
+                name="hibernate.show_sql"
+                value="true" />
+            <property
+                name="hibernate.format_sql"
+                value="true" />
+            <property
+                name="hibernate.use_sql_comments"
+                value="true" />
+        </properties>
+
+    </persistence-unit>
+</persistence>
