@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.dxc.basket.persistence.repositories.tests.JpaBasketRepositoryTest" time="1.93" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="18"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Workspace\basket\basket\basket-persistence-jpa\target\test-classes;C:\Workspace\basket\basket\basket-persistence-jpa\target\classes;C:\Workspace\basket\basket\basket-persistence-api\target\basket-persistence-api-1.0-SNAPSHOT.jar;C:\Users\irumenov2\.m2\repository\javax\persistence\javax.persistence-api\2.2\javax.persistence-api-2.2.jar;C:\Users\irumenov2\.m2\repository\org\hibernate\hibernate-core\5.5.7.Final\hibernate-core-5.5.7.Final.jar;C:\Users\irumenov2\.m2\repository\org\jboss\logging\jboss-logging\3.4.2.Final\jboss-logging-3.4.2.Final.jar;C:\Users\irumenov2\.m2\repository\org\javassist\javassist\3.27.0-GA\javassist-3.27.0-GA.jar;C:\Users\irumenov2\.m2\repository\net\bytebuddy\byte-buddy\1.11.12\byte-buddy-1.11.12.jar;C:\Users\irumenov2\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\irumenov2\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.1.1.Final\jboss-transaction-api_1.2_spec-1.1.1.Final.jar;C:\Users\irumenov2\.m2\repository\org\jboss\jandex\2.2.3.Final\jandex-2.2.3.Final.jar;C:\Users\irumenov2\.m2\repository\com\fasterxml\classmate\1.5.1\classmate-1.5.1.jar;C:\Users\irumenov2\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\irumenov2\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.1.2.Final\hibernate-commons-annotations-5.1.2.Final.jar;C:\Users\irumenov2\.m2\repository\javax\xml\bind\jaxb-api\2.3.1\jaxb-api-2.3.1.jar;C:\Users\irumenov2\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.1\jaxb-runtime-2.3.1.jar;C:\Users\irumenov2\.m2\repository\org\glassfish\jaxb\txw2\2.3.1\txw2-2.3.1.jar;C:\Users\irumenov2\.m2\repository\com\sun\istack\istack-commons-runtime\3.0.7\istack-commons-runtime-3.0.7.jar;C:\Users\irumenov2\.m2\repository\org\jvnet\staxex\stax-ex\1.8\stax-ex-1.8.jar;C:\Users\irumenov2\.m2\repository\com\sun\xml\fastinfoset\FastInfoset\1.2.15\FastInfoset-1.2.15.jar;C:\Users\irumenov2\.m2\repository\org\hsqldb\hsqldb\2.6.0\hsqldb-2.6.0.jar;C:\Users\irumenov2\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.8.0\junit-jupiter-engine-5.8.0.jar;C:\Users\irumenov2\.m2\repository\org\junit\platform\junit-platform-engine\1.8.0\junit-platform-engine-1.8.0.jar;C:\Users\irumenov2\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\irumenov2\.m2\repository\org\junit\platform\junit-platform-commons\1.8.0\junit-platform-commons-1.8.0.jar;C:\Users\irumenov2\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.0\junit-jupiter-api-5.8.0.jar;C:\Users\irumenov2\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Sofia"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="18"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-18.0.2\bin"/>
+    <property name="sun.java.command" value="C:\Users\irumenov2\AppData\Local\Temp\surefire16569894758797002487\surefirebooter2919569595438973939.jar C:\Users\irumenov2\AppData\Local\Temp\surefire16569894758797002487 2023-07-06T09-03-29_453-jvmRun1 surefire4602750568711374243tmp surefire_018217867582505409767tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Workspace\basket\basket\basket-persistence-jpa\target\test-classes;C:\Workspace\basket\basket\basket-persistence-jpa\target\classes;C:\Workspace\basket\basket\basket-persistence-api\target\basket-persistence-api-1.0-SNAPSHOT.jar;C:\Users\irumenov2\.m2\repository\javax\persistence\javax.persistence-api\2.2\javax.persistence-api-2.2.jar;C:\Users\irumenov2\.m2\repository\org\hibernate\hibernate-core\5.5.7.Final\hibernate-core-5.5.7.Final.jar;C:\Users\irumenov2\.m2\repository\org\jboss\logging\jboss-logging\3.4.2.Final\jboss-logging-3.4.2.Final.jar;C:\Users\irumenov2\.m2\repository\org\javassist\javassist\3.27.0-GA\javassist-3.27.0-GA.jar;C:\Users\irumenov2\.m2\repository\net\bytebuddy\byte-buddy\1.11.12\byte-buddy-1.11.12.jar;C:\Users\irumenov2\.m2\repository\antlr\antlr\2.7.7\antlr-2.7.7.jar;C:\Users\irumenov2\.m2\repository\org\jboss\spec\javax\transaction\jboss-transaction-api_1.2_spec\1.1.1.Final\jboss-transaction-api_1.2_spec-1.1.1.Final.jar;C:\Users\irumenov2\.m2\repository\org\jboss\jandex\2.2.3.Final\jandex-2.2.3.Final.jar;C:\Users\irumenov2\.m2\repository\com\fasterxml\classmate\1.5.1\classmate-1.5.1.jar;C:\Users\irumenov2\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\irumenov2\.m2\repository\org\hibernate\common\hibernate-commons-annotations\5.1.2.Final\hibernate-commons-annotations-5.1.2.Final.jar;C:\Users\irumenov2\.m2\repository\javax\xml\bind\jaxb-api\2.3.1\jaxb-api-2.3.1.jar;C:\Users\irumenov2\.m2\repository\org\glassfish\jaxb\jaxb-runtime\2.3.1\jaxb-runtime-2.3.1.jar;C:\Users\irumenov2\.m2\repository\org\glassfish\jaxb\txw2\2.3.1\txw2-2.3.1.jar;C:\Users\irumenov2\.m2\repository\com\sun\istack\istack-commons-runtime\3.0.7\istack-commons-runtime-3.0.7.jar;C:\Users\irumenov2\.m2\repository\org\jvnet\staxex\stax-ex\1.8\stax-ex-1.8.jar;C:\Users\irumenov2\.m2\repository\com\sun\xml\fastinfoset\FastInfoset\1.2.15\FastInfoset-1.2.15.jar;C:\Users\irumenov2\.m2\repository\org\hsqldb\hsqldb\2.6.0\hsqldb-2.6.0.jar;C:\Users\irumenov2\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.8.0\junit-jupiter-engine-5.8.0.jar;C:\Users\irumenov2\.m2\repository\org\junit\platform\junit-platform-engine\1.8.0\junit-platform-engine-1.8.0.jar;C:\Users\irumenov2\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\irumenov2\.m2\repository\org\junit\platform\junit-platform-commons\1.8.0\junit-platform-commons-1.8.0.jar;C:\Users\irumenov2\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.0\junit-jupiter-api-5.8.0.jar;C:\Users\irumenov2\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\irumenov2"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-07-19"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-18.0.2"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Workspace\basket\basket\basket-persistence-jpa"/>
+    <property name="style.color" value="always"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\irumenov2\AppData\Local\Temp\surefire16569894758797002487\surefirebooter2919569595438973939.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="18.0.2+9-61"/>
+    <property name="user.name" value="irumenov2"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\irumenov2\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\IRUMEN~1\AppData\Local\Temp\"/>
+    <property name="java.version" value="18.0.2"/>
+    <property name="user.dir" value="C:\Workspace\basket\basket\basket-persistence-jpa"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-18.0.2\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:/Eclips/eclipse-jee-2023-06-R-win32-x86_64/eclipse//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin/server;C:/Eclips/eclipse-jee-2023-06-R-win32-x86_64/eclipse//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.7.v20230425-1502/jre/bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Java\jdk-18.0.2\bin;C:\Program Files\1E\Client\Extensibility\NomadBranch;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Program Files\nodejs\;C:\Users\irumenov2\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Java\jdk-18.0.2\bin;;C:\Users\irumenov2\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\irumenov2\AppData\Roaming\npm;C:\Eclips\eclipse-jee-2023-06-R-win32-x86_64\eclipse;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="18.0.2+9-61"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="62.0"/>
+  </properties>
+  <testcase name="badTestForRepository" classname="com.dxc.basket.persistence.repositories.tests.JpaBasketRepositoryTest" time="1.918">
+    <system-out><![CDATA[in setup
+Hibernate: 
+    
+    drop table if exists JpaAddress CASCADE 
+Hibernate: 
+    
+    drop table if exists JpaCustomer CASCADE 
+Hibernate: 
+    
+    drop table if exists JpaCustomer_JpaAddress CASCADE 
+Hibernate: 
+    
+    drop table if exists JpaItem CASCADE 
+Hibernate: 
+    
+    drop table if exists JpaOrder CASCADE 
+Hibernate: 
+    
+    drop table if exists JpaOrderItem CASCADE 
+Hibernate: 
+    
+    drop table if exists JpaSeller CASCADE 
+Hibernate: 
+    
+    drop table if exists JpaSellerItem CASCADE 
+Hibernate: 
+    
+    create table JpaAddress (
+       street varchar(255) not null,
+        postalCode varchar(255) not null,
+        country integer not null,
+        city varchar(255) not null,
+        primary key (street, postalCode, country, city)
+    )
+Hibernate: 
+    
+    create table JpaCustomer (
+       email varchar(255) not null,
+        password varchar(255),
+        username varchar(255),
+        name varchar(255),
+        primary key (email)
+    )
+Hibernate: 
+    
+    create table JpaCustomer_JpaAddress (
+       JpaCustomer_email varchar(255) not null,
+        addresses_street varchar(255) not null,
+        addresses_postalCode varchar(255) not null,
+        addresses_country integer not null,
+        addresses_city varchar(255) not null,
+        primary key (JpaCustomer_email, addresses_street, addresses_postalCode, addresses_country, addresses_city)
+    )
+Hibernate: 
+    
+    create table JpaItem (
+       serial varchar(255) not null,
+        description varchar(255),
+        primary key (serial)
+    )
+Hibernate: 
+    
+    create table JpaOrder (
+       id varchar(255) not null,
+        customer_email varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table JpaOrderItem (
+       orderId varchar(255) not null,
+        orderedQuantity integer not null,
+        sellerItem_itemSerial varchar(255) not null,
+        sellerItem_sellerEmail varchar(255) not null,
+        primary key (orderId, sellerItem_itemSerial, sellerItem_sellerEmail)
+    )
+Hibernate: 
+    
+    create table JpaSeller (
+       email varchar(255) not null,
+        password varchar(255),
+        username varchar(255),
+        name varchar(255),
+        address_street varchar(255),
+        address_postalCode varchar(255),
+        address_country integer,
+        address_city varchar(255),
+        primary key (email)
+    )
+Hibernate: 
+    
+    create table JpaSellerItem (
+       itemSerial varchar(255) not null,
+        sellerEmail varchar(255) not null,
+        availableQuantity integer not null,
+        sellerPrice double not null,
+        primary key (itemSerial, sellerEmail)
+    )
+Hibernate: 
+    
+    alter table JpaCustomer_JpaAddress 
+       add constraint FKofdt3msnrf2fio3wri0y6b6as 
+       foreign key (addresses_street, addresses_postalCode, addresses_country, addresses_city) 
+       references JpaAddress
+Hibernate: 
+    
+    alter table JpaCustomer_JpaAddress 
+       add constraint FK5n7fea4souki78dome04bp2l2 
+       foreign key (JpaCustomer_email) 
+       references JpaCustomer
+Hibernate: 
+    
+    alter table JpaOrder 
+       add constraint FKliaggmb1bj6oy44ssyi1u30st 
+       foreign key (customer_email) 
+       references JpaCustomer
+Hibernate: 
+    
+    alter table JpaOrderItem 
+       add constraint FK27donm6wbixdale4c6sl3hm6j 
+       foreign key (orderId) 
+       references JpaOrder
+Hibernate: 
+    
+    alter table JpaOrderItem 
+       add constraint FKf1cfclw5h7u3buksjnblkwff 
+       foreign key (sellerItem_itemSerial, sellerItem_sellerEmail) 
+       references JpaSellerItem
+Hibernate: 
+    
+    alter table JpaSeller 
+       add constraint FK2ao1skv3dc3w8y6glsuv7r31j 
+       foreign key (address_street, address_postalCode, address_country, address_city) 
+       references JpaAddress
+Hibernate: 
+    
+    alter table JpaSellerItem 
+       add constraint FKonpofdbotm1k8j4cb3ffqkt14 
+       foreign key (itemSerial) 
+       references JpaItem
+Hibernate: 
+    
+    alter table JpaSellerItem 
+       add constraint FK6fyhkki242pscsflmvgb3mqq 
+       foreign key (sellerEmail) 
+       references JpaSeller
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaCustomer
+        */ insert 
+        into
+            JpaCustomer
+            (password, username, name, email) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaCustomer
+        */ insert 
+        into
+            JpaCustomer
+            (password, username, name, email) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaAddress
+        */ insert 
+        into
+            JpaAddress
+            (street, postalCode, country, city) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaAddress
+        */ insert 
+        into
+            JpaAddress
+            (street, postalCode, country, city) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaAddress
+        */ insert 
+        into
+            JpaAddress
+            (street, postalCode, country, city) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaSeller
+        */ insert 
+        into
+            JpaSeller
+            (address_street, address_postalCode, address_country, address_city, password, username, name, email) 
+        values
+            (?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaAddress
+        */ insert 
+        into
+            JpaAddress
+            (street, postalCode, country, city) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaSeller
+        */ insert 
+        into
+            JpaSeller
+            (address_street, address_postalCode, address_country, address_city, password, username, name, email) 
+        values
+            (?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaItem
+        */ insert 
+        into
+            JpaItem
+            (description, serial) 
+        values
+            (?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaSellerItem
+        */ insert 
+        into
+            JpaSellerItem
+            (availableQuantity, sellerPrice, itemSerial, sellerEmail) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaItem
+        */ insert 
+        into
+            JpaItem
+            (description, serial) 
+        values
+            (?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaSellerItem
+        */ insert 
+        into
+            JpaSellerItem
+            (availableQuantity, sellerPrice, itemSerial, sellerEmail) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaOrder
+        */ insert 
+        into
+            JpaOrder
+            (customer_email, id) 
+        values
+            (?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaOrder
+        */ insert 
+        into
+            JpaOrder
+            (customer_email, id) 
+        values
+            (?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaOrderItem
+        */ insert 
+        into
+            JpaOrderItem
+            (orderedQuantity, orderId, sellerItem_itemSerial, sellerItem_sellerEmail) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaOrderItem
+        */ insert 
+        into
+            JpaOrderItem
+            (orderedQuantity, orderId, sellerItem_itemSerial, sellerItem_sellerEmail) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert com.dxc.basket.persistence.entities.jpa.JpaOrderItem
+        */ insert 
+        into
+            JpaOrderItem
+            (orderedQuantity, orderId, sellerItem_itemSerial, sellerItem_sellerEmail) 
+        values
+            (?, ?, ?, ?)
+Hibernate: 
+    /* insert collection
+        row com.dxc.basket.persistence.entities.jpa.JpaCustomer.addresses */ insert 
+        into
+            JpaCustomer_JpaAddress
+            (JpaCustomer_email, addresses_street, addresses_postalCode, addresses_country, addresses_city) 
+        values
+            (?, ?, ?, ?, ?)
+Hibernate: 
+    /* insert collection
+        row com.dxc.basket.persistence.entities.jpa.JpaCustomer.addresses */ insert 
+        into
+            JpaCustomer_JpaAddress
+            (JpaCustomer_email, addresses_street, addresses_postalCode, addresses_country, addresses_city) 
+        values
+            (?, ?, ?, ?, ?)
+Hibernate: 
+    /* ql.customers */ select
+        jpacustome0_.email as email1_1_,
+        jpacustome0_.password as password2_1_,
+        jpacustome0_.username as username3_1_,
+        jpacustome0_.name as name4_1_ 
+    from
+        JpaCustomer jpacustome0_
+Hibernate: 
+    /* ql.sellers */ select
+        jpaseller0_.email as email1_6_,
+        jpaseller0_.address_street as address_5_6_,
+        jpaseller0_.address_postalCode as address_6_6_,
+        jpaseller0_.address_country as address_7_6_,
+        jpaseller0_.address_city as address_8_6_,
+        jpaseller0_.password as password2_6_,
+        jpaseller0_.username as username3_6_,
+        jpaseller0_.name as name4_6_ 
+    from
+        JpaSeller jpaseller0_
+Hibernate: 
+    /* ql.orders.customer */ select
+        distinct jpaorder0_.id as id1_4_,
+        jpaorder0_.customer_email as customer2_4_ 
+    from
+        JpaOrder jpaorder0_ 
+    where
+        jpaorder0_.customer_email=?
+1
+2
+Hibernate: 
+    /* ql.orders.seller */ select
+        distinct jpaorder0_.id as id1_4_,
+        jpaorder0_.customer_email as customer2_4_ 
+    from
+        JpaOrder jpaorder0_ 
+    inner join
+        JpaOrderItem items1_ 
+            on jpaorder0_.id=items1_.orderId cross 
+    join
+        JpaSellerItem jpaselleri2_ 
+    where
+        items1_.sellerItem_itemSerial=jpaselleri2_.itemSerial 
+        and items1_.sellerItem_sellerEmail=jpaselleri2_.sellerEmail 
+        and jpaselleri2_.sellerEmail=?
+Hibernate: 
+    /* ql.orders.customer.seller */ select
+        distinct jpaorder0_.id as id1_4_,
+        jpaorder0_.customer_email as customer2_4_ 
+    from
+        JpaOrder jpaorder0_ 
+    inner join
+        JpaOrderItem items1_ 
+            on jpaorder0_.id=items1_.orderId cross 
+    join
+        JpaSellerItem jpaselleri2_ 
+    where
+        items1_.sellerItem_itemSerial=jpaselleri2_.itemSerial 
+        and items1_.sellerItem_sellerEmail=jpaselleri2_.sellerEmail 
+        and jpaorder0_.customer_email=? 
+        and jpaselleri2_.sellerEmail=?
+Hibernate: 
+    /* ql.orders.customer.item */ select
+        distinct jpaorder0_.id as id1_4_,
+        jpaorder0_.customer_email as customer2_4_ 
+    from
+        JpaOrder jpaorder0_ 
+    inner join
+        JpaOrderItem items1_ 
+            on jpaorder0_.id=items1_.orderId cross 
+    join
+        JpaSellerItem jpaselleri2_ 
+    where
+        items1_.sellerItem_itemSerial=jpaselleri2_.itemSerial 
+        and items1_.sellerItem_sellerEmail=jpaselleri2_.sellerEmail 
+        and jpaorder0_.customer_email=? 
+        and jpaselleri2_.itemSerial=?
+Hibernate: 
+    /* ql.orders.seller.item */ select
+        distinct jpaorder0_.id as id1_4_,
+        jpaorder0_.customer_email as customer2_4_ 
+    from
+        JpaOrder jpaorder0_ 
+    inner join
+        JpaOrderItem items1_ 
+            on jpaorder0_.id=items1_.orderId cross 
+    join
+        JpaSellerItem jpaselleri2_ 
+    where
+        items1_.sellerItem_itemSerial=jpaselleri2_.itemSerial 
+        and items1_.sellerItem_sellerEmail=jpaselleri2_.sellerEmail 
+        and jpaselleri2_.sellerEmail=? 
+        and jpaselleri2_.itemSerial=?
+]]></system-out>
+    <system-err><![CDATA[Jul 06, 2023 9:03:32 AM org.hibernate.jpa.internal.util.LogHelper logPersistenceUnitInformation
+INFO: HHH000204: Processing PersistenceUnitInfo [name: basket-jpa-hibernate]
+Jul 06, 2023 9:03:33 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate ORM core version 5.5.7.Final
+Jul 06, 2023 9:03:33 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+Jul 06, 2023 9:03:33 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+Jul 06, 2023 9:03:33 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [org.hsqldb.jdbcDriver] at URL [jdbc:hsqldb:mem:sample;shutdown=true]
+Jul 06, 2023 9:03:33 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {password=****, user=sa}
+Jul 06, 2023 9:03:33 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001003: Autocommit mode: false
+Jul 06, 2023 9:03:33 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+2023-07-06T09:03:34.119+0300  WARN  HHH000038: Composite-id class does not override equals(): com.dxc.basket.persistence.entities.jpa.JpaAddress
+2023-07-06T09:03:34.119+0300  WARN  HHH000039: Composite-id class does not override hashCode(): com.dxc.basket.persistence.entities.jpa.JpaAddress
+]]></system-err>
+  </testcase>
+</testsuite>

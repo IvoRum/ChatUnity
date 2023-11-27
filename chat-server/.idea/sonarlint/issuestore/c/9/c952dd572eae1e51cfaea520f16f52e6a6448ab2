@@ -1,9 +1,0 @@
-
-l
-java:S2095"JUse try-with-resources or close this "ServerSocket" in a "finally" clause.(´·›½ıÿÿÿÿ8ùÊÁğ¿1
-L	java:S106"+Replace this use of System.out by a logger.(‚Àëóüÿÿÿÿ8ÄäÀğ¿1
-F
-java:S1481")Remove this unused "stop" local variable.(º™8İäÀğ¿1
-]	java:S125"<This block of commented-out lines of code should be removed.(™¦­Ôøÿÿÿÿ8ŞäÀğ¿1
-L	java:S106"+Replace this use of System.out by a logger.(¾’¦Ëùÿÿÿÿ8ãäÀğ¿1
-G	java:S106 "+Replace this use of System.out by a logger.(ìÍ¦‡8ãäÀğ¿1

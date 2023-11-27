@@ -1,0 +1,12 @@
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\entities\jpa\JpaOrderItemId.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\factories\jpa\JpaBasketRepositoryFactory.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\repositories\jpa\JpaBasketRepository.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\entities\jpa\JpaSeller.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\entities\jpa\JpaOrder.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\entities\jpa\JpaCustomer.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\entities\jpa\JpaSellerItem.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\entities\jpa\JpaSellerItemId.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\entities\jpa\JpaAddress.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\entities\jpa\JpaLogin.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\entities\jpa\JpaOrderItem.java
+C:\Workspace\basket\basket\basket-persistence-jpa\src\main\java\com\dxc\basket\persistence\entities\jpa\JpaItem.java
