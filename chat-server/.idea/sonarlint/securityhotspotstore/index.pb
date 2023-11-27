@@ -81,3 +81,7 @@ r
 Bchat-common/src/com/tu/varna/chat/common/net/NetMessageStatus.java,c\a\cab46f14423c3860270465aa2f949168dc419e21
 e
 5chat-net/src/com/tu/varna/chat/net/SocketHandler.java,f\0\f0a85915099fe268ef86af2241df49f3724cce05
+l
+<chat-common/src/com/tu/varna/chat/common/dto/MessageDto.java,8\4\84fbfcf9cc708dd7c6f9f223090a182a02a717e2
+i
+9chat-common/src/com/tu/varna/chat/common/dto/UserDto.java,d\5\d5bc8d7adc578426f7a09d87540c87b898fa053c
