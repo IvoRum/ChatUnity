@@ -81,3 +81,17 @@ r
 Bchat-common/src/com/tu/varna/chat/common/net/NetMessageStatus.java,c\a\cab46f14423c3860270465aa2f949168dc419e21
 e
 5chat-net/src/com/tu/varna/chat/net/SocketHandler.java,f\0\f0a85915099fe268ef86af2241df49f3724cce05
+T
+$chat-repository/src/module-info.java,c\4\c4e9b47244881de9b4d073061370aff53a430b43
+P
+ chat-common/src/module-info.java,c\8\c83439851d61ac9051f5c3a90d75cdb60598a502
+k
+;chat-services/src/com/tu/varna/chat/service/CreateUser.java,6\6\667d8c2aae095ee85e5adc8c7ec59cf9fe177fe9
+j
+:chat-services/src/com/tu/varna/chat/service/AddFriend.java,f\c\fc8c27448cea6c72372a1f828d1acf505bcdf7e4
+p
+@chat-services/src/com/tu/varna/chat/service/chat/CreateChat.java,c\3\c3edd57c7178e8146f10c0251d854f95c0b439a2
+q
+Achat-services/src/com/tu/varna/chat/service/chat/SendMessage.java,9\3\93676c50d0ccdccd83269bc9bcd0cd17eea1851e
+z
+Jchat-services-impl/src/com/tu/varna/chat/service/impl/SendMessageImpl.java,6\a\6a1a1937d585627d3b60a4151a645db3f02582f5
