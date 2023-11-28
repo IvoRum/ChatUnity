@@ -4,14 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.chat_mobile.ui.theme.ChatmobileTheme
-import android.widget.*
+import com.example.chat_mobile.ui.chat.ChatActivity2
+import com.example.chat_mobile.ui.login.LoginActivity
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,15 +31,15 @@ class MainActivity : ComponentActivity() {
 
         // set on-click listener
         btn_submit.setOnClickListener {
-            val user_name = et_email.text;
-            val password = et_password.text;
-            Toast.makeText(this@MainActivity, user_name, Toast.LENGTH_LONG).show()
+            //val user_name = et_email.text;
+            //val password = et_password.text;
+            //Toast.makeText(this@MainActivity, user_name, Toast.LENGTH_LONG).show()
 
             // your code to validate the user_name and password combination
             // and verify the same
 
             //start activiti
-            val intent = Intent(this, ChatActivity::class.java)
+            val intent = Intent(this, ChatActivity2::class.java)
             // start your next activity
             startActivity(intent)
 

@@ -17,6 +17,11 @@
             android:exported="false"
             android:label="@string/title_activity_login" />
         <activity
+            android:name=".ui.chat.ChatActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_chat2"
+            android:theme="@style/Theme.Chatmobile" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
