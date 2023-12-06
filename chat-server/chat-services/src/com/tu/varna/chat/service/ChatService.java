@@ -5,7 +5,7 @@ import com.tu.varna.chat.common.dto.UserDto;
 
 import java.util.Set;
 
-public interface Chat {
+public interface ChatService {
     void createChat(int userSender,int userReceiver);
     void sendMessage(int userSender,int userReceiver);
     void receiveMessage(int userSender,int userReceiver);
@@ -13,4 +13,5 @@ public interface Chat {
     ChatDuo getChatDuo();
     Set<UserDto> getChatsUsers();
     void addToChatGrup(int conversationId, int userId);
+    String pickMessage();
 }

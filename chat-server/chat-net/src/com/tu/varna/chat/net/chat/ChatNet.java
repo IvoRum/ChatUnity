@@ -1,18 +1,15 @@
 package com.tu.varna.chat.net.chat;
 
-import com.tu.varna.chat.net.multi.echo.ClientHandler;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class MainServer {
+public class ChatNet extends Thread {
 
     private static ServerSocket serverSocket;
     private static final int PORT=1300;
 
-    public static void main(String[] args) throws IOException {
-
+    public void run(){
         try {
             serverSocket=new ServerSocket(PORT);
         } catch (IOException e) {
@@ -20,7 +17,12 @@ public class MainServer {
             throw new RuntimeException(e+"Chat Socket did not open on port 1300");
         }
         do{
-            Socket clientSocket=serverSocket.accept();
+            Socket clientSocket= null;
+            try {
+                clientSocket = serverSocket.accept();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println("\n New client Accepted! \n");
 
             Thread handler = new ChatHandler(clientSocket);
