@@ -27,7 +27,7 @@ public class AuthNet extends Thread {
             }
             System.out.println("\n New client Accepted! \n");
 
-            Thread handler = new ChatHandler(clientSocket);
+            Thread handler = new AuthHandler(clientSocket);
             handler.start();
         }while (true);
     }

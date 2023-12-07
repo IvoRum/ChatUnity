@@ -1,4 +1,8 @@
 
-g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Ê¶ªÃ¾1
-J
-java:S4274"(Replace this assert with a proper check.(–¾ıœÿÿÿÿÿ8¿ØÀÀ1
+g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8‘çï¡Ä1
+[
+java:S1128">Remove this unused import 'com.tu.varna.chat.model.UnityUser'.(äƒÇŒ8¤çï¡Ä1
+`
+java:S1128">Remove this unused import 'jakarta.persistence.EntityManager'.(·ïŸéúÿÿÿÿ8¤çï¡Ä1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8¤çï¡Ä1

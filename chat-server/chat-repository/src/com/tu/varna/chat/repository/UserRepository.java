@@ -2,6 +2,7 @@ package com.tu.varna.chat.repository;
 
 import com.tu.varna.chat.common.PropertiesLoader;
 import com.tu.varna.chat.common.dto.UserDto;
+import com.tu.varna.chat.common.net.UserCredentials;
 import com.tu.varna.chat.model.UnityUser;
 import jakarta.persistence.EntityManager;
 
@@ -16,17 +17,10 @@ import java.util.List;
 
 public class UserRepository {
     private static final String JDBC_URL;
-    private final EntityManager entityManager;
-
-    public UserRepository(EntityManager entityManager) {
-        assert entityManager != null : "EntityManager should not be null!";
-
-        this.entityManager = entityManager;
-    }
 
     static {
         try {
-            JDBC_URL= PropertiesLoader.loadProperty("db.url");
+            JDBC_URL = PropertiesLoader.loadProperty("db.url");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -34,9 +28,9 @@ public class UserRepository {
 
     public String userRepositoryHeathCheck() throws SQLException {
 
-        String sql= "select Unity_user.id from Unity_user order by Unity_user.id asc limit 1;";
+        String sql = "select Unity_user.id from Unity_user order by Unity_user.id asc limit 1;";
 
-        Connection connection= DriverManager.getConnection(JDBC_URL);
+        Connection connection = DriverManager.getConnection(JDBC_URL);
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
@@ -47,28 +41,43 @@ public class UserRepository {
 
     public UserDto getUser(int userId) throws SQLException {
 
-        String sql= "select * from Unity_user where Unity_user.id=?;";
+        String sql = "select * from Unity_user where Unity_user.id=?;";
 
-        Connection connection= DriverManager.getConnection(JDBC_URL);
+        Connection connection = DriverManager.getConnection(JDBC_URL);
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1,userId);
+            statement.setInt(1, userId);
 
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
 
-            int id=resultSet.getInt("id");
-            String firstName=resultSet.getString("first_name");
-            String familyName=resultSet.getString("family_name");
-            String password=resultSet.getString("password");
-            String telephone= resultSet.getString("telephone");
-            String email=resultSet.getString("email");
+            int id = resultSet.getInt("id");
+            String firstName = resultSet.getString("first_name");
+            String familyName = resultSet.getString("family_name");
+            String password = resultSet.getString("password");
+            String telephone = resultSet.getString("telephone");
+            String email = resultSet.getString("email");
 
-            return new UserDto(id,firstName,familyName, telephone,password,email);
+            return new UserDto(id, firstName, familyName, telephone, password, email);
         }
     }
 
-    public List<UnityUser> getAllUsersSuccessful(){
-        return entityManager.createNamedQuery("unity_user.findAll", UnityUser.class).setMaxResults(3).getResultList();
+    public boolean isUser(UserCredentials userCredentials) throws SQLException {
+        String sql = "select uu.email,uu.password from unity_user uu " +
+                "where uu.email=? " +
+                "and uu.password=? ";
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, userCredentials.userEmail());
+            statement.setString(2, userCredentials.password());
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+
+            String foundUserEmail=resultSet.getString("email");
+            String foundPassword=resultSet.getString("password");
+            return userCredentials.userEmail().equals(foundUserEmail) && userCredentials.password().equals(foundPassword);
+        }
+
     }
 }
