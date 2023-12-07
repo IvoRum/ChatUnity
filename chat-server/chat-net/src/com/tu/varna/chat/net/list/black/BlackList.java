@@ -13,7 +13,6 @@ public class BlackList {
 
     void remove(UserCredentials userCredentials){
         //TODO check if user is in the list then remove if exist
-
     }
 
     void timeOut(UserCredentials userCredentials,int time){

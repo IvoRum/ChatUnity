@@ -1,0 +1,7 @@
+
+W
+java:S1854("<Remove this useless assignment to local variable "received".(„äÚıÿÿÿÿ
+H
+java:S1481'"-Remove this unused "received" local variable.(“Ï‹˜øÿÿÿÿ
+E	java:S106-"+Replace this use of System.out by a logger.(‡ñùÍüÿÿÿÿ
+E	java:S1061"+Replace this use of System.out by a logger.(ü£€Ãşÿÿÿÿ

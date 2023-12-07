@@ -3,22 +3,23 @@ package com.tu.varna.chat.service.impl;
 import com.tu.varna.chat.common.net.UserCredentials;
 import com.tu.varna.chat.repository.UserRepository;
 import com.tu.varna.chat.service.AuthService;
+import com.tu.varna.chat.service.impl.exception.ServiceException;
 
 import java.sql.SQLException;
 
 public class AuthServiceImpl implements AuthService {
-    private final static UserRepository userRepository;
+    private static final UserRepository userRepository;
 
     static {
-        userRepository=new UserRepository();
+        userRepository = new UserRepository();
     }
-    @Override public boolean logInUser(UserCredentials userCredentials) {
+
+    @Override public boolean logInUser(UserCredentials userCredentials) throws ServiceException {
         try {
-            userRepository.isUser(userCredentials);
+            return userRepository.isUser(userCredentials);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ServiceException(e);
         }
-        return false;
     }
 
     @Override public boolean registerUser(UserCredentials userCredentials) {
