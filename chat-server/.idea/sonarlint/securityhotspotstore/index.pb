@@ -49,3 +49,17 @@ t
 Dchat-common/src/com/tu/varna/chat/common/net/NewUserCredentials.java,a\1\a1a4405b8c8633ca37bd6e2b6697c8951569e2ad
 k
 ;chat-common/src/com/tu/varna/chat/common/net/UserNames.java,a\f\af83f15b3e8e89f37cf56d07536c3e99b8e8e07a
+w
+Gchat-repository/src/com/tu/varna/chat/repository/MassageRepository.java,f\6\f6feded56e64b5a33a0e5c8cbe3a49e0c9f6c481
+r
+Bchat-common/src/com/tu/varna/chat/common/net/ChatReachedPoint.java,d\1\d198201b744ef2d6f9f714b6d352179ca724239b
+s
+Cchat-common/src/com/tu/varna/chat/common/net/ChatUpdateRequest.java,6\2\6212031eab7c64efe4e2559414ba0a294d9245db
+j
+:chat-repository/src/com/tu/varna/chat/model/UnityUser.java,5\e\5ebdce5ba42a00c54d1f3281d418a2176a8f6450
+l
+<chat-application/src/com/tu/varna/chat/application/Main.java,e\9\e97fca7f8e152f1ddee8408f685114035ae006e7
+g
+7chat-net/src/com/tu/varna/chat/net/chat/MainServer.java,d\b\db5069a6821e4cbc80445f567e711e4fa756e2de
+d
+4chat-net/src/com/tu/varna/chat/net/chat/ChatNet.java,0\d\0db70e85ef76f1eaa92453d54306e51c87f1af51

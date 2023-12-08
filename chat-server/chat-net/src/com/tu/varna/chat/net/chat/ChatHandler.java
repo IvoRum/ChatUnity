@@ -1,7 +1,12 @@
 package com.tu.varna.chat.net.chat;
 
+import com.tu.varna.chat.common.net.ChatReachedPoint;
+import com.tu.varna.chat.common.net.NewUserCredentials;
+import com.tu.varna.chat.common.net.UserCredentials;
+import com.tu.varna.chat.common.net.UserNames;
 import com.tu.varna.chat.service.ChatService;
 import com.tu.varna.chat.service.impl.ChatServiceImpl;
+import com.tu.varna.chat.service.impl.exception.ServiceException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,7 +37,34 @@ public class ChatHandler extends Thread {
 
     @Override
     public void run() {
-        testConnection();
+        String received = "";
+        received = input.nextLine();
+        //TODO add to black list if package dose not start whit 'log:' or 'reg:'
+        assert received == null : "Pack must not be null";
+        assert received == "" : "Package must not be empty";
+        String firstThreeCharacters = received.substring(0, 3);
+        if (firstThreeCharacters.equals("gms")) {
+            getAllConversationsForAgivenUser(received);
+        } else if ("sms".equals(firstThreeCharacters)) {
+            sendMessage(received);
+        } else {
+            //add ip to blacklist
+        }
+    }
+
+    private void getAllConversationsForAgivenUser(String received) {
+        String[] inputPackage = received.split("gms:");
+
+        socket.getInetAddress();
+        String[] packageParts = inputPackage[1].split("\\s+");
+        for (int i=1;i<packageParts.length;i++) {
+            String[] chatReachedPointParts= inputPackage[i].split("$");
+            System.out.println(chatService.receiveMessage(
+                    new ChatReachedPoint(Integer.parseInt(chatReachedPointParts[0]),Integer.parseInt(chatReachedPointParts[1]))));
+        }
+    }
+
+    private void sendMessage(String received) {
     }
 
     private void testConnection(){

@@ -3,9 +3,9 @@ g	java:S112S"FDefine and throw a dedicated exception instead of using a generi
 g	java:S112_"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Í¶ÆÇÄ1
 g	java:S112a"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Í¶ÆÇÄ1
 ^
-java:S49733"<Strings and Boxed types should be compared using "equals()".(ƒ¶Ûïşÿÿÿÿ8Ï¶ÆÇÄ1
+java:S49733"<Strings and Boxed types should be compared using "equals()".(ƒ¶Ûïşÿÿÿÿ8ÖåŸÏÄ1
 O
-java:S11351"2Complete the task associated to this TODO comment.(äõà8ß¶ÆÇÄ1
+java:S11351"2Complete the task associated to this TODO comment.(äõà8æåŸÏÄ1
 L	java:S106A"+Replace this use of System.out by a logger.(‡ñùÍüÿÿÿÿ8à¶ÆÇÄ1
 L	java:S106E"+Replace this use of System.out by a logger.(ü£€Ãşÿÿÿÿ8à¶ÆÇÄ1
 G	java:S106O"+Replace this use of System.out by a logger.(Œîí8á¶ÆÇÄ1

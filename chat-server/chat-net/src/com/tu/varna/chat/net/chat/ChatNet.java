@@ -23,7 +23,7 @@ public class ChatNet extends Thread {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("\n New client Accepted! \n");
+            System.out.println("\n New client Accepted! \n"+clientSocket.getInetAddress().getHostAddress());
 
             Thread handler = new ChatHandler(clientSocket);
             handler.start();

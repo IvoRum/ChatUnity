@@ -12,7 +12,7 @@ public class MassageRepository {
 
     static {
         try {
-            JDBC_URL= PropertiesLoader.loadProperty("db.url");
+            JDBC_URL = PropertiesLoader.loadProperty("db.url");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -20,14 +20,31 @@ public class MassageRepository {
 
     public String userMessageHeathCheck() throws SQLException {
 
-        String sql= "select message.content from message " +
+        String sql = "select message.content from message " +
                 "where id_sender=1 " +
                 "and id_reciver=1 " +
                 "limit 1";
 
-        Connection connection= DriverManager.getConnection(JDBC_URL);
+        Connection connection = DriverManager.getConnection(JDBC_URL);
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getString("content");
+        }
+    }
+
+    public String getMessagesForAGivenUser(int idRevicer, int messageOrder) throws SQLException {
+
+        String sql = "select ms.id_sender, ms.message_order, ms.message_status, ms.content from message " +
+                "where id_reciver=? " +
+                "and message_order > ?";
+
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, idRevicer);
+            statement.setInt(2, messageOrder);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             return resultSet.getString("content");
