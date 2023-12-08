@@ -1,5 +1,6 @@
 package com.tu.varna.chat.service.impl;
 
+import com.tu.varna.chat.common.net.NewUserCredentials;
 import com.tu.varna.chat.common.net.UserCredentials;
 import com.tu.varna.chat.repository.UserRepository;
 import com.tu.varna.chat.service.AuthService;
@@ -22,8 +23,16 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
-    @Override public boolean registerUser(UserCredentials userCredentials) {
+    @Override public int registerUser(NewUserCredentials newUserCredentials) throws ServiceException {
+        try {
+            if (userRepository.isUser(newUserCredentials.userCredentials())) {
+                return 1;
+            }
+            if(userRepository.registerUser(newUserCredentials));
 
-        return false;
+        } catch (SQLException e) {
+            throw new ServiceException(e);
+        }
+        return 0;
     }
 }

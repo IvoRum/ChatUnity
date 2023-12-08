@@ -1,6 +1,8 @@
 package com.tu.varna.chat.net.auth;
 
+import com.tu.varna.chat.common.net.NewUserCredentials;
 import com.tu.varna.chat.common.net.UserCredentials;
+import com.tu.varna.chat.common.net.UserNames;
 import com.tu.varna.chat.service.AuthService;
 import com.tu.varna.chat.service.ChatService;
 import com.tu.varna.chat.service.impl.AuthServiceImpl;
@@ -37,27 +39,26 @@ public class AuthHandler extends Thread {
         }
     }
 
-    @Override
-    public void run() {
+    @Override public void run() {
         testConnection();
     }
 
-    private void testConnection(){
+    private void testConnection() {
         String received = "";
         received = input.nextLine();
-        assert received==null:"Pack must not be null";
-        assert received=="":"Package must not be empty";
+        //TODO add to black list if package dose not start whit 'log:' or 'reg:'
+        assert received == null : "Pack must not be null";
+        assert received == "" : "Package must not be empty";
         String firstThreeCharacters = received.substring(0, 3);
-        if(firstThreeCharacters.equals("log")){
+        if (firstThreeCharacters.equals("log")) {
             logInUser(received);
-        }else if("reg".equals(firstThreeCharacters)) {
+        } else if ("reg".equals(firstThreeCharacters)) {
             registerUser(received);
-        }else {
+        } else {
             //add ip to blacklist
         }
-        //TODO add to black list if package dose not start whit 'log:' or 'reg:'
 
-        output.println("ECHO: "+socket.getInetAddress());
+        output.println("ECHO: " + socket.getInetAddress());
 
         try {
             if (socket != null) {
@@ -70,15 +71,26 @@ public class AuthHandler extends Thread {
     }
 
     private void registerUser(String received) {
-    }
-
-    private void logInUser(String received) {
-        String[] inputPackage=received.split("log:");
+        String[] inputPackage = received.split("reg:");
 
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
         try {
-            System.out.println(authService.logInUser(new UserCredentials(packageParts[1],packageParts[2])));
+            System.out.println(authService.registerUser(
+                    new NewUserCredentials(new UserCredentials(packageParts[1], packageParts[2]), packageParts[3],
+                            new UserNames(packageParts[4], packageParts[2]))));
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void logInUser(String received) {
+        String[] inputPackage = received.split("log:");
+
+        socket.getInetAddress();
+        String[] packageParts = inputPackage[1].split("\\s+");
+        try {
+            System.out.println(authService.logInUser(new UserCredentials(packageParts[1], packageParts[2])));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ServiceException e) {

@@ -19,8 +19,6 @@ q
 Achat-common/src/com/tu/varna/chat/common/net/UserCredentials.java,4\f\4f7737b46a5587c1206b619990e918796579e524
 z
 Jchat-services-impl/src/com/tu/varna/chat/service/impl/AuthServiceImpl.java,1\d\1d14e8ae5ef5e3aafcf69973e23b7750dc07371b
-e
-5chat-net/src/com/tu/varna/chat/net/SocketHandler.java,f\0\f0a85915099fe268ef86af2241df49f3724cce05
 d
 4chat-net/src/com/tu/varna/chat/net/auth/AuthNet.java,7\3\730fb1c0b8b92521c102a143fb3940900af2c54a
 h
@@ -37,8 +35,6 @@ r
 Bchat-common/src/com/tu/varna/chat/common/net/NetMessageStatus.java,c\a\cab46f14423c3860270465aa2f949168dc419e21
 i
 9chat-common/src/com/tu/varna/chat/common/Credentials.java,6\9\6959aa2478a3cdf3210699a89e55c99890582a56
-„
-Tchat-repository/src/com/tu/varna/chat/factory/jpa/JpaChatUnityRepositoryFactory.java,9\1\911f41a2de2361b4adaac5bf6a5d92e6fb04ec7c
 l
 <chat-net/src/com/tu/varna/chat/net/list/black/BlackList.java,6\1\6188952361b6a2eee1137face6bd45ca0d5e0eb1
 l
@@ -49,3 +45,7 @@ S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 …
 Uchat-services-impl/src/com/tu/varna/chat/service/impl/exception/ServiceException.java,e\7\e7cada332bbc0f95c63de881065f3cdf280839c6
+t
+Dchat-common/src/com/tu/varna/chat/common/net/NewUserCredentials.java,a\1\a1a4405b8c8633ca37bd6e2b6697c8951569e2ad
+k
+;chat-common/src/com/tu/varna/chat/common/net/UserNames.java,a\f\af83f15b3e8e89f37cf56d07536c3e99b8e8e07a

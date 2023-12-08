@@ -13,7 +13,7 @@ log: ivo@mail.com ivo12345678
 ### Register
 
 ```
-reg: newUser@mail.com newuserpass12345678
+reg: newUser@mail.com newuserpass12345678 08879465 ivan ivanov
 ```
 
 ## Database
