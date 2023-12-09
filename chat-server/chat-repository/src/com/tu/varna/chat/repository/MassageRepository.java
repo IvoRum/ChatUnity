@@ -36,7 +36,7 @@ public class MassageRepository {
 
     public String getMessagesForAGivenUser(int idRevicer, int messageOrder) throws SQLException {
 
-        String sql = "select ms.id_sender, ms.message_order, ms.message_status, ms.content from message " +
+        String sql = "select ms.id_sender, ms.message_order, ms.message_status, ms.content from message ms " +
                 "where id_reciver=? " +
                 "and message_order > ?";
 

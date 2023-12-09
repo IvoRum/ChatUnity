@@ -57,17 +57,17 @@ public class ChatHandler extends Thread {
 
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
-        for (int i=1;i<packageParts.length;i++) {
-            String[] chatReachedPointParts= inputPackage[i].split("$");
+        for (int i = 2; i < packageParts.length; i++) {
+            String[] chatReachedPointParts = packageParts[i].split("@");
             System.out.println(chatService.receiveMessage(
-                    new ChatReachedPoint(Integer.parseInt(chatReachedPointParts[0]),Integer.parseInt(chatReachedPointParts[1]))));
+                    new ChatReachedPoint(Integer.parseInt(chatReachedPointParts[0]), Integer.parseInt(chatReachedPointParts[1]))));
         }
     }
 
     private void sendMessage(String received) {
     }
 
-    private void testConnection(){
+    private void testConnection() {
         String received = "";
         received = input.nextLine();
         output.println("ECHO: " + chatService.pickMessage());

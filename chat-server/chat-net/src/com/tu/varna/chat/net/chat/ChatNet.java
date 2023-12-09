@@ -19,6 +19,7 @@ public class ChatNet extends Thread {
         do{
             Socket clientSocket= null;
             try {
+                System.out.println(serverSocket.getLocalSocketAddress());
                 clientSocket = serverSocket.accept();
             } catch (IOException e) {
                 throw new RuntimeException(e);
