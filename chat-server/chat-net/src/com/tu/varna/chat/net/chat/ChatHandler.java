@@ -41,7 +41,6 @@ public class ChatHandler extends Thread {
         received = input.nextLine();
         //TODO add to black list if package dose not start whit 'log:' or 'reg:'
         assert received == null : "Pack must not be null";
-        assert received == "" : "Package must not be empty";
         String firstThreeCharacters = received.substring(0, 3);
         if (firstThreeCharacters.equals("gms")) {
             getAllConversationsForAgivenUser(received);
@@ -52,19 +51,40 @@ public class ChatHandler extends Thread {
         }
     }
 
+    /**
+     * Calls repository to return all the specified conversation messages.
+     * gms: userId conversation$order .....
+     * EX
+     * gms: 1 1&3 1&2
+     * @param received
+     */
     private void getAllConversationsForAgivenUser(String received) {
         String[] inputPackage = received.split("gms:");
-
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
         for (int i = 2; i < packageParts.length; i++) {
             String[] chatReachedPointParts = packageParts[i].split("@");
-            System.out.println(chatService.receiveMessage(
-                    new ChatReachedPoint(Integer.parseInt(chatReachedPointParts[0]), Integer.parseInt(chatReachedPointParts[1]))));
+            String allNewMessages=chatService.receiveMessage(
+                    new ChatReachedPoint(Integer.parseInt(chatReachedPointParts[0]), Integer.parseInt(chatReachedPointParts[1])));
+            System.out.println(allNewMessages);
+            output.println(allNewMessages);
         }
     }
 
+    /**
+     * The order of a 'sms' is as follows:
+     * sms: userId converstion content
+     * EX
+     * sms: 1 1 Hello Deme
+     * @param received
+     */
     private void sendMessage(String received) {
+        String[] inputPackage = received.split("sms:");
+        socket.getInetAddress();
+        String[] packageParts = inputPackage[1].split("\\s+");
+        for (int i = 2; i < packageParts.length; i++) {
+
+        }
     }
 
     private void testConnection() {
