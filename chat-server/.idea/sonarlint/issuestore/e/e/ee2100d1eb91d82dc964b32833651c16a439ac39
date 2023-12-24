@@ -1,0 +1,8 @@
+
+‰
+java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(œû¿Ø8ÑóïĞÄ1
+F	java:S106"+Replace this use of System.out by a logger.(‘‚¸k8ÒóïĞÄ1
+F	java:S106"+Replace this use of System.out by a logger.(éîÊ8ÒóïĞÄ1
+L
+java:S1068
+"*Remove this unused "socket" private field.(Å’¬Úşÿÿÿÿ8ÒóïĞÄ1

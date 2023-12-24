@@ -11,7 +11,7 @@ public class MainServer {
     private static ServerSocket serverSocket;
     private static final int PORT=1300;
 
-    public static void chatServer(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         try {
             serverSocket=new ServerSocket(PORT);
@@ -20,10 +20,12 @@ public class MainServer {
             throw new RuntimeException(e+"Chat Socket did not open on port 1300");
         }
         do{
+            System.out.println(serverSocket.getInetAddress().toString());
+            System.out.println(serverSocket.toString());
             Socket clientSocket=serverSocket.accept();
             System.out.println("\n New client Accepted! \n");
 
-            Thread handler = new ClientHandler(clientSocket);
+            Thread handler = new ChatHandler(clientSocket);
             handler.start();
         }while (true);
     }
