@@ -63,3 +63,13 @@ g
 7chat-net/src/com/tu/varna/chat/net/chat/MainServer.java,d\b\db5069a6821e4cbc80445f567e711e4fa756e2de
 d
 4chat-net/src/com/tu/varna/chat/net/chat/ChatNet.java,0\d\0db70e85ef76f1eaa92453d54306e51c87f1af51
+l
+<chat-common/src/com/tu/varna/chat/common/dto/MessageDto.java,8\4\84fbfcf9cc708dd7c6f9f223090a182a02a717e2
+r
+Bchat-net/src/com/tu/varna/chat/net/multi/echo/MultiEchoServer.java,f\7\f7084ffcbe196798b964bf201c30d74ef8f3f40c
+h
+8chat-net/src/com/tu/varna/chat/net/auth/AuthNetTest.java,5\0\5003dbc0393ec79b5d65181c28cd5760830c1cbb
+n
+>chat-common/src/com/tu/varna/chat/common/PropertiesLoader.java,a\6\a6d8f07b65f5437cd22d673e3b9fc1241ef98a67
+z
+Jchat-services-impl/src/com/tu/varna/chat/service/impl/SendMessageImpl.java,6\a\6a1a1937d585627d3b60a4151a645db3f02582f5

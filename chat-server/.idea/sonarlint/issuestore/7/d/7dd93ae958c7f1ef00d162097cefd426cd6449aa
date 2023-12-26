@@ -11,5 +11,3 @@ java:S1186'"€Add a nested comment explaining why this method is empty, throw a
 java:S11866"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Šû¶Æüÿÿÿÿ8öıàĞÄ1
 b
 java:S1124"EReorder the modifiers to comply with the Java Language Specification.(®Ü—Í8øıàĞÄ1
-H
-java:S11682"+Return an empty collection instead of null.(¥¹ï8úıàĞÄ1
