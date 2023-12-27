@@ -4,8 +4,6 @@ import com.tu.varna.chat.common.PropertiesLoader;
 import com.tu.varna.chat.common.dto.UserDto;
 import com.tu.varna.chat.common.net.NewUserCredentials;
 import com.tu.varna.chat.common.net.UserCredentials;
-import com.tu.varna.chat.model.UnityUser;
-import jakarta.persistence.EntityManager;
 
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -13,19 +11,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.util.List;
 
-
-public class UserRepository {
-    private static final String JDBC_URL;
-
-    static {
-        try {
-            JDBC_URL = PropertiesLoader.loadProperty("db.url");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
+public class UserRepository extends BaseRepository{
 
     public String userRepositoryHeathCheck() throws SQLException {
 

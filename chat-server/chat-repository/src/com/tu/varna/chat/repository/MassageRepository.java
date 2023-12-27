@@ -6,17 +6,7 @@ import jakarta.persistence.EntityManager;
 import java.io.FileNotFoundException;
 import java.sql.*;
 
-public class MassageRepository {
-
-    private static final String JDBC_URL;
-
-    static {
-        try {
-            JDBC_URL = PropertiesLoader.loadProperty("db.url");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
+public class MassageRepository extends BaseRepository{
 
     public String userMessageHeathCheck() throws SQLException {
 
