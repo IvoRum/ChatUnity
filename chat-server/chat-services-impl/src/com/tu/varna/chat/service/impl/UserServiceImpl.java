@@ -15,7 +15,16 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public void addFriend(int userSender, int userReceiver) {
-        
+
+    }
+
+    @Override
+    public void acceptFriendRequest(int idUser, int idNewFriend) {
+        try {
+            friendRepository.insertNewFriendRelation(idUser,idNewFriend);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
