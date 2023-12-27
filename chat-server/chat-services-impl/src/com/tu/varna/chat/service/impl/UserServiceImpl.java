@@ -1,6 +1,5 @@
 package com.tu.varna.chat.service.impl;
 
-import com.tu.varna.chat.common.dto.UserDto;
 import com.tu.varna.chat.common.dto.UserHandleDto;
 import com.tu.varna.chat.repository.FriendRepository;
 import com.tu.varna.chat.service.UserService;
