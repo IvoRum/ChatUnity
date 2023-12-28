@@ -1,2 +1,5 @@
 
-g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8¬Â’ÇÄ1
+h
+java:S1128"FRemove this unused import 'com.tu.varna.chat.common.PropertiesLoader'.(Ò¤‰ıÿÿÿÿÿ8¯ôË1
+\
+java:S1128":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8¯ôË1

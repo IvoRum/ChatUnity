@@ -11,5 +11,13 @@ O
 java:S1481["-Remove this unused "received" local variable.(“Ï‹˜øÿÿÿÿ8åâÄĞÄ1
 L	java:S106a"+Replace this use of System.out by a logger.(‡ñùÍüÿÿÿÿ8æâÄĞÄ1
 L	java:S106e"+Replace this use of System.out by a logger.(ü£€Ãşÿÿÿÿ8–‹ÖĞÄ1
+n
+java:S1128"LRemove this unused import 'com.tu.varna.chat.common.net.NewUserCredentials'.(¢¸–Ôüÿÿÿÿ8×ÂôË1
+k
+java:S1128"IRemove this unused import 'com.tu.varna.chat.common.net.UserCredentials'.(íœßĞıÿÿÿÿ8×ÂôË1
+e
+java:S1128"CRemove this unused import 'com.tu.varna.chat.common.net.UserNames'.(×ÜÚ±ùÿÿÿÿ8×ÂôË1
+s
+java:S1128	"VRemove this unused import 'com.tu.varna.chat.service.impl.exception.ServiceException'.(¦æ½‰8×ÂôË1
 U
 java:S1144Z"3Remove this unused private "testConnection" method.(©¨ùÿÿÿÿ8€ùˆÑÄ1

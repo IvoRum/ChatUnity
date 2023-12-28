@@ -71,5 +71,11 @@ h
 8chat-net/src/com/tu/varna/chat/net/auth/AuthNetTest.java,5\0\5003dbc0393ec79b5d65181c28cd5760830c1cbb
 n
 >chat-common/src/com/tu/varna/chat/common/PropertiesLoader.java,a\6\a6d8f07b65f5437cd22d673e3b9fc1241ef98a67
-z
-Jchat-services-impl/src/com/tu/varna/chat/service/impl/SendMessageImpl.java,6\a\6a1a1937d585627d3b60a4151a645db3f02582f5
+v
+Fchat-repository/src/com/tu/varna/chat/repository/FriendRepository.java,3\1\31ad8d4e56d88e41d19ebbc5e5e265e90ef62a78
+t
+Dchat-repository/src/com/tu/varna/chat/repository/BaseRepository.java,2\5\25bb9db2ce9a208b493e25ca3a7a1de700908baa
+o
+?chat-common/src/com/tu/varna/chat/common/dto/UserHandleDto.java,0\4\049bf26ee58ad2cf5ed65e8682b105121e69517f
+~
+Nchat-services-impl/src/com/tu/varna/chat/service/impl/UserServiceImplTest.java,6\7\674832e7caeaf031a93a2465f21ecd30f6e1b09c

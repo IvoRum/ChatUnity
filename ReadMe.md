@@ -30,11 +30,23 @@ gms: userId conversation$order ...
 gms: 1 1&3 1&2
 ```
 
+returns: All foudn messages. It will return emplty list if nothing was found.
+
 #### Send message
 
 ```
 sms: userId converstion content
 ```
+
+returns: only if problem whit the message.
+
+### Friends
+
+```
+gfr: userId
+```
+
+returns: set of all foud friends.
 
 ## Database
 
