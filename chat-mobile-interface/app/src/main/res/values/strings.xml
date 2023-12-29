@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">chat-mobile-interface</string>
+    <string name="title_activity_log_in">LogIn</string>
+    <string name="title_activity_friend_list">FriendList</string>
+</resources>
