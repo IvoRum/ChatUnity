@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.example.chatnewdev"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.chatnewdev"
         minSdk = 33
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
