@@ -3,6 +3,7 @@ package com.example.chat_mobile_interface
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -29,6 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.chat_mobile_interface.model.UserHandleDto
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
+import com.example.chat_mobile_interface.view.model.UserViewModel
 
 class FriendList : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,13 +46,8 @@ class FriendList : ComponentActivity() {
                         )
                     }
                     composable("chat/{userData}") {
-                            navBackStackEntry ->
-                        /* Extracting the id from the route */
-                        val uId = navBackStackEntry.arguments?.getInt("id")
-                        /* We check if it's not null */
-                        if (uId != null) {
-                            chatView(uId)
-                        }
+                        val userViewMode:UserViewModel by viewModels()
+                        chatView(userViewMode.userHandleDto.id)
                     }
                 }
             }
