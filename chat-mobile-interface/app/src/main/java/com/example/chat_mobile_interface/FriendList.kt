@@ -42,8 +42,14 @@ class FriendList : ComponentActivity() {
                             navController, listOf<UserHandleDto>(UserHandleDto(1, "Ivan", "Ivanov"))
                         )
                     }
-                    composable("chat") {
-                        chatView()
+                    composable("chat/{userData}") {
+                            navBackStackEntry ->
+                        /* Extracting the id from the route */
+                        val uId = navBackStackEntry.arguments?.getInt("id")
+                        /* We check if it's not null */
+                        if (uId != null) {
+                            chatView(uId)
+                        }
                     }
                 }
             }
@@ -66,7 +72,9 @@ fun Greeting3(navController: NavHostController, statingList: List<UserHandleDto>
                     .padding(10.dp)
             ) {
 
-                Row(modifier = Modifier.clickable { navController.navigate("chat") }) {
+                Row(modifier = Modifier.clickable {
+                    navController.navigate("chat/${item.id}")
+                     }) {
                     Text(
                         text = item.id.toString(), style = bodyLarge
                     )
@@ -91,8 +99,8 @@ fun GreetingPreview3() {
 }
 
 @Composable
-fun chatView() {
+fun chatView(id: Int) {
     ChatmobileinterfaceTheme {
-        Text(text = "Hello your in the chat")
+        Text(text = "User id is:$id")
     }
 }
