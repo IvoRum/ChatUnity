@@ -3,7 +3,6 @@ package com.example.chat_mobile_interface
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,12 +22,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.chat_mobile_interface.model.UserHandleDto
+import com.example.chat_mobile_interface.service.UserService
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
 import com.example.chat_mobile_interface.view.model.UserViewModel
@@ -45,9 +44,9 @@ class FriendList : ComponentActivity() {
                             navController, listOf<UserHandleDto>(UserHandleDto(1, "Ivan", "Ivanov"))
                         )
                     }
-                    composable("chat/{userData}") {
-                        val userViewMode:UserViewModel by viewModels()
-                        chatView(userViewMode.userHandleDto.id)
+                    composable("chat/{userData}") { backStackEntry ->
+                        val userViewMode = UserViewModel(backStackEntry.savedStateHandle,UserService())
+                        chatView(userViewMode.userHandleDto.value.id)
                     }
                 }
             }
@@ -71,8 +70,9 @@ fun Greeting3(navController: NavHostController, statingList: List<UserHandleDto>
             ) {
 
                 Row(modifier = Modifier.clickable {
-                    navController.navigate("chat/${item.id}")
-                     }) {
+                    val navstring = "chat/${item.id.toString()}";
+                    navController.navigate(navstring)
+                }) {
                     Text(
                         text = item.id.toString(), style = bodyLarge
                     )
@@ -92,7 +92,10 @@ fun Greeting3(navController: NavHostController, statingList: List<UserHandleDto>
 @Composable
 fun GreetingPreview3() {
     ChatmobileinterfaceTheme {
-        Greeting3(rememberNavController(), listOf<UserHandleDto>(UserHandleDto(1, "Ivan", "Ivanov")))
+        Greeting3(
+            rememberNavController(),
+            listOf<UserHandleDto>(UserHandleDto(1, "Ivan", "Ivanov"))
+        )
     }
 }
 
