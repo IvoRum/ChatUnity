@@ -86,12 +86,14 @@ public class ChatHandler extends Thread {
     }
 
     private void getAllFriendsList(String received) {
+
         String[] inputPackage = received.split("gfr:");
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
         for (int i = 1; i < packageParts.length; i++) {
             Set<UserHandleDto> frindInfo=userService.allFriends(Integer.parseInt(packageParts[i]));
             System.out.println(frindInfo);
+            output.println(frindInfo);
         }
     }
 
