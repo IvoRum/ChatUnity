@@ -33,6 +33,7 @@ import com.example.chat_mobile_interface.model.UserHandleDto
 import com.example.chat_mobile_interface.service.UserService
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
+import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
 import java.util.Collections
 
@@ -45,10 +46,18 @@ class FriendList : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "home") {
                     composable("home") {
-                        //TODO get data from web socket
+                        val viewModel = viewModel<FriendViewModel>(factory = object :
+                            ViewModelProvider.Factory {
+                            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                                return FriendViewModel(
+                                    Collections.emptyList()
+                                ) as T
+                            }
+                        })
+                        viewModel.getFriendsUserHandle(2)
                         Greeting3(
                             navController,
-                            getListOfFriends()
+                            viewModel.friends
                         )
                     }
                     composable("chat/{userData}") { backStackEntry ->
@@ -126,7 +135,7 @@ fun chatView(id: Int, name: String) {
     }
 }
 
-fun getListOfFriends():List<UserHandleDto>{
-    val userService=UserService()
+fun getListOfFriends(): List<UserHandleDto> {
+    val userService = UserService()
     return userService.getFriendsUserHandle(2)
 }

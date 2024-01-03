@@ -18,7 +18,7 @@ class UserViewModel(val userId: String) : ViewModel() {
                 }
             })
 
-        tcpClient.execute()
+        //tcpClient.execute()
     }
 
     // Function to update the LiveData with received message

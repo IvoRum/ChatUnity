@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.IBinder
 import com.example.chat_mobile_interface.model.UserHandleDto
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -63,17 +65,6 @@ class UserService : Service() {
         return userHandleDtoList
     }
 
-    suspend fun getFriendsUserHandle1(
-        id: Int?
-    ): List<UserHandleDto> {
-        var response: String = ""
-        val tcpClient = TcpClient1(
-            "192.168.0.102",
-            1300, "gfr: 2"
-        )
-
-            return tcpClient.execute()
-    }
 
     override fun onBind(intent: Intent?): IBinder? {
         return null;
@@ -93,6 +84,7 @@ class TcpClient(
 
     private var receivedMessage: String? = null
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun execute() {
         GlobalScope.launch(Dispatchers.IO) {
             var socket: Socket? = null
