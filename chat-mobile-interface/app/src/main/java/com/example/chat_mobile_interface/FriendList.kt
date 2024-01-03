@@ -1,5 +1,6 @@
 package com.example.chat_mobile_interface
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,6 +23,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -35,6 +39,7 @@ import com.example.chat_mobile_interface.view.model.UserViewModel
 class FriendList : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             ChatmobileinterfaceTheme {
                 val navController = rememberNavController()
@@ -45,8 +50,22 @@ class FriendList : ComponentActivity() {
                         )
                     }
                     composable("chat/{userData}") { backStackEntry ->
-                        val userViewMode = UserViewModel(backStackEntry.savedStateHandle,UserService())
-                        chatView(userViewMode.userHandleDto.value.id)
+                        val userId = backStackEntry.arguments?.getString("userData") ?: ""
+                        val viewModel = viewModel<UserViewModel>(
+                            factory = object : ViewModelProvider.Factory {
+                                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                                    return UserViewModel(
+                                        userId
+                                    ) as T
+                                }
+                            }
+                        )
+                        Row {
+                            Text(text = viewModel.userId)
+                        }
+                        //val userViewMode = UserViewModel(backStackEntry.savedStateHandle,UserService())
+                        //chatView(userViewMode.userHandleDto.value.id,userViewMode.userHandleDto.value.firstName)
+
                     }
                 }
             }
@@ -100,8 +119,8 @@ fun GreetingPreview3() {
 }
 
 @Composable
-fun chatView(id: Int) {
+fun chatView(id: Int, name: String) {
     ChatmobileinterfaceTheme {
-        Text(text = "User id is:$id")
+        Text(text = "User id is:$id NAME: $name")
     }
 }

@@ -33,11 +33,14 @@ class MainActivity : ComponentActivity() {
             ChatmobileinterfaceTheme {
                 Button(onClick = {
                     val intent = Intent(this, FriendList::class.java)
+                    /*
                     Intent(applicationContext, RunningService::class.java).also {
                         it.action = RunningService.Actions.START.toString()
                         startService(it)
                     }
-                    //startActivity(intent)
+
+                     */
+                    startActivity(intent)
                 }) {
                     Text(text = "Open friend list")
                 }
