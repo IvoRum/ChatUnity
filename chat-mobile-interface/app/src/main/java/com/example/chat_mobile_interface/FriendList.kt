@@ -1,6 +1,5 @@
 package com.example.chat_mobile_interface
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -31,7 +30,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.chat_mobile_interface.model.UserHandleDto
-import com.example.chat_mobile_interface.service.UserService
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
 import com.example.chat_mobile_interface.view.model.UserViewModel
@@ -45,8 +43,15 @@ class FriendList : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "home") {
                     composable("home") {
+                        //TODO get data from web socket
                         Greeting3(
-                            navController, listOf<UserHandleDto>(UserHandleDto(1, "Ivan", "Ivanov"))
+                            navController,
+                            listOf<UserHandleDto>(
+                                UserHandleDto(1, "Ivan", "Ivanov"),
+                                UserHandleDto(2, "Ivan", "Ivanov"),
+                                UserHandleDto(3, "Ivan", "Ivanov"),
+                                UserHandleDto(4, "Ivan", "Ivanov")
+                            )
                         )
                     }
                     composable("chat/{userData}") { backStackEntry ->
@@ -65,7 +70,6 @@ class FriendList : ComponentActivity() {
                         }
                         //val userViewMode = UserViewModel(backStackEntry.savedStateHandle,UserService())
                         //chatView(userViewMode.userHandleDto.value.id,userViewMode.userHandleDto.value.firstName)
-
                     }
                 }
             }
