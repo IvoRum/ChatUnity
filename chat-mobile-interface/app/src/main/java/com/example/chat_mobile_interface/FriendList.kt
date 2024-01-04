@@ -1,5 +1,6 @@
 package com.example.chat_mobile_interface
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,7 +16,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -35,9 +38,18 @@ import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
 import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.util.Collections
 
 class FriendList : ComponentActivity() {
+
+    @OptIn(DelicateCoroutinesApi::class)
+    @SuppressLint("CoroutineCreationDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,18 +58,25 @@ class FriendList : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "home") {
                     composable("home") {
-                        val viewModel = viewModel<FriendViewModel>(factory = object :
-                            ViewModelProvider.Factory {
-                            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                                return FriendViewModel(
-                                    Collections.emptyList()
-                                ) as T
-                            }
-                        })
+                        val viewModel = viewModel<FriendViewModel>()
+
+                        var list= emptyList<UserHandleDto>() //by viewModel.friendList.observeAsState(emptyList())
+
+                        viewModel.friendList.observe(this@FriendList){
+                            list=it
+                        }
+
+
                         viewModel.getFriendsUserHandle(2)
+                        /*
+                        LaunchedEffect(viewModel){
+                            viewModel.getFriendsUserHandle(2)
+                        }
+
+                         */
                         Greeting3(
                             navController,
-                            viewModel.friends
+                            viewModel.simplefriends
                         )
                     }
                     composable("chat/{userData}") { backStackEntry ->
@@ -135,7 +154,8 @@ fun chatView(id: Int, name: String) {
     }
 }
 
-fun getListOfFriends(): List<UserHandleDto> {
+ fun getListOfFriends() = GlobalScope.async {
     val userService = UserService()
-    return userService.getFriendsUserHandle(2)
+    userService.getFriendsUserHandle(2)
+    //return emptyList()
 }

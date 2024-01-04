@@ -31,11 +31,11 @@ class UserService : Service() {
                 }
             })
 
-        tcpClient.execute()
+        //tcpClient.execute()
         return UserHandleDto(1, name, "Panov")
     }
 
-    fun getFriendsUserHandle(
+    suspend fun getFriendsUserHandle(
         id: Int?
     ): List<UserHandleDto> {
         var response: String = ""
@@ -43,6 +43,7 @@ class UserService : Service() {
             1300, "gfr: 2", object : TcpClient.OnMessageReceivedListener {
                 override fun onMessageReceived(message: String) {
                     response = message
+                    println(message)
                 }
             })
         tcpClient.execute()
@@ -84,9 +85,8 @@ class TcpClient(
 
     private var receivedMessage: String? = null
 
-    @OptIn(DelicateCoroutinesApi::class)
-    fun execute() {
-        GlobalScope.launch(Dispatchers.IO) {
+    fun execute(): String {
+        
             var socket: Socket? = null
             try {
                 // Create a socket connection
@@ -105,10 +105,11 @@ class TcpClient(
             } finally {
                 socket?.close()
             }
-
+        receivedMessage?.let { listener.onMessageReceived(it) }
+        return receivedMessage.toString()
             // Notify the listener with the received message
-            receivedMessage?.let { listener.onMessageReceived(it) }
-        }
+         //
+
     }
 
     interface OnMessageReceivedListener {
