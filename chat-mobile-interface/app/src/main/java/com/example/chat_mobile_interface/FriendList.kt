@@ -4,25 +4,40 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
@@ -39,12 +54,8 @@ import com.example.chat_mobile_interface.ui.theme.bodyLarge
 import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import java.util.Collections
 
 class FriendList : ComponentActivity() {
 
@@ -59,40 +70,35 @@ class FriendList : ComponentActivity() {
                 NavHost(navController, startDestination = "home") {
                     composable("home") {
                         val viewModel = viewModel<FriendViewModel>()
-
+                        //In bras boathouse of mock
+                        /*
                         var list= emptyList<UserHandleDto>() //by viewModel.friendList.observeAsState(emptyList())
-
                         viewModel.friendList.observe(this@FriendList){
                             list=it
                         }
-
-
                         viewModel.getFriendsUserHandle(2)
-                        /*
+
                         LaunchedEffect(viewModel){
                             viewModel.getFriendsUserHandle(2)
                         }
-
                          */
                         Greeting3(
-                            navController,
-                            viewModel.simplefriends
+                            navController, viewModel.simplefriends
                         )
                     }
-                    composable("chat/{userData}") { backStackEntry ->
+                    composable("chat/{userData}/{userName}") { backStackEntry ->
                         val userId = backStackEntry.arguments?.getString("userData") ?: ""
-                        val viewModel = viewModel<UserViewModel>(
-                            factory = object : ViewModelProvider.Factory {
+                        val userName = backStackEntry.arguments?.getString("userName") ?: ""
+                        val viewModel =
+                            viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
                                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                                     return UserViewModel(
-                                        userId
+                                        userId, userName
                                     ) as T
                                 }
-                            }
-                        )
-                        Row {
-                            Text(text = viewModel.userId)
-                        }
+                            })
+                        val ms = listOf<Message>(Message("Ivan", "Hello from Ivan"), Message("Ivan", "Ko pravish ve"))
+                        chatView(viewModel.userId, viewModel.userName,ms)
                         //val userViewMode = UserViewModel(backStackEntry.savedStateHandle,UserService())
                         //chatView(userViewMode.userHandleDto.value.id,userViewMode.userHandleDto.value.firstName)
                     }
@@ -118,7 +124,7 @@ fun Greeting3(navController: NavHostController, statingList: List<UserHandleDto>
             ) {
 
                 Row(modifier = Modifier.clickable {
-                    val navstring = "chat/${item.id.toString()}";
+                    val navstring = "chat/${item.id}/${item.familyName}";
                     navController.navigate(navstring)
                 }) {
                     Text(
@@ -141,20 +147,102 @@ fun Greeting3(navController: NavHostController, statingList: List<UserHandleDto>
 fun GreetingPreview3() {
     ChatmobileinterfaceTheme {
         Greeting3(
-            rememberNavController(),
-            listOf<UserHandleDto>(UserHandleDto(1, "Ivan", "Ivanov"))
+            rememberNavController(), listOf<UserHandleDto>(UserHandleDto(1, "Ivan", "Ivanov"))
         )
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun chatView(id: Int, name: String) {
+fun chatViewPreview() {
+    val ms = listOf<Message>(Message("Ivan", "Hello from Ivan"), Message("Ivan", "Ko pravish ve"))
+
     ChatmobileinterfaceTheme {
-        Text(text = "User id is:$id NAME: $name")
+        chatView(id = "1", name = "Ivan", ms)
     }
 }
 
- fun getListOfFriends() = GlobalScope.async {
+@Composable
+fun chatView(id: String, name: String, messages: List<Message>) {
+    ChatmobileinterfaceTheme {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth().fillMaxHeight(),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(text = "User id is:$id NAME: $name")
+            Column {
+                Conversation(messages)
+            }
+            var text by remember { mutableStateOf("") }
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.Start)
+            ) {
+                TextField(
+                    value = text,
+                    onValueChange = { text = it },
+                    Modifier
+                        .fillMaxWidth()
+                        .height(100.dp)
+                )
+            }
+        }
+
+    }
+}
+
+@Composable
+fun Conversation(messages: List<Message>) {
+    LazyColumn() {
+        items(messages) { message ->
+            MessageCard(message)
+        }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewConversation() {
+    val SampleData =
+        listOf<Message>(Message("Ivan", "Hello from Ivan"), Message("Ivan", "Ko pravish ve"))
+    ChatmobileinterfaceTheme {
+        Box(Modifier.background(Color.Blue)) {
+            Conversation(SampleData)
+        }
+    }
+}
+
+@Composable
+fun MessageCard(msg: Message) {
+    // Add padding around our message
+    Row(modifier = Modifier.padding(all = 8.dp)) {
+        Image(
+            painter = painterResource(R.drawable.ic_launcher_foreground),
+            contentDescription = "Contact profile picture",
+            modifier = Modifier
+                // Set image size to 40 dp
+                .size(40.dp)
+                // Clip image to be shaped as a circle
+                .clip(CircleShape)
+        )
+
+        // Add a horizontal space between the image and the column
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Column {
+            Text(text = msg.author)
+            // Add a vertical space between the author and message texts
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(text = msg.body)
+        }
+    }
+}
+
+data class Message(val author: String, val body: String)
+
+fun getListOfFriends() = GlobalScope.async {
     val userService = UserService()
     userService.getFriendsUserHandle(2)
     //return emptyList()

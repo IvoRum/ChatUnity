@@ -1,6 +1,6 @@
 
-F	java:S106"+Replace this use of System.out by a logger.(‘‚¸k8ÒóïĞÄ1
-F	java:S106"+Replace this use of System.out by a logger.(éîÊ8ÒóïĞÄ1
+F	java:S106"+Replace this use of System.out by a logger.(‘‚¸k8˜ŒŸÊÍ1
+F	java:S106"+Replace this use of System.out by a logger.(éîÊ8œŒŸÊÍ1
 L
 java:S1068
-"*Remove this unused "socket" private field.(Å’¬Úşÿÿÿÿ8ÒóïĞÄ1
+"*Remove this unused "socket" private field.(Å’¬Úşÿÿÿÿ8¾ŒŸÊÍ1

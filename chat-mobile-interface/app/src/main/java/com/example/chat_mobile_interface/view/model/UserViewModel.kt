@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chat_mobile_interface.service.TcpClient
 
-class UserViewModel(val userId: String) : ViewModel() {
+class UserViewModel(val userId: String,val userName:String) : ViewModel() {
     private val _receivedMessage = MutableLiveData<String>()
     val receivedMessage: LiveData<String> get() = _receivedMessage
 
