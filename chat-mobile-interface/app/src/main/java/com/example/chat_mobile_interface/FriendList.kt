@@ -17,6 +17,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +34,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.chat_mobile_interface.model.UserHandleDto
+import com.example.chat_mobile_interface.service.FriendRepo
 import com.example.chat_mobile_interface.service.UserService
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
@@ -42,6 +44,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.Collections
@@ -58,38 +61,41 @@ class FriendList : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "home") {
                     composable("home") {
-                        val viewModel = viewModel<FriendViewModel>()
+                        val viewModel = viewModel<FriendViewModel>(factory = object :
+                            ViewModelProvider.Factory {
+                            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                                return FriendViewModel(
+                                    FriendRepo()
+                                ) as T
+                            }
+                        })
 
-                        var list= emptyList<UserHandleDto>() //by viewModel.friendList.observeAsState(emptyList())
-
+                        //val list by viewModel.friendList.observeAsState(emptyList())
+                        val list by viewModel.friendFlow.collectAsState(emptyList())
+                        val lists by viewModel.friends2.collectAsState()
+                        /*
                         viewModel.friendList.observe(this@FriendList){
                             list=it
                         }
-
-
+                         */
                         viewModel.getFriendsUserHandle(2)
-                        /*
-                        LaunchedEffect(viewModel){
+                        LaunchedEffect(viewModel) {
                             viewModel.getFriendsUserHandle(2)
                         }
-
-                         */
                         Greeting3(
-                            navController,
-                            viewModel.simplefriends
+                            navController, lists
                         )
                     }
                     composable("chat/{userData}") { backStackEntry ->
                         val userId = backStackEntry.arguments?.getString("userData") ?: ""
-                        val viewModel = viewModel<UserViewModel>(
-                            factory = object : ViewModelProvider.Factory {
+                        val viewModel =
+                            viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
                                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                                     return UserViewModel(
                                         userId
                                     ) as T
                                 }
-                            }
-                        )
+                            })
                         Row {
                             Text(text = viewModel.userId)
                         }
@@ -141,8 +147,7 @@ fun Greeting3(navController: NavHostController, statingList: List<UserHandleDto>
 fun GreetingPreview3() {
     ChatmobileinterfaceTheme {
         Greeting3(
-            rememberNavController(),
-            listOf<UserHandleDto>(UserHandleDto(1, "Ivan", "Ivanov"))
+            rememberNavController(), listOf<UserHandleDto>(UserHandleDto(1, "Ivan", "Ivanov"))
         )
     }
 }
@@ -154,7 +159,7 @@ fun chatView(id: Int, name: String) {
     }
 }
 
- fun getListOfFriends() = GlobalScope.async {
+fun getListOfFriends() = GlobalScope.async {
     val userService = UserService()
     userService.getFriendsUserHandle(2)
     //return emptyList()
