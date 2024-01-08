@@ -1,5 +1,6 @@
 package com.example.chat_mobile_interface.view.model
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,8 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.util.ArrayList
 
@@ -26,13 +29,20 @@ class FriendViewModel() : ViewModel() {
         UserHandleDto(5, "Tosho", "Kykata")
     )
 
+    private val _dataFlow = MutableStateFlow<List<UserHandleDto>>(emptyList())
+    val dataFlow: StateFlow<List<UserHandleDto>> = _dataFlow
+    //val da: MutableStateFlow(emptyList())
     fun getFriendsUserHandle(
         id: Int?
     ) {
-        viewModelScope.async {
-            val da = friendRepo.getFriends()
-            _friends.value = da
-            simplefriends = da
+        viewModelScope.launch{//async {
+            val da =friendRepo.getFriends()
+            //_friends.postValue(da.await())
+            _friends.value=da
+            _dataFlow.value=da
+            println("da+dataflow+"+_dataFlow.value)
+            //simplefriends = da
         }
     }
+    //////
 }

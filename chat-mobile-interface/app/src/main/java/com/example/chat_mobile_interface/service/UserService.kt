@@ -86,7 +86,6 @@ class TcpClient(
     private var receivedMessage: String? = null
 
     fun execute(): String {
-        
             var socket: Socket? = null
             try {
                 // Create a socket connection

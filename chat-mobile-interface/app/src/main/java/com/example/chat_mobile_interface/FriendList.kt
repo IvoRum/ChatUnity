@@ -33,7 +33,12 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -56,6 +61,7 @@ import com.example.chat_mobile_interface.model.UserHandleDto
 import com.example.chat_mobile_interface.service.UserService
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
+import com.example.chat_mobile_interface.view.model.ConversationViewModel
 import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -75,21 +81,13 @@ class FriendList : ComponentActivity() {
                 NavHost(navController, startDestination = "home") {
                     composable("home") {
                         val viewModel = viewModel<FriendViewModel>()
-                        //In bras boathouse of mock
-                        /*
-                        var list= emptyList<UserHandleDto>() //by viewModel.friendList.observeAsState(emptyList())
-                        viewModel.friendList.observe(this@FriendList){
-                            list=it
-                        }
-                        viewModel.getFriendsUserHandle(2)
-
-                        LaunchedEffect(viewModel){
+                        val list=viewModel.dataFlow.collectAsState()
+                        DisposableEffect(Unit) {
                             viewModel.getFriendsUserHandle(2)
+                            onDispose { }
                         }
-                         */
-                        Greeting3(
-                            navController, viewModel.simplefriends
-                        )
+
+                        Greeting3(navController,list)
                     }
                     composable("chat/{userData}/{userName}") { backStackEntry ->
                         val userId = backStackEntry.arguments?.getString("userData") ?: ""
@@ -106,38 +104,23 @@ class FriendList : ComponentActivity() {
                             Message("Ivan", "Hello from Ivan"),
                             Message("Ivan", "Ko pravish ve"),
                             Message("Ivan", "Hello from Ivan"),
-                            Message("Ivan", "Ko pravish ve"),
-                            Message("Ivan", "Hello from Ivan"),
-                            Message("Ivan", "Ko pravish ve"),
-                            Message("Ivan", "Hello from Ivan"),
-                            Message("Ivan", "Ko pravish ve"),
-                            Message("Ivan", "Hello from Ivan"),
-                            Message("Ivan", "Ko pravish ve"),
-                            Message("Ivan", "Hello from Ivan"),
-                            Message("Ivan", "Ko pravish ve"),
-                            Message("Ivan", "Hello from Ivan"),
-                            Message("Ivan", "Ko pravish ve"),
-                            Message("Ivan", "Hello from Ivan"),
                             Message("Ivan", "Ko pravish ve")
                         )
 
                         chatView(viewModel.userId, viewModel.userName, ms)
-                        //val userViewMode = UserViewModel(backStackEntry.savedStateHandle,UserService())
-                        //chatView(userViewMode.userHandleDto.value.id,userViewMode.userHandleDto.value.firstName)
                     }
                 }
             }
         }
     }
 }
-
 @Composable
-fun Greeting3(navController: NavHostController, statingList: List<UserHandleDto>) {
+fun Greeting3(navController: NavHostController, statingList: State<List<UserHandleDto>>) {
     var friends by remember {
         mutableStateOf(statingList)
     }
     LazyColumn(content = {
-        items(friends) { item ->
+        items(friends.value) { item ->
             Row(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -164,19 +147,9 @@ fun Greeting3(navController: NavHostController, statingList: List<UserHandleDto>
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview3() {
-    ChatmobileinterfaceTheme {
-        Greeting3(
-            rememberNavController(), listOf<UserHandleDto>(UserHandleDto(1, "Ivan", "Ivanov"))
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
 fun chatViewPreview() {
     val ms = listOf<Message>(
-        Message("Ivan", "Hello from Ivan"),
+        Message("1Ivan", "Hello from Ivan"),
         Message("Ivan", "Ko pravish ve"),
         Message("Ivan", "Hello from Ivan"),
         Message("Ivan", "Ko pravish ve"),
@@ -200,10 +173,12 @@ fun chatViewPreview() {
     }
 }
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun chatView(id: String, name: String, messages: List<Message>) {
+    val viewModel= viewModel<ConversationViewModel>()
+
     var text by remember { mutableStateOf("") }
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = "User id is:$id NAME: $name") })
@@ -229,14 +204,14 @@ fun chatView(id: String, name: String, messages: List<Message>) {
                 )
             )
         }
-    }) { Conversation(messages) }
+    }) { Conversation( messages) }
 }
 
 @Composable
 fun Conversation(messages: List<Message>) {
     LazyColumn(
         reverseLayout = true,
-        modifier = Modifier.padding(10.dp, 65.dp),
+        modifier = Modifier.padding(10.dp, 85.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(messages) { message ->
@@ -250,7 +225,7 @@ fun Conversation(messages: List<Message>) {
 fun PreviewConversation() {
     val SampleData =
         listOf<Message>(
-            Message("Ivan", "Hello from Ivan"),
+            Message("1Ivan", "Hello from Ivan"),
             Message("Ivan", "Ko pravish ve"),
             Message("Ivan", "Hello from Ivan"),
             Message("Ivan", "Ko pravish ve"),
@@ -278,25 +253,20 @@ fun PreviewConversation() {
 fun MessageCard(msg: Message) {
     // Add padding around our message
     Row(modifier = Modifier.padding(all = 8.dp)) {
-            Image(
-                painter = painterResource(R.drawable.ic_launcher_foreground),
-                contentDescription = "Contact profile picture",
-                modifier = Modifier
-                    // Set image size to 40 dp
-                    .size(40.dp)
-                    // Clip image to be shaped as a circle
-                    .clip(CircleShape)
-            )
+        Image(
+            painter = painterResource(R.drawable.ic_launcher_foreground),
+            contentDescription = "Contact profile picture",
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
 
-            // Add a horizontal space between the image and the column
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Column {
-                Text(text = msg.author)
-                // Add a vertical space between the author and message texts
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(text = msg.body)
-            }
+        Column {
+            Text(text = msg.author)
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(text = msg.body)
+        }
     }
 }
 

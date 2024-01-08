@@ -12,11 +12,11 @@ class FriendRepo {
     suspend fun getFriends(): List<UserHandleDto> {
             var response=GlobalScope.async {
                 var da = ""
-                val tcpClient = TcpClient("192.168.0.101",
+                val tcpClient = TcpClient("192.168.0.103",
                     1300, "gfr: 2", object : TcpClient.OnMessageReceivedListener {
                         override fun onMessageReceived(message: String) {
                             da = message
-                            println(message)
+                            //println(message)
                         }
                     })
                 tcpClient.execute()
