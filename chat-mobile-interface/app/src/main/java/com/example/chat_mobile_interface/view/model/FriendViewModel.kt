@@ -1,41 +1,38 @@
 package com.example.chat_mobile_interface.view.model
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.chat_mobile_interface.model.UserHandleDto
 import com.example.chat_mobile_interface.service.FriendRepo
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.stateIn
+import com.example.chat_mobile_interface.service.TcpClient
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.util.ArrayList
 
-class FriendViewModel(val friendRepo: FriendRepo) : ViewModel() {
+class FriendViewModel() : ViewModel() {
+    private val friendRepo = FriendRepo()
     private val _friends = MutableLiveData<List<UserHandleDto>>()
     val friendList: LiveData<List<UserHandleDto>> get() = _friends
-    val friendFlow: Flow<List<UserHandleDto>> = flow {
-        emit(friendRepo.getFriends())
-    }
-
-    private val __friends=MutableStateFlow<List<UserHandleDto>>(emptyList())
-    val friends2= __friends.asStateFlow()
+    var simplefriends = listOf<UserHandleDto>(
+        UserHandleDto(1, "Ivan", "Ivanov"),
+        UserHandleDto(2, "Iliq", "Panov"),
+        UserHandleDto(3, "Hristo", "Dimitrov"),
+        UserHandleDto(4, "Mariq", "Ilieva"),
+        UserHandleDto(5, "Tosho", "Kykata")
+    )
 
     fun getFriendsUserHandle(
         id: Int?
     ) {
-        viewModelScope.launch {
+        viewModelScope.async {
             val da = friendRepo.getFriends()
             _friends.value = da
-            __friends.value=da
-            //simplefriends=da
+            simplefriends = da
         }
     }
 }
