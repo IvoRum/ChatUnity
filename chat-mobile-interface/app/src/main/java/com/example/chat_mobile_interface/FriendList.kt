@@ -12,10 +12,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,20 +21,27 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
+import androidx.compose.ui.graphics.Color.Companion.Blue
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -97,8 +102,26 @@ class FriendList : ComponentActivity() {
                                     ) as T
                                 }
                             })
-                        val ms = listOf<Message>(Message("Ivan", "Hello from Ivan"), Message("Ivan", "Ko pravish ve"))
-                        chatView(viewModel.userId, viewModel.userName,ms)
+                        val ms = listOf<Message>(
+                            Message("Ivan", "Hello from Ivan"),
+                            Message("Ivan", "Ko pravish ve"),
+                            Message("Ivan", "Hello from Ivan"),
+                            Message("Ivan", "Ko pravish ve"),
+                            Message("Ivan", "Hello from Ivan"),
+                            Message("Ivan", "Ko pravish ve"),
+                            Message("Ivan", "Hello from Ivan"),
+                            Message("Ivan", "Ko pravish ve"),
+                            Message("Ivan", "Hello from Ivan"),
+                            Message("Ivan", "Ko pravish ve"),
+                            Message("Ivan", "Hello from Ivan"),
+                            Message("Ivan", "Ko pravish ve"),
+                            Message("Ivan", "Hello from Ivan"),
+                            Message("Ivan", "Ko pravish ve"),
+                            Message("Ivan", "Hello from Ivan"),
+                            Message("Ivan", "Ko pravish ve")
+                        )
+
+                        chatView(viewModel.userId, viewModel.userName, ms)
                         //val userViewMode = UserViewModel(backStackEntry.savedStateHandle,UserService())
                         //chatView(userViewMode.userHandleDto.value.id,userViewMode.userHandleDto.value.firstName)
                     }
@@ -110,11 +133,9 @@ class FriendList : ComponentActivity() {
 
 @Composable
 fun Greeting3(navController: NavHostController, statingList: List<UserHandleDto>) {
-
     var friends by remember {
         mutableStateOf(statingList)
     }
-
     LazyColumn(content = {
         items(friends) { item ->
             Row(
@@ -122,7 +143,6 @@ fun Greeting3(navController: NavHostController, statingList: List<UserHandleDto>
                     .fillMaxHeight()
                     .padding(10.dp)
             ) {
-
                 Row(modifier = Modifier.clickable {
                     val navstring = "chat/${item.id}/${item.familyName}";
                     navController.navigate(navstring)
@@ -155,47 +175,70 @@ fun GreetingPreview3() {
 @Preview(showBackground = true)
 @Composable
 fun chatViewPreview() {
-    val ms = listOf<Message>(Message("Ivan", "Hello from Ivan"), Message("Ivan", "Ko pravish ve"))
+    val ms = listOf<Message>(
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve")
+    )
+
 
     ChatmobileinterfaceTheme {
         chatView(id = "1", name = "Ivan", ms)
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun chatView(id: String, name: String, messages: List<Message>) {
-    ChatmobileinterfaceTheme {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth().fillMaxHeight(),
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(text = "User id is:$id NAME: $name")
-            Column {
-                Conversation(messages)
-            }
-            var text by remember { mutableStateOf("") }
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.Start)
-            ) {
-                TextField(
-                    value = text,
-                    onValueChange = { text = it },
-                    Modifier
-                        .fillMaxWidth()
-                        .height(100.dp)
+    var text by remember { mutableStateOf("") }
+    Scaffold(topBar = {
+        TopAppBar(title = { Text(text = "User id is:$id NAME: $name") })
+    }, bottomBar = {
+        Row(modifier = Modifier.padding(10.dp)) {
+            TextField(
+                value = text,
+                onValueChange = { text = it },
+                modifier = Modifier
+                    .weight(1F)
+                    .padding(end = 8.dp),
+                shape = RoundedCornerShape(60.dp),
+                trailingIcon = {
+                    Icon(
+                        Icons.Default.ArrowForward,
+                        contentDescription = "Send message",
+                        tint = Blue
+                    )
+                },
+                colors = TextFieldDefaults.colors(
+                    focusedIndicatorColor = Transparent,
+                    unfocusedIndicatorColor = Transparent
                 )
-            }
+            )
         }
-
-    }
+    }) { Conversation(messages) }
 }
 
 @Composable
 fun Conversation(messages: List<Message>) {
-    LazyColumn() {
+    LazyColumn(
+        reverseLayout = true,
+        modifier = Modifier.padding(10.dp, 65.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
         items(messages) { message ->
             MessageCard(message)
         }
@@ -206,7 +249,24 @@ fun Conversation(messages: List<Message>) {
 @Composable
 fun PreviewConversation() {
     val SampleData =
-        listOf<Message>(Message("Ivan", "Hello from Ivan"), Message("Ivan", "Ko pravish ve"))
+        listOf<Message>(
+            Message("Ivan", "Hello from Ivan"),
+            Message("Ivan", "Ko pravish ve"),
+            Message("Ivan", "Hello from Ivan"),
+            Message("Ivan", "Ko pravish ve"),
+            Message("Ivan", "Hello from Ivan"),
+            Message("Ivan", "Ko pravish ve"),
+            Message("Ivan", "Hello from Ivan"),
+            Message("Ivan", "Ko pravish ve"),
+            Message("Ivan", "Hello from Ivan"),
+            Message("Ivan", "Ko pravish ve"),
+            Message("Ivan", "Hello from Ivan"),
+            Message("Ivan", "Ko pravish ve"),
+            Message("Ivan", "Hello from Ivan"),
+            Message("Ivan", "Ko pravish ve"),
+            Message("Ivan", "Hello from Ivan"),
+            Message("Ivan", "Ko pravish ve")
+        )
     ChatmobileinterfaceTheme {
         Box(Modifier.background(Color.Blue)) {
             Conversation(SampleData)
@@ -218,25 +278,25 @@ fun PreviewConversation() {
 fun MessageCard(msg: Message) {
     // Add padding around our message
     Row(modifier = Modifier.padding(all = 8.dp)) {
-        Image(
-            painter = painterResource(R.drawable.ic_launcher_foreground),
-            contentDescription = "Contact profile picture",
-            modifier = Modifier
-                // Set image size to 40 dp
-                .size(40.dp)
-                // Clip image to be shaped as a circle
-                .clip(CircleShape)
-        )
+            Image(
+                painter = painterResource(R.drawable.ic_launcher_foreground),
+                contentDescription = "Contact profile picture",
+                modifier = Modifier
+                    // Set image size to 40 dp
+                    .size(40.dp)
+                    // Clip image to be shaped as a circle
+                    .clip(CircleShape)
+            )
 
-        // Add a horizontal space between the image and the column
-        Spacer(modifier = Modifier.width(8.dp))
+            // Add a horizontal space between the image and the column
+            Spacer(modifier = Modifier.width(8.dp))
 
-        Column {
-            Text(text = msg.author)
-            // Add a vertical space between the author and message texts
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = msg.body)
-        }
+            Column {
+                Text(text = msg.author)
+                // Add a vertical space between the author and message texts
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = msg.body)
+            }
     }
 }
 
