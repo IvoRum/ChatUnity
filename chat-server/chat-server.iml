@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/chat-services-impl/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chat-services/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chat-net/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

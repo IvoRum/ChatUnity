@@ -8,6 +8,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.PrintWriter
+import java.net.InetAddress
 import java.net.Socket
 
 class FriendRepo {
@@ -52,14 +53,11 @@ class TcpClient(
     fun execute(): String {
         var socket: Socket? = null
         try {
-            // Create a socket connection
             socket = Socket(serverIp, serverPort)
 
-            // Send the message to the server
             val out = PrintWriter(socket.getOutputStream(), true)
             out.println(messageToSend)
 
-            // Receive the response from the server
             val `in` = BufferedReader(InputStreamReader(socket.getInputStream()))
             receivedMessage = `in`.readLine()
 
@@ -70,9 +68,6 @@ class TcpClient(
         }
         receivedMessage?.let { listener.onMessageReceived(it) }
         return receivedMessage.toString()
-        // Notify the listener with the received message
-        //
-
     }
 
     interface OnMessageReceivedListener {

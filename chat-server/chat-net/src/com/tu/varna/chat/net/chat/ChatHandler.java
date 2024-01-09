@@ -10,9 +10,7 @@ import com.tu.varna.chat.service.impl.UserServiceImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class ChatHandler extends Thread {
     private Socket socket;
@@ -101,21 +99,23 @@ public class ChatHandler extends Thread {
      * Calls repository to return all the specified conversation messages.
      * gms: userId conversation$order .....
      * EX
-     * gms: 1 1&3 1&2
+     * gms: 1 1@3 1@2
      *
      * @param received
      */
-    private void getAllConversationsForAgivenUser(String received) {
+    public void getAllConversationsForAgivenUser(String received) {
         String[] inputPackage = received.split("gms:");
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
+        List<String> allNewMessagesList=new ArrayList<>();
         for (int i = 2; i < packageParts.length; i++) {
             String[] chatReachedPointParts = packageParts[i].split("@");
             String allNewMessages = chatService.receiveMessage(
                     new ChatReachedPoint(Integer.parseInt(chatReachedPointParts[0]), Integer.parseInt(chatReachedPointParts[1])));
-            System.out.println(allNewMessages);
-            output.println(allNewMessages);
+            allNewMessagesList.add(allNewMessages);
         }
+        System.out.println(allNewMessagesList);
+        output.println(allNewMessagesList);
     }
 
     /**
