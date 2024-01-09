@@ -34,11 +34,9 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -53,10 +51,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.chat_mobile_interface.model.Message
 import com.example.chat_mobile_interface.model.UserHandleDto
 import com.example.chat_mobile_interface.service.UserService
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
@@ -80,40 +80,51 @@ class FriendList : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController, startDestination = "home") {
                     composable("home") {
-                        val viewModel = viewModel<FriendViewModel>()
-                        val list=viewModel.dataFlow.collectAsState()
-                        DisposableEffect(Unit) {
-                            viewModel.getFriendsUserHandle(2)
-                            onDispose { }
-                        }
-
-                        Greeting3(navController,list)
+                        Home(navController)
                     }
                     composable("chat/{userData}/{userName}") { backStackEntry ->
-                        val userId = backStackEntry.arguments?.getString("userData") ?: ""
-                        val userName = backStackEntry.arguments?.getString("userName") ?: ""
-                        val viewModel =
-                            viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
-                                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                                    return UserViewModel(
-                                        userId, userName
-                                    ) as T
-                                }
-                            })
-                        val ms = listOf<Message>(
-                            Message("Ivan", "Hello from Ivan"),
-                            Message("Ivan", "Ko pravish ve"),
-                            Message("Ivan", "Hello from Ivan"),
-                            Message("Ivan", "Ko pravish ve")
-                        )
-
-                        chatView(viewModel.userId, viewModel.userName, ms)
+                        Chat(backStackEntry)
                     }
                 }
             }
         }
     }
 }
+
+// Navigation composable
+@Composable
+fun Chat(backStackEntry: NavBackStackEntry) {
+    val userId = backStackEntry.arguments?.getString("userData") ?: ""
+    val userName = backStackEntry.arguments?.getString("userName") ?: ""
+    val viewModel =
+        viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return UserViewModel(
+                    userId, userName
+                ) as T
+            }
+        })
+    val ms = listOf<Message>(
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve")
+    )
+    chatView(viewModel.userId, viewModel.userName, ms)
+}
+
+@Composable
+fun Home(navController: NavHostController) {
+    val viewModel = viewModel<FriendViewModel>()
+    val list=viewModel.dataFlow.collectAsState()
+    DisposableEffect(Unit) {
+        viewModel.getFriendsUserHandle(2)
+        onDispose { }
+    }
+    Greeting3(navController,list)
+}
+
+//Sub composable
 @Composable
 fun Greeting3(navController: NavHostController, statingList: State<List<UserHandleDto>>) {
     var friends by remember {
@@ -143,34 +154,6 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
             Divider()
         }
     }, modifier = Modifier.fillMaxSize())
-}
-
-@Preview(showBackground = true)
-@Composable
-fun chatViewPreview() {
-    val ms = listOf<Message>(
-        Message("1Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve")
-    )
-
-
-    ChatmobileinterfaceTheme {
-        chatView(id = "1", name = "Ivan", ms)
-    }
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "StateFlowValueCalledInComposition")
@@ -220,6 +203,61 @@ fun Conversation(messages: List<Message>) {
     }
 }
 
+@Composable
+fun MessageCard(msg: Message) {
+    // Add padding around our message
+    Row(modifier = Modifier.padding(all = 8.dp)) {
+        Image(
+            painter = painterResource(R.drawable.ic_launcher_foreground),
+            contentDescription = "Contact profile picture",
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Column {
+            Text(text = msg.author)
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(text = msg.body)
+        }
+    }
+}
+
+fun getListOfFriends() = GlobalScope.async {
+    val userService = UserService()
+    userService.getFriendsUserHandle(2)
+    //return emptyList()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun chatViewPreview() {
+    val ms = listOf<Message>(
+        Message("1Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve"),
+        Message("Ivan", "Hello from Ivan"),
+        Message("Ivan", "Ko pravish ve")
+    )
+
+
+    ChatmobileinterfaceTheme {
+        chatView(id = "1", name = "Ivan", ms)
+    }
+}
+
 @Preview
 @Composable
 fun PreviewConversation() {
@@ -247,33 +285,4 @@ fun PreviewConversation() {
             Conversation(SampleData)
         }
     }
-}
-
-@Composable
-fun MessageCard(msg: Message) {
-    // Add padding around our message
-    Row(modifier = Modifier.padding(all = 8.dp)) {
-        Image(
-            painter = painterResource(R.drawable.ic_launcher_foreground),
-            contentDescription = "Contact profile picture",
-            modifier = Modifier
-                .size(40.dp)
-                .clip(CircleShape)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-
-        Column {
-            Text(text = msg.author)
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = msg.body)
-        }
-    }
-}
-
-data class Message(val author: String, val body: String)
-
-fun getListOfFriends() = GlobalScope.async {
-    val userService = UserService()
-    userService.getFriendsUserHandle(2)
-    //return emptyList()
 }
