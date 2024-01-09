@@ -57,15 +57,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.chat_mobile_interface.model.Message
+import com.example.chat_mobile_interface.model.MessageReachedPointDto
 import com.example.chat_mobile_interface.model.UserHandleDto
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
-import com.example.chat_mobile_interface.view.model.ConversationViewModel
 import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 
 class FriendList : ComponentActivity() {
 
@@ -103,13 +101,13 @@ fun Chat(backStackEntry: NavBackStackEntry) {
                 ) as T
             }
         })
-    val ms = listOf<Message>(
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve")
-    )
-    chatView(viewModel.userId, viewModel.userName, ms)
+    val list=viewModel.dataFlow.collectAsState()
+    DisposableEffect(Unit) {
+        viewModel.getUserMessages()
+        onDispose { }
+    }
+
+    chatView(viewModel.userId, viewModel.userName, list)
 }
 
 @Composable
@@ -158,9 +156,7 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun chatView(id: String, name: String, messages: List<Message>) {
-    val viewModel= viewModel<ConversationViewModel>()
-
+fun chatView(id: String, name: String, messages: State<List<MessageReachedPointDto>>) {
     var text by remember { mutableStateOf("") }
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = "User id is:$id NAME: $name") })
@@ -190,20 +186,20 @@ fun chatView(id: String, name: String, messages: List<Message>) {
 }
 
 @Composable
-fun Conversation(messages: List<Message>) {
+fun Conversation(messages: State<List<MessageReachedPointDto>>) {
     LazyColumn(
         reverseLayout = true,
         modifier = Modifier.padding(10.dp, 85.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(messages) { message ->
+        items(messages.value) { message ->
             MessageCard(message)
         }
     }
 }
 
 @Composable
-fun MessageCard(msg: Message) {
+fun MessageCard(msg: MessageReachedPointDto) {
     // Add padding around our message
     Row(modifier = Modifier.padding(all = 8.dp)) {
         Image(
@@ -216,66 +212,9 @@ fun MessageCard(msg: Message) {
         Spacer(modifier = Modifier.width(8.dp))
 
         Column {
-            Text(text = msg.author)
+            Text(text = msg.sende.toString())
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = msg.body)
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun chatViewPreview() {
-    val ms = listOf<Message>(
-        Message("1Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve"),
-        Message("Ivan", "Hello from Ivan"),
-        Message("Ivan", "Ko pravish ve")
-    )
-
-
-    ChatmobileinterfaceTheme {
-        chatView(id = "1", name = "Ivan", ms)
-    }
-}
-
-@Preview
-@Composable
-fun PreviewConversation() {
-    val SampleData =
-        listOf<Message>(
-            Message("1Ivan", "Hello from Ivan"),
-            Message("Ivan", "Ko pravish ve"),
-            Message("Ivan", "Hello from Ivan"),
-            Message("Ivan", "Ko pravish ve"),
-            Message("Ivan", "Hello from Ivan"),
-            Message("Ivan", "Ko pravish ve"),
-            Message("Ivan", "Hello from Ivan"),
-            Message("Ivan", "Ko pravish ve"),
-            Message("Ivan", "Hello from Ivan"),
-            Message("Ivan", "Ko pravish ve"),
-            Message("Ivan", "Hello from Ivan"),
-            Message("Ivan", "Ko pravish ve"),
-            Message("Ivan", "Hello from Ivan"),
-            Message("Ivan", "Ko pravish ve"),
-            Message("Ivan", "Hello from Ivan"),
-            Message("Ivan", "Ko pravish ve")
-        )
-    ChatmobileinterfaceTheme {
-        Box(Modifier.background(Color.Blue)) {
-            Conversation(SampleData)
+            Text(text = msg.content)
         }
     }
 }

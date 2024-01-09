@@ -1,5 +1,6 @@
 package com.example.chat_mobile_interface.repository
 
+import com.example.chat_mobile_interface.model.MessageReachedPointDto
 import com.example.chat_mobile_interface.model.UserHandleDto
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -36,6 +37,33 @@ class FriendRepo {
                 UserHandleDto(id.toInt(), firstName, familyName)
             }.toList()
             userHandleDtoList
+        }
+    }
+
+    suspend fun getMessages(): List<MessageReachedPointDto> {
+        var response=GlobalScope.async {
+            var da = ""
+            val tcpClient = TcpClient("192.168.0.104",
+                1300, "gms: 1 1@3", object : TcpClient.OnMessageReceivedListener {
+                    override fun onMessageReceived(message: String) {
+                        da = message
+                        println(message)
+                    }
+                })
+            tcpClient.execute()
+        }
+        return runBlocking {
+            val regex =
+                Regex("""MessageReachedPointDto\[idSender=(\d+), idReceiver=(\d+), content=([^\]]+)""")
+            // Find all matches in the input string
+            val matches = regex.findAll(response.await())
+
+            // Create a list of UserHandleDto objects from the matches
+            val foundMessages = matches.map {
+                val (id, idReceiver, content) = it.destructured
+                MessageReachedPointDto(id.toInt(), idReceiver.toInt(), content)
+            }.toList()
+            foundMessages
         }
     }
 
