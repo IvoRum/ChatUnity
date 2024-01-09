@@ -1,5 +1,6 @@
 package com.tu.varna.chat.net.chat;
 
+import com.tu.varna.chat.common.dto.MessageReachedPointDto;
 import com.tu.varna.chat.common.dto.UserHandleDto;
 import com.tu.varna.chat.common.net.ChatReachedPoint;
 import com.tu.varna.chat.service.ChatService;
@@ -107,10 +108,10 @@ public class ChatHandler extends Thread {
         String[] inputPackage = received.split("gms:");
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
-        List<String> allNewMessagesList=new ArrayList<>();
+        List<List<MessageReachedPointDto>> allNewMessagesList=new ArrayList<>();
         for (int i = 2; i < packageParts.length; i++) {
             String[] chatReachedPointParts = packageParts[i].split("@");
-            String allNewMessages = chatService.receiveMessage(
+            List<MessageReachedPointDto> allNewMessages = chatService.receiveMessage(
                     new ChatReachedPoint(Integer.parseInt(chatReachedPointParts[0]), Integer.parseInt(chatReachedPointParts[1])));
             allNewMessagesList.add(allNewMessages);
         }

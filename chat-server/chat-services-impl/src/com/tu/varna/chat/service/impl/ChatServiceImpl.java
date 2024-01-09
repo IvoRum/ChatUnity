@@ -1,12 +1,14 @@
 package com.tu.varna.chat.service.impl;
 
 import com.tu.varna.chat.common.dto.ChatDuo;
+import com.tu.varna.chat.common.dto.MessageReachedPointDto;
 import com.tu.varna.chat.common.dto.UserDto;
 import com.tu.varna.chat.common.net.ChatReachedPoint;
 import com.tu.varna.chat.repository.MassageRepository;
 import com.tu.varna.chat.service.ChatService;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 public class ChatServiceImpl implements ChatService {
@@ -27,9 +29,9 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public String receiveMessage(ChatReachedPoint chatReachedPoint) {
+    public List<MessageReachedPointDto> receiveMessage(ChatReachedPoint chatReachedPoint) {
         try {
-            return massageRepository.getMessagesForAGivenUser(chatReachedPoint.conversationId(),chatReachedPoint.orderReached());
+            return massageRepository.getAllMessagesForAGivenUser(chatReachedPoint.conversationId(),chatReachedPoint.orderReached());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
