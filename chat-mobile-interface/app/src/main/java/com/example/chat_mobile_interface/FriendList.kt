@@ -58,7 +58,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.chat_mobile_interface.model.Message
 import com.example.chat_mobile_interface.model.UserHandleDto
-import com.example.chat_mobile_interface.service.UserService
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
 import com.example.chat_mobile_interface.view.model.ConversationViewModel
@@ -222,12 +221,6 @@ fun MessageCard(msg: Message) {
             Text(text = msg.body)
         }
     }
-}
-
-fun getListOfFriends() = GlobalScope.async {
-    val userService = UserService()
-    userService.getFriendsUserHandle(2)
-    //return emptyList()
 }
 
 @Preview(showBackground = true)

@@ -3,7 +3,7 @@ package com.example.chat_mobile_interface.view.model
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.chat_mobile_interface.service.TcpClient
+import com.example.chat_mobile_interface.repository.TcpClient
 
 class UserViewModel(val userId: String,val userName:String) : ViewModel() {
     private val _receivedMessage = MutableLiveData<String>()
