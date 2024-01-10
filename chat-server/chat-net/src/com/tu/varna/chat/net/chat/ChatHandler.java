@@ -125,15 +125,21 @@ public class ChatHandler extends Thread {
      * EX
      * sms: 1 1 Hello Deme
      *
-     * @param received
      */
     private void sendMessage(String received) {
+        /*
         String[] inputPackage = received.split("sms:");
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
         for (int i = 2; i < packageParts.length; i++) {
+         */
+        String[] inputPackage = received.split("sms:");
+        String[] packageParts = inputPackage[1].split("\\s+");
 
-        }
+        // save to db
+        chatService.sendMessage(Integer.parseInt(packageParts[1]),Integer.parseInt(packageParts[2]),packageParts[3]);
+        // return message
+        output.println(">");
     }
 
     private void testConnection() {

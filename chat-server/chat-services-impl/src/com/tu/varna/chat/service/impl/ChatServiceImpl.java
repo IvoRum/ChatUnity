@@ -24,7 +24,7 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public void sendMessage(int userSender, int userReceiver) {
+    public void sendMessage(int userSender, int userReceiver, String content) {
 
     }
 
