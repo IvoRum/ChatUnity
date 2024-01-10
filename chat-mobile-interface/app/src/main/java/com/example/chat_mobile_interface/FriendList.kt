@@ -5,15 +5,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -42,10 +41,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
@@ -56,7 +55,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.chat_mobile_interface.model.Message
 import com.example.chat_mobile_interface.model.MessageReachedPointDto
 import com.example.chat_mobile_interface.model.UserHandleDto
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
@@ -101,7 +99,7 @@ fun Chat(backStackEntry: NavBackStackEntry) {
                 ) as T
             }
         })
-    val list=viewModel.dataFlow.collectAsState()
+    val list = viewModel.dataFlow.collectAsState()
     DisposableEffect(Unit) {
         viewModel.getUserMessages()
         onDispose { }
@@ -113,12 +111,12 @@ fun Chat(backStackEntry: NavBackStackEntry) {
 @Composable
 fun Home(navController: NavHostController) {
     val viewModel = viewModel<FriendViewModel>()
-    val list=viewModel.dataFlow.collectAsState()
+    val list = viewModel.dataFlow.collectAsState()
     DisposableEffect(Unit) {
         viewModel.getFriendsUserHandle(2)
         onDispose { }
     }
-    Greeting3(navController,list)
+    Greeting3(navController, list)
 }
 
 //Sub composable
@@ -182,18 +180,40 @@ fun chatView(id: String, name: String, messages: State<List<MessageReachedPointD
                 )
             )
         }
-    }) { Conversation( messages) }
+    }) { Conversation(2, messages) }
 }
 
 @Composable
-fun Conversation(messages: State<List<MessageReachedPointDto>>) {
+@Preview
+fun chatViewPreview() {
+    val da: State<List<MessageReachedPointDto>> =
+        remember {
+            mutableStateOf(
+                listOf(
+                    MessageReachedPointDto(1, 2, "Alo Deme"),
+                    MessageReachedPointDto(2, 1, "Da Ivoaaaaaaaaaaaaa")
+                )
+            )
+        }
+    chatView("1", "Ivan", da)
+}
+
+@Composable
+fun Conversation(userId: Int, messages: State<List<MessageReachedPointDto>>) {
     LazyColumn(
-        reverseLayout = true,
-        modifier = Modifier.padding(10.dp, 85.dp),
+        reverseLayout = false,
+        modifier = Modifier
+            .padding(10.dp, 85.dp)
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(messages.value) { message ->
-            MessageCard(message)
+            if (userId == message.sende) {
+                SendMessageCard(message)
+            } else {
+                MessageCard(message)
+            }
+
         }
     }
 }
@@ -201,7 +221,10 @@ fun Conversation(messages: State<List<MessageReachedPointDto>>) {
 @Composable
 fun MessageCard(msg: MessageReachedPointDto) {
     // Add padding around our message
-    Row(modifier = Modifier.padding(all = 8.dp)) {
+    Row(
+        modifier = Modifier
+            .padding(all = 8.dp), horizontalArrangement = Arrangement.Absolute.Center
+    ) {
         Image(
             painter = painterResource(R.drawable.ic_launcher_foreground),
             contentDescription = "Contact profile picture",
@@ -216,5 +239,31 @@ fun MessageCard(msg: MessageReachedPointDto) {
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = msg.content)
         }
+    }
+}
+
+@Composable
+fun SendMessageCard(msg: MessageReachedPointDto) {
+    // Add padding around our message
+    Row(
+        modifier = Modifier
+            .padding(all = 8.dp)
+            .fillMaxWidth(), horizontalArrangement = Arrangement.End
+    ) {
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Column(verticalArrangement = Arrangement.Bottom) {
+                //Spacer(modifier = Modifier.width(8.dp))
+
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = msg.content)
+        }
+        Image(
+            painter = painterResource(R.drawable.ic_launcher_foreground),
+            contentDescription = "Contact profile picture",
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
+        )
     }
 }
