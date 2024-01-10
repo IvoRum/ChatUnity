@@ -24,4 +24,10 @@ class UserViewModel(val userId: String,val userName:String) : ViewModel() {
             println("dataflow+" + _dataFlow.value)
         }
     }
+
+    fun sendMessage(message:String){
+        viewModelScope.launch{
+            friendRepo.sendMessages(message)
+        }
+    }
 }

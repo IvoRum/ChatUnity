@@ -43,6 +43,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.graphics.Color.Companion.Transparent
+import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -62,6 +63,7 @@ import com.example.chat_mobile_interface.ui.theme.bodyLarge
 import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.launch
 
 class FriendList : ComponentActivity() {
 
@@ -105,7 +107,7 @@ fun Chat(backStackEntry: NavBackStackEntry) {
         onDispose { }
     }
 
-    chatView(viewModel.userId, viewModel.userName, list)
+    chatView(viewModel,viewModel.userId, viewModel.userName, list)
 }
 
 @Composable
@@ -154,7 +156,7 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun chatView(id: String, name: String, messages: State<List<MessageReachedPointDto>>) {
+fun chatView(viewModel: UserViewModel,id: String, name: String, messages: State<List<MessageReachedPointDto>>) {
     var text by remember { mutableStateOf("") }
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = "User id is:$id NAME: $name") })
@@ -171,6 +173,8 @@ fun chatView(id: String, name: String, messages: State<List<MessageReachedPointD
                     Icon(
                         Icons.Default.ArrowForward,
                         contentDescription = "Send message",
+                        modifier= Modifier.clickable {viewModel.sendMessage(text)
+                        },
                         tint = Blue
                     )
                 },
@@ -186,16 +190,28 @@ fun chatView(id: String, name: String, messages: State<List<MessageReachedPointD
 @Composable
 @Preview
 fun chatViewPreview() {
+    val viewModel =
+        viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return UserViewModel(
+                    "1", "Ivan"
+                ) as T
+            }
+        })
     val da: State<List<MessageReachedPointDto>> =
         remember {
             mutableStateOf(
                 listOf(
-                    MessageReachedPointDto(1, 2, "Alo Deme"),
-                    MessageReachedPointDto(2, 1, "Da Ivoaaaaaaaaaaaaa")
+                    MessageReachedPointDto(1, 2, "Alsdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao Deme"),
+                    MessageReachedPointDto(
+                        2,
+                        1,
+                        "Da Ivoaaaaaaaadfgjsdfghdsfklghskdfhgkljdsljkfghjksdlhfgkjdshfghljkdfhaaaaa"
+                    )
                 )
             )
         }
-    chatView("1", "Ivan", da)
+    chatView(viewModel,"1", "Ivan", da)
 }
 
 @Composable
@@ -248,22 +264,12 @@ fun SendMessageCard(msg: MessageReachedPointDto) {
     Row(
         modifier = Modifier
             .padding(all = 8.dp)
-            .fillMaxWidth(), horizontalArrangement = Arrangement.End
+            .fillMaxWidth()
     ) {
-        Spacer(modifier = Modifier.width(8.dp))
-
-        Column(verticalArrangement = Arrangement.Bottom) {
-                //Spacer(modifier = Modifier.width(8.dp))
-
+        Column {
             Spacer(modifier = Modifier.height(10.dp))
-            Text(text = msg.content)
+            Text(text = msg.content, textAlign = TextAlign.Right)
         }
-        Image(
-            painter = painterResource(R.drawable.ic_launcher_foreground),
-            contentDescription = "Contact profile picture",
-            modifier = Modifier
-                .size(40.dp)
-                .clip(CircleShape)
-        )
+        Spacer(modifier = Modifier.width(8.dp))
     }
 }

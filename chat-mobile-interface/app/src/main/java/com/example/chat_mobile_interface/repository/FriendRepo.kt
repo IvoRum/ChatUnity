@@ -1,5 +1,6 @@
 package com.example.chat_mobile_interface.repository
 
+import com.example.chat_mobile_interface.model.Message
 import com.example.chat_mobile_interface.model.MessageReachedPointDto
 import com.example.chat_mobile_interface.model.UserHandleDto
 import kotlinx.coroutines.GlobalScope
@@ -67,6 +68,22 @@ class FriendRepo {
         }
     }
 
+    suspend fun sendMessages(message: String) {
+        var response= GlobalScope.async {
+            var da = ""
+            val tcpClient = TcpClient("192.168.0.104",
+                1300, "sms: 1 1 $message", object : TcpClient.OnMessageReceivedListener {
+                    override fun onMessageReceived(message: String) {
+                        da = message
+                        println(message)
+                    }
+                })
+            tcpClient.execute()
+        }
+        return runBlocking {
+            println(response.await())
+        }
+    }
 }
 
 class TcpClient(
