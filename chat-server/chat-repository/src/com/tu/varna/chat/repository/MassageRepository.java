@@ -65,14 +65,19 @@ public class MassageRepository extends BaseRepository {
         }
     }
 
-    public void sendMessage(int idRevicer, int messageOrder) throws SQLException {
+    public void sendMessage(final int idRevicer,final int idSender, final int messageOrder,final String content) throws SQLException {
 
-        String sql = "insert into message(id_sender, tid_reciver, message_order, time_stamp, tcontent, tmessage_status) " +
-                "value(?,?,?,now(),?,?)";
+        String sql = "INSERT INTO message(content,id_reciver,id_sender,message_order,message_status,time_stamp) " +
+                " VALUES(?,?,?,?,3,CURRENT_TIMESTAMP)";
 
         Connection connection = DriverManager.getConnection(JDBC_URL);
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, content);
+            statement.setInt(2, idRevicer);
+            statement.setInt(3, idSender);
+            statement.setInt(4, messageOrder);
+            statement.execute();
         }
     }
 

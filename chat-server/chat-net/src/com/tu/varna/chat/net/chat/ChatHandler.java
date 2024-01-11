@@ -90,7 +90,7 @@ public class ChatHandler extends Thread {
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
         for (int i = 1; i < packageParts.length; i++) {
-            Set<UserHandleDto> frindInfo=userService.allFriends(Integer.parseInt(packageParts[i]));
+            Set<UserHandleDto> frindInfo = userService.allFriends(Integer.parseInt(packageParts[i]));
             System.out.println(frindInfo);
             output.println(frindInfo);
         }
@@ -108,7 +108,7 @@ public class ChatHandler extends Thread {
         String[] inputPackage = received.split("gms:");
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
-        List<List<MessageReachedPointDto>> allNewMessagesList=new ArrayList<>();
+        List<List<MessageReachedPointDto>> allNewMessagesList = new ArrayList<>();
         for (int i = 2; i < packageParts.length; i++) {
             String[] chatReachedPointParts = packageParts[i].split("@");
             List<MessageReachedPointDto> allNewMessages = chatService.receiveMessage(
@@ -121,10 +121,9 @@ public class ChatHandler extends Thread {
 
     /**
      * The order of a 'sms' is as follows:
-     * sms: userId converstion content
+     * sms: userId converstion order $content
      * EX
-     * sms: 1 1 Hello Deme
-     *
+     * sms: 1 1 43 $Hello Deme
      */
     private void sendMessage(String received) {
         /*
@@ -134,12 +133,13 @@ public class ChatHandler extends Thread {
         for (int i = 2; i < packageParts.length; i++) {
          */
         String[] inputPackage = received.split("sms:");
-        String[] packageParts = inputPackage[1].split("\\s+");
+        String[] packagePartsContent = inputPackage[1].split("\\$");
+        String[] packageParts = packagePartsContent[0].split("\\s+");
 
         // save to db
-        chatService.sendMessage(Integer.parseInt(packageParts[1]),Integer.parseInt(packageParts[2]),packageParts[3]);
+        chatService.sendMessage(Integer.parseInt(packageParts[1]), Integer.parseInt(packageParts[2]), Integer.parseInt(packageParts[3]), packagePartsContent[1]);
         // return message
-        output.println(">"+packageParts[3]);
+        output.println(">" + inputPackage[1]);
     }
 
     private void testConnection() {

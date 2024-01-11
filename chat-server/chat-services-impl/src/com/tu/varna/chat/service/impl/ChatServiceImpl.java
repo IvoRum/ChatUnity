@@ -24,8 +24,12 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public void sendMessage(int userSender, int userReceiver, String content) {
-
+    public void sendMessage(int userSender, int userReceiver,int order, String content) {
+        try {
+            massageRepository.sendMessage(userReceiver,userSender,order,content);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

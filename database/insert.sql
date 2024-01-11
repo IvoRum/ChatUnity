@@ -3,7 +3,7 @@ VALUES (1, 'ivo@mail.com', '089671253', 'ivo12345678', 'Ivaylo', 'Rumenov');
 
 INSERT INTO Unity_user(id, email, telephone, password, first_name, family_name)
 VALUES (2, 'deme@mail.com', '089345345', 'deme12345678', 'Damqn', 'Mihaylov');
-
+/*NOT ADDED*/
 INSERT INTO Unity_user(id, email, telephone, password, first_name, family_name)
 VALUES (3, 'emo@mail.com', '089653453', 'emo12345678', 'E,amuil', 'Glavchev');
 

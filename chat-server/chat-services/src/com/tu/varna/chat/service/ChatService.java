@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface ChatService {
     void createChat(int userSender,int userReceiver);
-    void sendMessage(int userSender,int userReceiver,String content);
+    void sendMessage(int userSender,int userReceiver,int order,String content);
     List<MessageReachedPointDto> receiveMessage(ChatReachedPoint chatReachedPoint);
     void getChatrelation(int userSender,int userReceiver);
     ChatDuo getChatDuo();
