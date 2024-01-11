@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,10 +24,18 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.rounded.AccountCircle
+import androidx.compose.material.icons.rounded.Warning
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -43,7 +53,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.graphics.Color.Companion.Transparent
-import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -63,24 +72,50 @@ import com.example.chat_mobile_interface.ui.theme.bodyLarge
 import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.launch
 
 class FriendList : ComponentActivity() {
 
-    @OptIn(DelicateCoroutinesApi::class)
-    @SuppressLint("CoroutineCreationDuringComposition")
+    @OptIn(DelicateCoroutinesApi::class, ExperimentalMaterial3Api::class)
+    @SuppressLint("CoroutineCreationDuringComposition", "UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             ChatmobileinterfaceTheme {
                 val navController = rememberNavController()
-                NavHost(navController, startDestination = "home") {
-                    composable("home") {
-                        Home(navController)
-                    }
-                    composable("chat/{userData}/{userName}") { backStackEntry ->
-                        Chat(backStackEntry)
+                Scaffold(topBar = {
+                    TopAppBar(
+                        title = {},
+                        navigationIcon = {
+                            IconButton(onClick = { navController.navigateUp() }) {
+                                Icon(
+                                    imageVector = Icons.Filled.ArrowBack,
+                                    contentDescription = "Localized description"
+                                )
+                            }
+                        },
+                        actions = {
+                            IconButton(onClick = { /* do something */ }) {
+                                Icon(
+                                    Icons.Rounded.AccountCircle, contentDescription = "Your Profile"
+                                )
+                            }
+                        },
+                    )
+
+                }) {
+                    Box(
+                        modifier = Modifier
+                            .padding(0.dp, 65.dp, 0.dp, 0.dp)
+                    ) {
+                        NavHost(navController, startDestination = "home") {
+                            composable("home") {
+                                Home(navController)
+                            }
+                            composable("chat/{userData}/{userName}") { backStackEntry ->
+                                Chat(backStackEntry)
+                            }
+                        }
                     }
                 }
             }
@@ -93,30 +128,43 @@ class FriendList : ComponentActivity() {
 fun Chat(backStackEntry: NavBackStackEntry) {
     val userId = backStackEntry.arguments?.getString("userData") ?: ""
     val userName = backStackEntry.arguments?.getString("userName") ?: ""
-    val viewModel =
-        viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return UserViewModel(
-                    userId, userName
-                ) as T
-            }
-        })
+    val viewModel = viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return UserViewModel(
+                userId, userName
+            ) as T
+        }
+    })
     val list = viewModel.dataFlow.collectAsState()
     DisposableEffect(Unit) {
         viewModel.getUserMessages()
         onDispose { }
     }
 
-    chatView(viewModel,viewModel.userId, viewModel.userName, list)
+    chatView(viewModel, viewModel.userId, viewModel.userName, list)
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Home(navController: NavHostController) {
     val viewModel = viewModel<FriendViewModel>()
     val list = viewModel.dataFlow.collectAsState()
+    var errorFlag = false
     DisposableEffect(Unit) {
-        viewModel.getFriendsUserHandle(2)
+        try {
+            viewModel.getFriendsUserHandle(2)
+        } catch (e: Exception) {
+            errorFlag = true
+        }
         onDispose { }
+    }
+    if (errorFlag) {
+        AlertDialog(onDismissRequest = { /*TODO*/ }, confirmButton = { /*TODO*/ }, icon = {
+            Icon(
+                Icons.Rounded.Warning, contentDescription = "da"
+            )
+        })
+
     }
     Greeting3(navController, list)
 }
@@ -156,7 +204,12 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun chatView(viewModel: UserViewModel,id: String, name: String, messages: State<List<MessageReachedPointDto>>) {
+fun chatView(
+    viewModel: UserViewModel,
+    id: String,
+    name: String,
+    messages: State<List<MessageReachedPointDto>>
+) {
     var text by remember { mutableStateOf("") }
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = "User id is:$id NAME: $name") })
@@ -173,14 +226,14 @@ fun chatView(viewModel: UserViewModel,id: String, name: String, messages: State<
                     Icon(
                         Icons.Default.ArrowForward,
                         contentDescription = "Send message",
-                        modifier= Modifier.clickable {viewModel.sendMessage(text)
+                        modifier = Modifier.clickable {
+                            viewModel.sendMessage(text)
                         },
                         tint = Blue
                     )
                 },
                 colors = TextFieldDefaults.colors(
-                    focusedIndicatorColor = Transparent,
-                    unfocusedIndicatorColor = Transparent
+                    focusedIndicatorColor = Transparent, unfocusedIndicatorColor = Transparent
                 )
             )
         }
@@ -190,28 +243,29 @@ fun chatView(viewModel: UserViewModel,id: String, name: String, messages: State<
 @Composable
 @Preview
 fun chatViewPreview() {
-    val viewModel =
-        viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return UserViewModel(
-                    "1", "Ivan"
-                ) as T
-            }
-        })
-    val da: State<List<MessageReachedPointDto>> =
-        remember {
-            mutableStateOf(
-                listOf(
-                    MessageReachedPointDto(1, 2, "Alsdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao Deme"),
-                    MessageReachedPointDto(
-                        2,
-                        1,
-                        "Da Ivoaaaaaaaadfgjsdfghdsfklghskdfhgkljdsljkfghjksdlhfgkjdshfghljkdfhaaaaa"
-                    )
+    val viewModel = viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return UserViewModel(
+                "1", "Ivan"
+            ) as T
+        }
+    })
+    val da: State<List<MessageReachedPointDto>> = remember {
+        mutableStateOf(
+            listOf(
+                MessageReachedPointDto(
+                    1,
+                    2,
+                    "Alsdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao Deme"
+                ), MessageReachedPointDto(
+                    2,
+                    1,
+                    "Da Ivoaaaaaaaadfgjsdfghdsfklghskdfhgkljdsljkfghjksdlhfgkjdshfghljkdfhaaaaa"
                 )
             )
-        }
-    chatView(viewModel,"1", "Ivan", da)
+        )
+    }
+    chatView(viewModel, "1", "Ivan", da)
 }
 
 @Composable
@@ -238,8 +292,7 @@ fun Conversation(userId: Int, messages: State<List<MessageReachedPointDto>>) {
 fun MessageCard(msg: MessageReachedPointDto) {
     // Add padding around our message
     Row(
-        modifier = Modifier
-            .padding(all = 8.dp), horizontalArrangement = Arrangement.Absolute.Center
+        modifier = Modifier.padding(all = 8.dp), horizontalArrangement = Arrangement.Absolute.Center
     ) {
         Image(
             painter = painterResource(R.drawable.ic_launcher_foreground),

@@ -139,7 +139,7 @@ public class ChatHandler extends Thread {
         // save to db
         chatService.sendMessage(Integer.parseInt(packageParts[1]),Integer.parseInt(packageParts[2]),packageParts[3]);
         // return message
-        output.println(">");
+        output.println(">"+packageParts[3]);
     }
 
     private void testConnection() {

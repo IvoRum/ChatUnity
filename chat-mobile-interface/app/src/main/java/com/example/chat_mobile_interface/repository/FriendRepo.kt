@@ -108,6 +108,7 @@ class TcpClient(
 
         } catch (e: IOException) {
             e.printStackTrace()
+            println("Vruskata grumna")
         } finally {
             socket?.close()
         }
