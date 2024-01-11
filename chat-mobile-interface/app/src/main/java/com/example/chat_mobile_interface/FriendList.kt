@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,12 +25,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.rounded.AccountCircle
-import androidx.compose.material.icons.rounded.Warning
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -149,23 +143,11 @@ fun Chat(backStackEntry: NavBackStackEntry) {
 fun Home(navController: NavHostController) {
     val viewModel = viewModel<FriendViewModel>()
     val list = viewModel.dataFlow.collectAsState()
-    var errorFlag = false
     DisposableEffect(Unit) {
-        try {
-            viewModel.getFriendsUserHandle(2)
-        } catch (e: Exception) {
-            errorFlag = true
-        }
+        viewModel.getFriendsUserHandle(2)
         onDispose { }
     }
-    if (errorFlag) {
-        AlertDialog(onDismissRequest = { /*TODO*/ }, confirmButton = { /*TODO*/ }, icon = {
-            Icon(
-                Icons.Rounded.Warning, contentDescription = "da"
-            )
-        })
 
-    }
     Greeting3(navController, list)
 }
 
@@ -255,12 +237,16 @@ fun chatViewPreview() {
             listOf(
                 MessageReachedPointDto(
                     1,
-                    2,
+                    1,
                     "Alsdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao Deme"
                 ), MessageReachedPointDto(
                     2,
                     1,
                     "Da Ivoaaaaaaaadfgjsdfghdsfklghskdfhgkljdsljkfghjksdlhfgkjdshfghljkdfhaaaaa"
+                ), MessageReachedPointDto(
+                    2,
+                    1,
+                    "Da"
                 )
             )
         )
@@ -320,6 +306,7 @@ fun SendMessageCard(msg: MessageReachedPointDto) {
             .fillMaxWidth()
     ) {
         Column {
+            Spacer(modifier = Modifier.weight(1f))
             Spacer(modifier = Modifier.height(10.dp))
             Text(text = msg.content, textAlign = TextAlign.Right)
         }

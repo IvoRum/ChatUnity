@@ -13,7 +13,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.*;
 
-public class ChatHandler extends Thread {
+public class
+ChatHandler extends Thread {
     private Socket socket;
     private Scanner input;
     private PrintWriter output;

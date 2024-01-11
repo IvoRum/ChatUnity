@@ -27,7 +27,7 @@ gms: userId conversation$order ...
 ```
 
 ```
-gms: 1 1&3 1&2
+gms: 1 1@3
 ```
 
 returns: All foudn messages. It will return emplty list if nothing was found.
@@ -35,7 +35,11 @@ returns: All foudn messages. It will return emplty list if nothing was found.
 #### Send message
 
 ```
-sms: userId converstion content
+sms: userId converstion order $content
+```
+
+```
+sms: 1 1 10 $Alabala alo be
 ```
 
 returns: only if problem whit the message.

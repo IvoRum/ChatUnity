@@ -1,6 +1,5 @@
 package com.example.chat_mobile_interface.repository
 
-import com.example.chat_mobile_interface.model.Message
 import com.example.chat_mobile_interface.model.MessageReachedPointDto
 import com.example.chat_mobile_interface.model.UserHandleDto
 import kotlinx.coroutines.GlobalScope
@@ -10,14 +9,14 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.PrintWriter
-import java.net.InetAddress
 import java.net.Socket
 
-class FriendRepo {
+class UnityChatRepo {
+    val SERVER_ADDRESS="192.168.0.104"
     suspend fun getFriends(): List<UserHandleDto> {
             var response=GlobalScope.async {
                 var da = ""
-                val tcpClient = TcpClient("192.168.0.104",
+                val tcpClient = TcpClient(SERVER_ADDRESS,
                     1300, "gfr: 2", object : TcpClient.OnMessageReceivedListener {
                         override fun onMessageReceived(message: String) {
                             da = message
@@ -44,7 +43,7 @@ class FriendRepo {
     suspend fun getMessages(): List<MessageReachedPointDto> {
         var response=GlobalScope.async {
             var da = ""
-            val tcpClient = TcpClient("192.168.0.104",
+            val tcpClient = TcpClient(SERVER_ADDRESS,
                 1300, "gms: 1 1@3", object : TcpClient.OnMessageReceivedListener {
                     override fun onMessageReceived(message: String) {
                         da = message
@@ -71,7 +70,7 @@ class FriendRepo {
     suspend fun sendMessages(message: String) {
         var response= GlobalScope.async {
             var da = ""
-            val tcpClient = TcpClient("192.168.0.104",
+            val tcpClient = TcpClient(SERVER_ADDRESS,
                 1300, "sms: 1 1 $message", object : TcpClient.OnMessageReceivedListener {
                     override fun onMessageReceived(message: String) {
                         da = message
