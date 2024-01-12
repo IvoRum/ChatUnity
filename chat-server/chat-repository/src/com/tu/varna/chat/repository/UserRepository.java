@@ -106,12 +106,7 @@ public class UserRepository extends BaseRepository{
             statement.setString(2, userCredentials.password());
 
             ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-
-            String foundUserEmail = resultSet.getString("email");
-            String foundPassword = resultSet.getString("password");
-            return userCredentials.userEmail().equals(foundUserEmail) &&
-                    userCredentials.password().equals(foundPassword);
+            return resultSet.next();
         }
     }
 }

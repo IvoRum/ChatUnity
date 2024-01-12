@@ -18,7 +18,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Override public LogdInUser logInUser(UserCredentials userCredentials) throws ServiceException {
         try {
-            return userRepository.getUser(userCredentials);
+            if(userRepository.isUser(userCredentials)) {
+                return userRepository.getUser(userCredentials);
+            }
+            return null;
         } catch (SQLException e) {
             throw new ServiceException(e);
         }

@@ -40,7 +40,6 @@ public class AuthHandler extends Thread {
     }
 
     @Override public void run() {
-
         testConnection();
     }
 
@@ -93,7 +92,7 @@ public class AuthHandler extends Thread {
         try {
             output.println(authService.logInUser(new UserCredentials(packageParts[1], packageParts[2])));
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            output.println("User not found");
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
