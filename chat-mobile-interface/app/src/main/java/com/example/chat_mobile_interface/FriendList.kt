@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,6 +31,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -45,12 +47,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.toColor
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -66,8 +71,9 @@ import com.example.chat_mobile_interface.ui.theme.bodyLarge
 import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
-
+val chatBubbleShape= RoundedCornerShape(30.dp)
 class FriendList : ComponentActivity() {
+
 
     @OptIn(DelicateCoroutinesApi::class, ExperimentalMaterial3Api::class)
     @SuppressLint("CoroutineCreationDuringComposition", "UnusedMaterial3ScaffoldPaddingParameter")
@@ -238,11 +244,11 @@ fun chatViewPreview() {
                 MessageReachedPointDto(
                     1,
                     1,
-                    "Alsdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao Deme"
+                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaao Deme"
                 ), MessageReachedPointDto(
                     2,
                     1,
-                    "Da Ivoaaaaaaaadfgjsdfghdsfklghskdfhgkljdsljkfghjksdlhfgkjdshfghljkdfhaaaaa"
+                    "Da Ivoaaj kf ghj ksdlfgjk lhdfkghkdf ghk kdfghkdf  khk jdfhl fkjaskjdh fjka sfgjkasdhfgkjdshfghljkdfhaaaaa"
                 ), MessageReachedPointDto(
                     2,
                     1,
@@ -280,19 +286,31 @@ fun MessageCard(msg: MessageReachedPointDto) {
     Row(
         modifier = Modifier.padding(all = 8.dp), horizontalArrangement = Arrangement.Absolute.Center
     ) {
-        Image(
-            painter = painterResource(R.drawable.ic_launcher_foreground),
-            contentDescription = "Contact profile picture",
-            modifier = Modifier
-                .size(40.dp)
-                .clip(CircleShape)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
 
         Column {
-            Text(text = msg.sende.toString())
+            Row {
+                Image(
+                    painter = painterResource(R.drawable.ic_launcher_foreground),
+                    contentDescription = "Contact profile picture",
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(CircleShape)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(text = msg.sende.toString(), modifier = Modifier.padding(0.dp, 10.dp))
+            }
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = msg.content)
+            Column(
+                modifier = Modifier
+                    .background(Color.LightGray, chatBubbleShape)
+            ) {
+                Text(
+                    style = MaterialTheme.typography.bodyLarge,
+                    text = msg.content,
+                    modifier = Modifier.padding(30.dp, 10.dp)
+                )
+            }
+
         }
     }
 }
@@ -302,14 +320,19 @@ fun SendMessageCard(msg: MessageReachedPointDto) {
     // Add padding around our message
     Row(
         modifier = Modifier
-            .padding(all = 8.dp)
             .fillMaxWidth()
     ) {
-        Column {
-            Spacer(modifier = Modifier.weight(1f))
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(text = msg.content, textAlign = TextAlign.Right)
+        Spacer(modifier = Modifier.weight(1f))
+        Column(
+            modifier = Modifier
+                .background(Color(179, 95, 217, 85), chatBubbleShape)
+        ) {
+            Text(
+                text = msg.content,
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Right,
+                modifier = Modifier.padding(20.dp, 10.dp)
+            )
         }
-        Spacer(modifier = Modifier.width(8.dp))
     }
 }
