@@ -22,8 +22,6 @@ public class AuthNet extends Thread {
             Socket clientSocket= null;
             try {
                 System.out.println(serverSocket.getLocalSocketAddress());
-                System.out.println(serverSocket.getLocalSocketAddress().toString());
-
                 clientSocket = serverSocket.accept();
             } catch (IOException e) {
                 throw new RuntimeException(e);

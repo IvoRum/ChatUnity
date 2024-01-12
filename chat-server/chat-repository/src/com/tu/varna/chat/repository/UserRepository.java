@@ -1,16 +1,13 @@
 package com.tu.varna.chat.repository;
 
 import com.tu.varna.chat.common.PropertiesLoader;
+import com.tu.varna.chat.common.dto.LogdInUser;
 import com.tu.varna.chat.common.dto.UserDto;
 import com.tu.varna.chat.common.net.NewUserCredentials;
 import com.tu.varna.chat.common.net.UserCredentials;
 
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class UserRepository extends BaseRepository{
 
@@ -50,8 +47,8 @@ public class UserRepository extends BaseRepository{
         }
     }
 
-    public boolean isUser(UserCredentials userCredentials) throws SQLException {
-        String sql = "select uu.email,uu.password from unity_user uu " +
+    public LogdInUser getUser(UserCredentials userCredentials) throws SQLException {
+        String sql = "select uu.id, uu.first_name, uu.family_name, uu.email from unity_user uu " +
                 "where uu.email=? " +
                 "and uu.password=? ";
         Connection connection = DriverManager.getConnection(JDBC_URL);
@@ -61,11 +58,11 @@ public class UserRepository extends BaseRepository{
 
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-
+            int foundId=resultSet.getInt("id");
+            String foundFirstName= resultSet.getString("first_name");
+            String foundFamilyName=resultSet.getString("family_name");
             String foundUserEmail = resultSet.getString("email");
-            String foundPassword = resultSet.getString("password");
-            return userCredentials.userEmail().equals(foundUserEmail) &&
-                    userCredentials.password().equals(foundPassword);
+            return new LogdInUser(foundId,foundFirstName,foundFamilyName,foundUserEmail);
         }
     }
 
@@ -96,6 +93,25 @@ public class UserRepository extends BaseRepository{
             resultSet.next();
 
             return resultSet.getInt("id");
+        }
+    }
+
+    public boolean isUser(UserCredentials userCredentials) throws SQLException {
+        String sql = "select uu.email,uu.password from unity_user uu " +
+                "where uu.email=? " +
+                "and uu.password=? ";
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, userCredentials.userEmail());
+            statement.setString(2, userCredentials.password());
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+
+            String foundUserEmail = resultSet.getString("email");
+            String foundPassword = resultSet.getString("password");
+            return userCredentials.userEmail().equals(foundUserEmail) &&
+                    userCredentials.password().equals(foundPassword);
         }
     }
 }

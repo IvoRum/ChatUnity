@@ -22,7 +22,6 @@ ChatHandler extends Thread {
     private static final ChatService chatService;
     private static final UserService userService;
 
-
     static {
         userService = new UserServiceImpl();
         chatService = new ChatServiceImpl();

@@ -40,6 +40,7 @@ public class AuthHandler extends Thread {
     }
 
     @Override public void run() {
+
         testConnection();
     }
 
@@ -90,7 +91,7 @@ public class AuthHandler extends Thread {
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
         try {
-            System.out.println(authService.logInUser(new UserCredentials(packageParts[1], packageParts[2])));
+            output.println(authService.logInUser(new UserCredentials(packageParts[1], packageParts[2])));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ServiceException e) {
