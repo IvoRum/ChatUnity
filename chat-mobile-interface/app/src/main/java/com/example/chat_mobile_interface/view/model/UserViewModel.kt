@@ -2,6 +2,7 @@ package com.example.chat_mobile_interface.view.model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.chat_mobile_interface.model.LogdInUser
 import com.example.chat_mobile_interface.model.MessageReachedPointDto
 import com.example.chat_mobile_interface.repository.UnityChatRepo
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +13,8 @@ class UserViewModel(val userId: String,val userName:String) : ViewModel() {
     private val friendRepo = UnityChatRepo()
     private val _dataFlow = MutableStateFlow<List<MessageReachedPointDto>>(emptyList())
     val dataFlow: StateFlow<List<MessageReachedPointDto>> = _dataFlow
-
+    private val _logedDataFlow=MutableStateFlow<LogdInUser>(LogdInUser(0,"","",""))
+    val logedDataFlow:StateFlow<LogdInUser> = _logedDataFlow
     fun getUserMessages(){
         viewModelScope.launch {
             val da = friendRepo.getMessages()
@@ -24,6 +26,13 @@ class UserViewModel(val userId: String,val userName:String) : ViewModel() {
     fun sendMessage(message:String){
         viewModelScope.launch{
             friendRepo.sendMessages(message)
+        }
+    }
+
+    fun logUser(email:String, password:String){
+        viewModelScope.launch {
+            _logedDataFlow.value=friendRepo.logIn(email,password)
+            println("Log in process finished")
         }
     }
 }

@@ -39,7 +39,8 @@ public class AuthHandler extends Thread {
         }
     }
 
-    @Override public void run() {
+    @Override
+    public void run() {
         testConnection();
     }
 
@@ -85,16 +86,16 @@ public class AuthHandler extends Thread {
     }
 
     private void logInUser(String received) {
+        //TODO SLoji proverka ve kaval
         String[] inputPackage = received.split("log:");
-
-        socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");
         try {
+
             output.println(authService.logInUser(new UserCredentials(packageParts[1], packageParts[2])));
         } catch (SQLException e) {
             output.println("User not found");
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
     }
 }
