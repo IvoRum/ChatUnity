@@ -9,6 +9,9 @@
 ```
 log: ivo@mail.com ivo12345678
 ```
+```
+log: deme@mail.com deme12345678
+```
 
 ### Register
 

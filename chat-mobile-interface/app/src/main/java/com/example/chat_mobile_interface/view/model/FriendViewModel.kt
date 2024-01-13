@@ -9,17 +9,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class FriendViewModel() : ViewModel() {
+class FriendViewModel(val userId:Int) : ViewModel() {
     private val friendRepo = UnityChatRepo()
     private val _dataFlow = MutableStateFlow<List<UserHandleDto>>(emptyList())
     val dataFlow: StateFlow<List<UserHandleDto>> = _dataFlow
+
     fun getFriendsUserHandle(
         id: Int?
     ) {
         viewModelScope.launch{
-            val da =friendRepo.getFriends()
+            val da =friendRepo.getFriends(userId)
             _dataFlow.value=da
-            println("dataflow+"+_dataFlow.value)
+            println("UserFriends: "+_dataFlow.value)
         }
     }
 }

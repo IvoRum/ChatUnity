@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class UserViewModel(val userId: String,val userName:String) : ViewModel() {
+class UserViewModel : ViewModel() {
     private val friendRepo = UnityChatRepo()
     private val _dataFlow = MutableStateFlow<List<MessageReachedPointDto>>(emptyList())
     val dataFlow: StateFlow<List<MessageReachedPointDto>> = _dataFlow
@@ -19,7 +19,7 @@ class UserViewModel(val userId: String,val userName:String) : ViewModel() {
         viewModelScope.launch {
             val da = friendRepo.getMessages()
             _dataFlow.value = da
-            println("dataflow+" + _dataFlow.value)
+            println("User Message:" + _dataFlow.value)
         }
     }
 

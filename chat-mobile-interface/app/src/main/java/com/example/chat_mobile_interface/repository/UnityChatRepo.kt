@@ -15,11 +15,11 @@ import kotlin.math.log
 
 class UnityChatRepo {
     val SERVER_ADDRESS = "192.168.0.104"
-    suspend fun getFriends(): List<UserHandleDto> {
+    suspend fun getFriends(userId:Int): List<UserHandleDto> {
         var response = GlobalScope.async {
             var da = ""
             val tcpClient = TcpClient(SERVER_ADDRESS,
-                1300, "gfr: 2", object : TcpClient.OnMessageReceivedListener {
+                1300, "gfr: $userId", object : TcpClient.OnMessageReceivedListener {
                     override fun onMessageReceived(message: String) {
                         da = message
                         //println(message)

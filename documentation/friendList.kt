@@ -72,7 +72,7 @@ import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 val chatBubbleShape= RoundedCornerShape(30.dp)
-class FriendList : ComponentActivity() {
+class FriendList(val user:UserViewModel) : ComponentActivity() {
 
 
     @OptIn(DelicateCoroutinesApi::class, ExperimentalMaterial3Api::class)
@@ -93,15 +93,15 @@ class FriendList : ComponentActivity() {
                                     contentDescription = "Localized description"
                                 )
                             }
-                        },
+                                         },
                         actions = {
                             IconButton(onClick = { /* do something */ }) {
                                 Icon(
                                     Icons.Rounded.AccountCircle, contentDescription = "Your Profile"
                                 )
                             }
-                        },
-                    )
+                                  },
+                        )
 
                 }) {
                     Box(
@@ -110,7 +110,7 @@ class FriendList : ComponentActivity() {
                     ) {
                         NavHost(navController, startDestination = "home") {
                             composable("home") {
-                                Home(navController)
+                                Home(navController,user.userId)
                             }
                             composable("chat/{userData}/{userName}") { backStackEntry ->
                                 Chat(backStackEntry)
@@ -126,7 +126,7 @@ class FriendList : ComponentActivity() {
 // Navigation composable
 @Composable
 fun Chat(backStackEntry: NavBackStackEntry) {
-    val userId = backStackEntry.arguments?.getString("userData") ?: ""
+    val userId = backStackEntry.arguments?.getInt("userData") ?: 0
     val userName = backStackEntry.arguments?.getString("userName") ?: ""
     val viewModel = viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -141,13 +141,19 @@ fun Chat(backStackEntry: NavBackStackEntry) {
         onDispose { }
     }
 
-    chatView(viewModel, viewModel.userId, viewModel.userName, list)
+    chatView(viewModel, viewModel.userId.toString(), viewModel.userName, list)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Home(navController: NavHostController) {
-    val viewModel = viewModel<FriendViewModel>()
+fun Home(navController: NavHostController,userId: Int) {
+    val viewModel = viewModel<FriendViewModel>(factory = object : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return FriendViewModel(
+                userId
+            ) as T
+        }
+    })
     val list = viewModel.dataFlow.collectAsState()
     DisposableEffect(Unit) {
         viewModel.getFriendsUserHandle(2)
@@ -186,7 +192,7 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
             }
             Divider()
         }
-    }, modifier = Modifier.fillMaxSize())
+                         }, modifier = Modifier.fillMaxSize())
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "StateFlowValueCalledInComposition")
@@ -201,31 +207,31 @@ fun chatView(
     var text by remember { mutableStateOf("") }
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = "User id is:$id NAME: $name") })
-    }, bottomBar = {
-        Row(modifier = Modifier.padding(10.dp)) {
-            TextField(
-                value = text,
-                onValueChange = { text = it },
-                modifier = Modifier
-                    .weight(1F)
-                    .padding(end = 8.dp),
-                shape = RoundedCornerShape(60.dp),
-                trailingIcon = {
-                    Icon(
-                        Icons.Default.ArrowForward,
-                        contentDescription = "Send message",
-                        modifier = Modifier.clickable {
-                            viewModel.sendMessage(text)
-                        },
-                        tint = Blue
-                    )
-                },
-                colors = TextFieldDefaults.colors(
-                    focusedIndicatorColor = Transparent, unfocusedIndicatorColor = Transparent
-                )
-            )
-        }
-    }) { Conversation(2, messages) }
+                      }, bottomBar = {
+                          Row(modifier = Modifier.padding(10.dp)) {
+                              TextField(
+                                  value = text,
+                                  onValueChange = { text = it },
+                                  modifier = Modifier
+                                      .weight(1F)
+                                      .padding(end = 8.dp),
+                                  shape = RoundedCornerShape(60.dp),
+                                  trailingIcon = {
+                                      Icon(
+                                          Icons.Default.ArrowForward,
+                                          contentDescription = "Send message",
+                                          modifier = Modifier.clickable {
+                                              viewModel.sendMessage(text)
+                                                                        },
+                                          tint = Blue
+                                      )
+                                                 },
+                                  colors = TextFieldDefaults.colors(
+                                      focusedIndicatorColor = Transparent, unfocusedIndicatorColor = Transparent
+                                  )
+                              )
+                          }
+                      }) { Conversation(2, messages) }
 }
 
 @Composable
@@ -234,7 +240,7 @@ fun chatViewPreview() {
     val viewModel = viewModel<UserViewModel>(factory = object : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return UserViewModel(
-                "1", "Ivan"
+                1, "Ivan"
             ) as T
         }
     })
@@ -336,3 +342,14 @@ fun SendMessageCard(msg: MessageReachedPointDto) {
         }
     }
 }
+
+
+    @Composable
+    fun NavigateToFriendList() {
+        Button(onClick = {
+            val intent = Intent(this, FriendList::class.java)
+            startActivity(intent)
+        }) {
+            Text(text = "Open friend list")
+        }
+    }
