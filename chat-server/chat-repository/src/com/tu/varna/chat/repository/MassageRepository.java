@@ -78,6 +78,7 @@ public class MassageRepository extends BaseRepository {
             statement.setInt(3, idSender);
             statement.setInt(4, messageOrder);
             statement.execute();
+            System.out.println("Message:"+content+" Order:"+messageOrder);
         }
     }
 

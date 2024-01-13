@@ -75,11 +75,12 @@ class UnityChatRepo {
     }
 
     suspend fun sendMessages(sender: Int, conversation: Int, order: Int, message: String) {
+        println("Message: sende: $sender; Coversation: $conversation; Content:$message; Order:$order")
         var response = GlobalScope.async {
             var da = ""
             val tcpClient = TcpClient(SERVER_ADDRESS,
                 1300,
-                "sms: $sender $conversation $order $message",
+                "sms: $sender $conversation $order $$message",
                 object : TcpClient.OnMessageReceivedListener {
                     override fun onMessageReceived(message: String) {
                         da = message

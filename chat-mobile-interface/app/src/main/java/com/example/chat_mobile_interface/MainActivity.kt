@@ -223,7 +223,7 @@ class MainActivity : ComponentActivity() {
     // Navigation composable
     @Composable
     fun Chat(backStackEntry: NavBackStackEntry, userData: State<LogdInUser>) {
-        val userId = backStackEntry.arguments?.getInt("userData") ?: 0
+        val userId = backStackEntry.arguments?.getString("userData") ?: ""
         val userName = backStackEntry.arguments?.getString("userName") ?: ""
         val list = viewModel.dataFlow.collectAsState()
         DisposableEffect(Unit) {
@@ -231,7 +231,7 @@ class MainActivity : ComponentActivity() {
             onDispose { }
         }
 
-        ChatView(userData.value.id.toString(), userData.value.familyName, list)
+        ChatView(userId.toString(), userName, list)
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -312,16 +312,14 @@ class MainActivity : ComponentActivity() {
                             Icons.Default.ArrowForward,
                             contentDescription = "Send message",
                             modifier = Modifier.clickable {
-                                /*
+
                                 viewModel.sendMessage(
                                     viewModel.logedDataFlow.value.id,
                                     Integer.parseInt(id),
-                                    messages.value.get(messages.value.size).messageOrder,
+                                    messages.value.get(messages.value.size-1).messageOrder+1,
                                     text
                                 )
                                 viewModel.getUserMessages()
-
-                                 */
                             },
                             tint = Color.Blue
                         )
