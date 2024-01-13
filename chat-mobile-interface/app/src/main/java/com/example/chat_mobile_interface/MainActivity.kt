@@ -83,10 +83,12 @@ import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
 import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
+import kotlin.contracts.Effect
 
 class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<UserViewModel>()
+    private var chatPossituin = 0
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
@@ -225,13 +227,13 @@ class MainActivity : ComponentActivity() {
     fun Chat(backStackEntry: NavBackStackEntry, userData: State<LogdInUser>) {
         val userId = backStackEntry.arguments?.getString("userData") ?: ""
         val userName = backStackEntry.arguments?.getString("userName") ?: ""
-        val list = viewModel.dataFlow.collectAsState()
+
         DisposableEffect(Unit) {
             viewModel.getUserMessages()
             onDispose { }
         }
 
-        ChatView(userId.toString(), userName, list)
+        ChatView(userId.toString(), userName)
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -292,10 +294,11 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun ChatView(
         id: String,
-        name: String,
-        messages: State<List<MessageReachedPointDto>>
+        name: String
     ) {
+        val messages = viewModel.dataFlow.collectAsState()
         var text by remember { mutableStateOf("") }
+
         Scaffold(topBar = {
             TopAppBar(title = { Text(text = "User id is:$id NAME: $name") })
         }, bottomBar = {
@@ -312,14 +315,14 @@ class MainActivity : ComponentActivity() {
                             Icons.Default.ArrowForward,
                             contentDescription = "Send message",
                             modifier = Modifier.clickable {
-
                                 viewModel.sendMessage(
                                     viewModel.logedDataFlow.value.id,
                                     Integer.parseInt(id),
-                                    messages.value.get(messages.value.size-1).messageOrder+1,
+                                    messages.value.get(messages.value.size - 1).messageOrder + 1,
                                     text
                                 )
                                 viewModel.getUserMessages()
+                                text = ""
                             },
                             tint = Color.Blue
                         )
@@ -330,13 +333,12 @@ class MainActivity : ComponentActivity() {
                     )
                 )
             }
-        }) { Conversation(2, messages) }
+        }) { Conversation(2) }
     }
 
     @Composable
     @Preview
     fun chatViewPreview() {
-        val viewModel1 by viewModels<UserViewModel>()
         val da: State<List<MessageReachedPointDto>> = remember {
             mutableStateOf(
                 listOf(
@@ -356,14 +358,21 @@ class MainActivity : ComponentActivity() {
                 )
             )
         }
-        ChatView("1", "Ivan", da)
+        ChatView("1", "Ivan")
     }
 
     @Composable
-    fun Conversation(userId: Int, messages: State<List<MessageReachedPointDto>>) {
+    fun Conversation(userId: Int) {
+
+        val messages = viewModel.dataFlow.collectAsState()
         val lazyListState = rememberLazyListState()
+        chatPossituin=messages.value.size
+        var rememberposition = remember { chatPossituin }
         LaunchedEffect(true) {
-            lazyListState.scrollToItem(messages.value.size)
+            lazyListState.scrollToItem(rememberposition)
+        }
+        LaunchedEffect(chatPossituin){
+            lazyListState.scrollToItem(chatPossituin)
         }
         LazyColumn(
             reverseLayout = false, state = lazyListState,
