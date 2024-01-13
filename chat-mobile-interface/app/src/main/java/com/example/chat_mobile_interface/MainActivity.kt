@@ -13,11 +13,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -99,6 +100,16 @@ class MainActivity : ComponentActivity() {
             Button(
                 onClick = { logInAction(viewModel, userName, password) },
                 modifier = Modifier.padding(10.dp)
+            )
+            {
+                Text(text = "Log in")
+
+            }
+            Button(
+                onClick = { logInAction(viewModel, "ivo@mail.com", "ivo12345678") },
+                modifier = Modifier.padding(10.dp), colors = ButtonDefaults.buttonColors(Color.Transparent,
+                    Color.Transparent,Color.Transparent, Color.Transparent
+                )
             )
             {
                 Text(text = "Log in")
