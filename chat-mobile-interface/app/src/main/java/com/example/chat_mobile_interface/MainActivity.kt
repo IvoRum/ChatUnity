@@ -138,10 +138,10 @@ class MainActivity : ComponentActivity() {
                                 LogIn(navController)
                             }
                             composable("home") {
-                                Home(navController,userData)
+                                Home(navController, userData)
                             }
                             composable("chat/{userData}/{userName}") { backStackEntry ->
-                                Chat(backStackEntry,userData)
+                                Chat(backStackEntry, userData)
                             }
                         }
                     }
@@ -231,7 +231,7 @@ class MainActivity : ComponentActivity() {
             onDispose { }
         }
 
-        chatView( userData.value.id.toString(), userData.value.familyName, list)
+        ChatView(userData.value.id.toString(), userData.value.familyName, list)
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -261,7 +261,7 @@ class MainActivity : ComponentActivity() {
             mutableStateOf(statingList)
         }
 
-        LazyColumn(modifier = Modifier.fillMaxSize()){
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(friends.value) { item ->
                 Row(
                     modifier = Modifier
@@ -290,7 +290,7 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "StateFlowValueCalledInComposition")
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun chatView(
+    fun ChatView(
         id: String,
         name: String,
         messages: State<List<MessageReachedPointDto>>
@@ -312,7 +312,16 @@ class MainActivity : ComponentActivity() {
                             Icons.Default.ArrowForward,
                             contentDescription = "Send message",
                             modifier = Modifier.clickable {
-                                viewModel.sendMessage(text)
+                                /*
+                                viewModel.sendMessage(
+                                    viewModel.logedDataFlow.value.id,
+                                    Integer.parseInt(id),
+                                    messages.value.get(messages.value.size).messageOrder,
+                                    text
+                                )
+                                viewModel.getUserMessages()
+
+                                 */
                             },
                             tint = Color.Blue
                         )
@@ -335,21 +344,21 @@ class MainActivity : ComponentActivity() {
                 listOf(
                     MessageReachedPointDto(
                         1,
-                        1,
+                        1, 1,
                         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaao Deme"
                     ), MessageReachedPointDto(
                         2,
-                        1,
+                        1, 1,
                         "Da Ivoaaj kf ghj ksdlfgjk lhdfkghkdf ghk kdfghkdf  khk jdfhl fkjaskjdh fjka sfgjkasdhfgkjdshfghljkdfhaaaaa"
                     ), MessageReachedPointDto(
                         2,
-                        1,
+                        1, 1,
                         "Da"
                     )
                 )
             )
         }
-        chatView( "1", "Ivan", da)
+        ChatView("1", "Ivan", da)
     }
 
     @Composable
@@ -359,7 +368,7 @@ class MainActivity : ComponentActivity() {
             lazyListState.scrollToItem(messages.value.size)
         }
         LazyColumn(
-            reverseLayout = false,state = lazyListState,
+            reverseLayout = false, state = lazyListState,
             modifier = Modifier
                 .padding(10.dp, 85.dp)
                 .fillMaxWidth(),

@@ -23,9 +23,9 @@ class UserViewModel : ViewModel() {
         }
     }
 
-    fun sendMessage(message:String){
+    fun sendMessage(sender: Int, conversation: Int, order: Int, message: String){
         viewModelScope.launch{
-            friendRepo.sendMessages(message)
+            friendRepo.sendMessages(sender,conversation,order,message)
         }
     }
 

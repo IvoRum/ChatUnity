@@ -15,7 +15,7 @@ import kotlin.math.log
 
 class UnityChatRepo {
     val SERVER_ADDRESS = "192.168.0.104"
-    suspend fun getFriends(userId:Int): List<UserHandleDto> {
+    suspend fun getFriends(userId: Int): List<UserHandleDto> {
         var response = GlobalScope.async {
             var da = ""
             val tcpClient = TcpClient(SERVER_ADDRESS,
@@ -56,24 +56,31 @@ class UnityChatRepo {
         }
         return runBlocking {
             val regex =
-                Regex("""MessageReachedPointDto\[idSender=(\d+), idReceiver=(\d+), content=([^\]]+)""")
+                Regex("""MessageReachedPointDto\[idSender=(\d+), idReceiver=(\d+), messageOrder=(\d+), content=([^\]]+)""")
             // Find all matches in the input string
             val matches = regex.findAll(response.await())
 
             // Create a list of UserHandleDto objects from the matches
             val foundMessages = matches.map {
-                val (id, idReceiver, content) = it.destructured
-                MessageReachedPointDto(id.toInt(), idReceiver.toInt(), content)
+                val (id, idReceiver, messageOrder, content) = it.destructured
+                MessageReachedPointDto(
+                    id.toInt(),
+                    idReceiver.toInt(),
+                    messageOrder.toInt(),
+                    content
+                )
             }.toList()
             foundMessages
         }
     }
 
-    suspend fun sendMessages(message: String) {
+    suspend fun sendMessages(sender: Int, conversation: Int, order: Int, message: String) {
         var response = GlobalScope.async {
             var da = ""
             val tcpClient = TcpClient(SERVER_ADDRESS,
-                1300, "sms: 1 1 $message", object : TcpClient.OnMessageReceivedListener {
+                1300,
+                "sms: $sender $conversation $order $message",
+                object : TcpClient.OnMessageReceivedListener {
                     override fun onMessageReceived(message: String) {
                         da = message
                         println(message)
@@ -98,19 +105,19 @@ class UnityChatRepo {
             tcpClient.execute()
         }
         return runBlocking {
-            if(response.await().equals("null")){
-                 LogdInUser(404,"","","")
-            }else{
+            if (response.await().equals("null")) {
+                LogdInUser(404, "", "", "")
+            } else {
 
-            val regex =
-                Regex("""LogdInUser\[id=(\d+), firstName=([A-Za-z]+), familyName=([A-Za-z]+), email=([A-Za-z@.]+)\]""")
-            val matches = regex.findAll(response.await())
+                val regex =
+                    Regex("""LogdInUser\[id=(\d+), firstName=([A-Za-z]+), familyName=([A-Za-z]+), email=([A-Za-z@.]+)\]""")
+                val matches = regex.findAll(response.await())
 
-            val userHandleDtoList = matches.map {
-                val (id, firstName, familyName, email) = it.destructured
-                LogdInUser(id.toInt(), firstName, familyName, email)
-            }.toList()
-            userHandleDtoList.get(0)
+                val userHandleDtoList = matches.map {
+                    val (id, firstName, familyName, email) = it.destructured
+                    LogdInUser(id.toInt(), firstName, familyName, email)
+                }.toList()
+                userHandleDtoList.get(0)
             }
         }
     }
