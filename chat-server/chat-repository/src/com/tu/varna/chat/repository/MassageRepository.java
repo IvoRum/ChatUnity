@@ -59,7 +59,7 @@ public class MassageRepository extends BaseRepository {
             ResultSet resultSet = statement.executeQuery();
             List<MessageReachedPointDto> foundMessages = new ArrayList<>();
             while (resultSet.next()) {
-                foundMessages.add(new MessageReachedPointDto(resultSet.getInt("id_sender"), idRevicer, resultSet.getString("content")));
+                foundMessages.add(new MessageReachedPointDto(resultSet.getInt("id_sender"), idRevicer,resultSet.getInt("message_order"), resultSet.getString("content")));
             }
             return foundMessages;
         }
