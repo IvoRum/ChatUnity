@@ -23,7 +23,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -45,6 +47,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -257,7 +260,8 @@ class MainActivity : ComponentActivity() {
         var friends by remember {
             mutableStateOf(statingList)
         }
-        LazyColumn(content = {
+
+        LazyColumn(modifier = Modifier.fillMaxSize()){
             items(friends.value) { item ->
                 Row(
                     modifier = Modifier
@@ -280,7 +284,7 @@ class MainActivity : ComponentActivity() {
                 }
                 Divider()
             }
-        }, modifier = Modifier.fillMaxSize())
+        }
     }
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "StateFlowValueCalledInComposition")
@@ -350,8 +354,12 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun Conversation(userId: Int, messages: State<List<MessageReachedPointDto>>) {
+        val lazyListState = rememberLazyListState()
+        LaunchedEffect(true) {
+            lazyListState.scrollToItem(messages.value.size)
+        }
         LazyColumn(
-            reverseLayout = false,
+            reverseLayout = false,state = lazyListState,
             modifier = Modifier
                 .padding(10.dp, 85.dp)
                 .fillMaxWidth(),
