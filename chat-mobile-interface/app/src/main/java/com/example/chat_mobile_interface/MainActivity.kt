@@ -8,11 +8,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.rounded.AccountCircle
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -24,11 +30,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.chat_mobile_interface.composable.AddFriend
 import com.example.chat_mobile_interface.composable.Chat
 import com.example.chat_mobile_interface.composable.Home
 import com.example.chat_mobile_interface.composable.LogIn
@@ -52,16 +60,46 @@ class MainActivity : ComponentActivity() {
                 ), 0
             )
         }
-        val brush = Brush.horizontalGradient(listOf(Color(80,120,230), Color.White))
+        val brush = Brush.horizontalGradient(listOf(Color(80, 120, 230), Color.White))
         setContent {
             ChatmobileinterfaceTheme {
                 val navController = rememberNavController()
                 var userData = viewModel.logedDataFlow.collectAsState();
                 Scaffold(topBar = {
-                    TopAppBar(modifier=Modifier.background(brush),
+                    TopAppBar(
+                        modifier = Modifier.background(brush),
                         title = {
                             if (userData.value.id != 0 && userData.value.id != 404) {
-                                Text(text = "${userData.value.id} Name:${userData.value.familyName}")
+                                Row {
+                                    IconButton(onClick = { /* do something */ }) {
+                                        Icon(
+                                            painterResource(R.drawable.friendadd2),
+                                            contentDescription = "Localized description",
+                                            Modifier.clickable {
+                                                navController.navigate("addfriend")
+                                            }.padding(3.dp,0.dp)
+                                        )
+                                    }
+                                    IconButton(onClick = { /* do something */ }) {
+                                        Icon(
+                                            painterResource(R.drawable.chat2),
+                                            contentDescription = "Localized description",
+                                            Modifier.clickable {
+                                                navController.navigate("home")
+                                            }.padding(3.dp,0.dp)
+                                        )
+                                    }
+                                    IconButton(onClick = { /* do something */ }) {
+                                        Icon(
+                                            painterResource(R.drawable.group2),
+                                            contentDescription = "Localized description",
+                                            Modifier.clickable {
+                                                navController.navigate("home")
+                                            }.padding(3.dp,0.dp)
+                                        )
+                                    }
+                                    //Text(text = "${userData.value.id} Name:${userData.value.familyName}")
+                                }
                             }
                         },
                         navigationIcon = {
@@ -75,15 +113,18 @@ class MainActivity : ComponentActivity() {
                         actions = {
                             IconButton(onClick = { navController.navigate("profile") }) {
                                 if (userData.value.id != 0 && userData.value.id != 404) {
-                                    Icon(
-                                        Icons.Rounded.AccountCircle,
-                                        contentDescription = "Your Profile"
-                                    )
+                                    Row {
+                                        Icon(
+                                            Icons.Rounded.AccountCircle,
+                                            contentDescription = "Your Profile"
+                                        )
+                                    }
                                 }
                             }
                         },
                     )
-                }) {
+                })
+                {
                     Box(
                         modifier = Modifier
                             .padding(0.dp, 65.dp, 0.dp, 0.dp)
@@ -98,6 +139,9 @@ class MainActivity : ComponentActivity() {
                             }
                             composable("home") {
                                 Home(navController, userData)
+                            }
+                            composable("addfriend") {
+                                AddFriend(viewModel)
                             }
                             composable("chat/{userData}/{userName}") { backStackEntry ->
                                 Chat(viewModel, backStackEntry, userData)

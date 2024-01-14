@@ -29,6 +29,7 @@ import com.example.chat_mobile_interface.model.LogdInUser
 import com.example.chat_mobile_interface.model.UserHandleDto
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
 import com.example.chat_mobile_interface.view.model.FriendViewModel
+import com.example.chat_mobile_interface.view.model.UserViewModel
 
 @Composable
 fun Home(navController: NavHostController, userData: State<LogdInUser>) {
@@ -81,4 +82,9 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
         }
     }
     Divider()
+}
+
+@Composable
+fun AddFriend(viewModel: UserViewModel) {
+    
 }
