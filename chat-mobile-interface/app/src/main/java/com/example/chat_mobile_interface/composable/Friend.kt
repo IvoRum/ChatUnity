@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.chat_mobile_interface.model.GroupDto
 import com.example.chat_mobile_interface.model.LogdInUser
 import com.example.chat_mobile_interface.model.UserHandleDto
 import com.example.chat_mobile_interface.ui.theme.bodyLarge
@@ -86,6 +87,58 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
 }
 
 @Composable
-fun AddFriend(viewModel: UserViewModel) {
+fun AddFriend(viewModel: UserViewModel,navController: NavHostController, userData: State<LogdInUser>) {
 
+}
+
+@Composable
+fun Groups(viewModel: UserViewModel,navController: NavHostController, userData: State<LogdInUser>) {
+    val user = viewModel.logedDataFlow.collectAsState()
+    val friendViewModel =
+        viewModel<FriendViewModel>(factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return FriendViewModel(
+                    userData.value.id
+                ) as T
+            }
+        })
+    val list = friendViewModel.groupDataFlow.collectAsState()
+    DisposableEffect(Unit) {
+        friendViewModel.getGroups(user.value.id)
+        onDispose { }
+    }
+
+    GreetingGroup(navController, list)
+}
+
+@Composable
+fun GreetingGroup(navController: NavHostController, statingList: State<List<GroupDto>>) {
+    var friends by remember {
+        mutableStateOf(statingList)
+    }
+    Divider()
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        items(friends.value) { item ->
+            Divider()
+            Row(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(10.dp)
+            ) {
+                Row(modifier = Modifier.clickable {
+                    val navstring = "chat/${item.id}/${item.name}";
+                    navController.navigate(navstring)
+                }) {
+                    Text(
+                        text = item.id.toString(), style = bodyLarge
+                    )
+                    Spacer(modifier = Modifier.width(13.dp))
+                    Text(text = "${item.name}", style = bodyLarge)
+                    //todo add user details to the chat windows
+                }
+
+            }
+        }
+    }
+    Divider()
 }

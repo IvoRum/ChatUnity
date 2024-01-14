@@ -1,5 +1,6 @@
 package com.example.chat_mobile_interface.repository
 
+import com.example.chat_mobile_interface.model.GroupDto
 import com.example.chat_mobile_interface.model.LogdInUser
 import com.example.chat_mobile_interface.model.MessageReachedPointDto
 import com.example.chat_mobile_interface.model.UserHandleDto
@@ -40,6 +41,37 @@ class UnityChatRepo {
                 val userHandleDtoList = matches?.map {
                     val (id, firstName, familyName, conversation) = it.destructured
                     UserHandleDto(id.toInt(), firstName, familyName, conversation.toInt())
+                }?.toList()
+                userHandleDtoList
+            }
+        }
+    }
+
+    suspend fun getGroups(userId: Int): List<GroupDto>? {
+        var response = GlobalScope.async {
+            var da = ""
+            val tcpClient = TcpClient(SERVER_ADDRESS,
+                1300, "gug: $userId", object : TcpClient.OnMessageReceivedListener {
+                    override fun onMessageReceived(message: String) {
+                        da = message
+                        //println(message)
+                    }
+                })
+            tcpClient.execute()
+        }
+        return runBlocking {
+            if (response.await().equals(null)) {
+                null
+            } else {
+                val regex =
+                    Regex("""GroupDto\[name=([^\]]+), id=(\d+)]""")
+                // Find all matches in the input string
+                val matches = response.await()?.let { regex.findAll(it) }
+
+                // Create a list of UserHandleDto objects from the matches
+                val userHandleDtoList = matches?.map {
+                    val (name, id) = it.destructured
+                    GroupDto(name, id.toInt())
                 }?.toList()
                 userHandleDtoList
             }

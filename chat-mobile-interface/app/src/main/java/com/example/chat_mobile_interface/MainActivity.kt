@@ -38,6 +38,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.chat_mobile_interface.composable.AddFriend
 import com.example.chat_mobile_interface.composable.Chat
+import com.example.chat_mobile_interface.composable.Groups
 import com.example.chat_mobile_interface.composable.Home
 import com.example.chat_mobile_interface.composable.LogIn
 import com.example.chat_mobile_interface.composable.Profile
@@ -75,27 +76,33 @@ class MainActivity : ComponentActivity() {
                                         Icon(
                                             painterResource(R.drawable.friendadd2),
                                             contentDescription = "Localized description",
-                                            Modifier.clickable {
-                                                navController.navigate("addfriend")
-                                            }.padding(3.dp,0.dp)
+                                            Modifier
+                                                .clickable {
+                                                    navController.navigate("addfriend")
+                                                }
+                                                .padding(3.dp, 0.dp)
                                         )
                                     }
                                     IconButton(onClick = { /* do something */ }) {
                                         Icon(
                                             painterResource(R.drawable.chat2),
                                             contentDescription = "Localized description",
-                                            Modifier.clickable {
-                                                navController.navigate("home")
-                                            }.padding(3.dp,0.dp)
+                                            Modifier
+                                                .clickable {
+                                                    navController.navigate("home")
+                                                }
+                                                .padding(3.dp, 0.dp)
                                         )
                                     }
                                     IconButton(onClick = { /* do something */ }) {
                                         Icon(
                                             painterResource(R.drawable.group2),
                                             contentDescription = "Localized description",
-                                            Modifier.clickable {
-                                                navController.navigate("home")
-                                            }.padding(3.dp,0.dp)
+                                            Modifier
+                                                .clickable {
+                                                    navController.navigate("groups")
+                                                }
+                                                .padding(3.dp, 0.dp)
                                         )
                                     }
                                     //Text(text = "${userData.value.id} Name:${userData.value.familyName}")
@@ -138,10 +145,13 @@ class MainActivity : ComponentActivity() {
                                 Profile(viewModel)
                             }
                             composable("home") {
-                                Home(viewModel,navController, userData)
+                                Home(viewModel, navController, userData)
+                            }
+                            composable("groups") {
+                                Groups(viewModel, navController, userData)
                             }
                             composable("addfriend") {
-                                AddFriend(viewModel)
+                                AddFriend(viewModel, navController, userData)
                             }
                             composable("chat/{userData}/{userName}") { backStackEntry ->
                                 Chat(viewModel, backStackEntry, userData)

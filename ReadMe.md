@@ -53,6 +53,12 @@ returns: only if problem whit the message.
 gfr: userId
 ```
 
+### Group
+
+```
+gug: userId
+```
+
 returns: set of all foud friends.
 
 ## Database

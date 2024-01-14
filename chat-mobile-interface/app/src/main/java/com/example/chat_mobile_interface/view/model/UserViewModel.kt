@@ -16,6 +16,7 @@ class UserViewModel : ViewModel() {
     private val _logedDataFlow = MutableStateFlow<LogdInUser>(LogdInUser(0, "", "", ""))
     val logedDataFlow: StateFlow<LogdInUser> = _logedDataFlow
     fun getUserMessages(userId: Int, coversation: Int) {
+        println("Try to sernt a Message:" + _dataFlow.value+ "by: $userId to conversation: $coversation")
         viewModelScope.launch {
             val da = friendRepo.getMessages(userId, coversation)
             if (da != null) {

@@ -9,3 +9,5 @@ data class UserHandleDto(
 )
 
 data class LogdInUser(val id: Int, val firstName: String, val familyName: String, val email: String)
+
+data class GroupDto(val name: String, val id: Int)
