@@ -46,11 +46,11 @@ class UnityChatRepo {
         }
     }
 
-    suspend fun getMessages(): List<MessageReachedPointDto>? {
+    suspend fun getMessages(userId: Int,coversation:Int): List<MessageReachedPointDto>? {
         var response = GlobalScope.async {
             var da = ""
             val tcpClient = TcpClient(SERVER_ADDRESS,
-                1300, "gms: 1 1@3", object : TcpClient.OnMessageReceivedListener {
+                1300, "gms: $userId $coversation@0", object : TcpClient.OnMessageReceivedListener {
                     override fun onMessageReceived(message: String) {
                         da = message
                         println(message)
@@ -155,8 +155,6 @@ class TcpClient(
             return null
         }
         try {
-
-
             val out = PrintWriter(socket.getOutputStream(), true)
             out.println(messageToSend)
 

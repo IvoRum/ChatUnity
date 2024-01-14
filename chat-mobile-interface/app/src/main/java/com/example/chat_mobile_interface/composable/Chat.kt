@@ -55,11 +55,12 @@ private var chatPossituin = 0
 val chatBubbleShape = RoundedCornerShape(30.dp)
 @Composable
 fun Chat(viewModel: UserViewModel, backStackEntry: NavBackStackEntry, userData: State<LogdInUser>) {
+    val user = viewModel.logedDataFlow.collectAsState()
     val userId = backStackEntry.arguments?.getString("userData") ?: ""
     val userName = backStackEntry.arguments?.getString("userName") ?: ""
 
     DisposableEffect(Unit) {
-        viewModel.getUserMessages()
+        viewModel.getUserMessages(user.value.id,Integer.parseInt(userId))
         onDispose { }
     }
 
@@ -74,6 +75,7 @@ fun ChatView(
     id: String,
     name: String
 ) {
+    val user = viewModel.logedDataFlow.collectAsState()
     val messages = viewModel.dataFlow.collectAsState()
     var text by remember { mutableStateOf("") }
 
@@ -99,7 +101,7 @@ fun ChatView(
                                 messages.value.get(messages.value.size - 1).messageOrder + 1,
                                 text
                             )
-                            viewModel.getUserMessages()
+                            viewModel.getUserMessages(user.value.id,Integer.parseInt(id))
                             text = ""
                         },
                         tint = Color.Blue

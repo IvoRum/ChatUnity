@@ -55,9 +55,10 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
     var friends by remember {
         mutableStateOf(statingList)
     }
-
+    Divider()
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(friends.value) { item ->
+            Divider()
             Row(
                 modifier = Modifier
                     .fillMaxHeight()
@@ -77,7 +78,7 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
                 }
 
             }
-            Divider()
         }
     }
+    Divider()
 }
