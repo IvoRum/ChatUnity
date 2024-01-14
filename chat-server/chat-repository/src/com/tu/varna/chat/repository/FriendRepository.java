@@ -20,6 +20,7 @@ public class FriendRepository extends BaseRepository {
                 "         join public.unity_user uu on uu.id = fr.id_friend " +
                 "where fr.id_user = ?";
          */
+        // Number of alterations #-3
         String sql="select  DISTINCT fr.id_friend, uu.first_name, uu.family_name, ucr.id_conversation as ucr_of_friend, cc.id_conversation as ucr_of_user " +
                 "from friend_relation fr " +
                 "         join public.unity_user uu on uu.id = fr.id_friend " +

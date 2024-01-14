@@ -1,7 +1,6 @@
 package com.example.chat_mobile_interface.composable
 
 import android.annotation.SuppressLint
-import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -72,7 +71,7 @@ fun Chat(viewModel: UserViewModel, backStackEntry: NavBackStackEntry, userData: 
 @Composable
 fun ChatView(
     viewModel: UserViewModel,
-    id: String,
+    conversationId: String,
     name: String
 ) {
     val user = viewModel.logedDataFlow.collectAsState()
@@ -80,7 +79,8 @@ fun ChatView(
     var text by remember { mutableStateOf("") }
 
     Scaffold(topBar = {
-        TopAppBar(title = { Text(text = "User id is:$id NAME: $name") })
+        //TopAppBar(title = { Text(text = "User id is:$conversationId NAME: $name") })
+        TopAppBar(title = { Text(text = "$name ${user.value.familyName}") })
     }, bottomBar = {
         Row(modifier = Modifier.padding(10.dp)) {
             TextField(
@@ -97,11 +97,11 @@ fun ChatView(
                         modifier = Modifier.clickable {
                             viewModel.sendMessage(
                                 viewModel.logedDataFlow.value.id,
-                                Integer.parseInt(id),
+                                Integer.parseInt(conversationId),
                                 messages.value.get(messages.value.size - 1).messageOrder + 1,
                                 text
                             )
-                            viewModel.getUserMessages(user.value.id,Integer.parseInt(id))
+                            viewModel.getUserMessages(user.value.id,Integer.parseInt(conversationId))
                             text = ""
                         },
                         tint = Color.Blue
@@ -113,12 +113,11 @@ fun ChatView(
                 )
             )
         }
-    }) { Conversation(viewModel, 2) }
+    }) { Conversation(viewModel, user.value.id) }
 }
 
 @Composable
 fun Conversation(viewModel: UserViewModel, userId: Int) {
-
     val messages = viewModel.dataFlow.collectAsState()
     val lazyListState = rememberLazyListState()
     chatPossituin = messages.value.size
