@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.rounded.AccountCircle
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -87,6 +88,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier
                             .padding(0.dp, 65.dp, 0.dp, 0.dp)
                     ) {
+                        Divider()
                         NavHost(navController, startDestination = "login") {
                             composable("login") {
                                 LogIn(viewModel, navController)

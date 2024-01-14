@@ -8,10 +8,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -23,13 +23,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.chat_mobile_interface.R
 import com.example.chat_mobile_interface.view.model.UserViewModel
@@ -48,15 +47,21 @@ fun LogIn(viewModel: UserViewModel, navController: NavHostController) {
     val isTextFieldEmptyPassword by derivedStateOf {
         password.isBlank()
     }
+    val brush = Brush.horizontalGradient(listOf(Color(80,120,230), Color.White))
+
     Column(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth()
-            .background(Color(80, 120, 230)),
+            .background(brush),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Image(painter = painterResource(R.drawable.logo1), contentDescription = "logo")
+        Image(
+            painter = painterResource(R.drawable.logo1),
+            contentDescription = "logo",
+            modifier = Modifier.size(450.dp)
+        )
         TextField(
             value = userName,
             onValueChange = { userName = it },
