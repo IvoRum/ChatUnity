@@ -32,7 +32,8 @@ import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
 
 @Composable
-fun Home(navController: NavHostController, userData: State<LogdInUser>) {
+fun Home(viewModel: UserViewModel,navController: NavHostController, userData: State<LogdInUser>) {
+    val user = viewModel.logedDataFlow.collectAsState()
     val friendViewModel =
         viewModel<FriendViewModel>(factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -43,7 +44,7 @@ fun Home(navController: NavHostController, userData: State<LogdInUser>) {
         })
     val list = friendViewModel.dataFlow.collectAsState()
     DisposableEffect(Unit) {
-        friendViewModel.getFriendsUserHandle(2)
+        friendViewModel.getFriendsUserHandle(user.value.id)
         onDispose { }
     }
 
@@ -86,5 +87,5 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
 
 @Composable
 fun AddFriend(viewModel: UserViewModel) {
-    
+
 }

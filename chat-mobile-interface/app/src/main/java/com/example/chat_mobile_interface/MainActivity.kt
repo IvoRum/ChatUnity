@@ -138,7 +138,7 @@ class MainActivity : ComponentActivity() {
                                 Profile(viewModel)
                             }
                             composable("home") {
-                                Home(navController, userData)
+                                Home(viewModel,navController, userData)
                             }
                             composable("addfriend") {
                                 AddFriend(viewModel)

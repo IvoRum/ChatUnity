@@ -20,11 +20,13 @@ public class FriendRepository extends BaseRepository {
                 "         join public.unity_user uu on uu.id = fr.id_friend " +
                 "where fr.id_user = ?";
          */
-        String sql="select fr.id_friend, uu.first_name, uu.family_name, ucr.id_conversation " +
+        String sql="select  DISTINCT fr.id_friend, uu.first_name, uu.family_name, ucr.id_conversation as ucr_of_friend, cc.id_conversation as ucr_of_user " +
                 "from friend_relation fr " +
                 "         join public.unity_user uu on uu.id = fr.id_friend " +
-                "         join public.user_conversation_relation ucr on ucr.id_user=fr.id_user " +
-                "where fr.id_user = ?";
+                "         join public.user_conversation_relation ucr on fr.id_friend= ucr.id_user " +
+                "         join public.conversation c on c.id = ucr.id_conversation " +
+                "         join public.user_conversation_relation cc on cc.id_user=fr.id_user " +
+                "where fr.id_user = ? and cc.id_conversation = ucr.id_conversation";
 
         Connection connection = DriverManager.getConnection(JDBC_URL);
 
@@ -37,7 +39,7 @@ public class FriendRepository extends BaseRepository {
                 int friendId=resultSet.getInt("id_friend");
                 String firstName=resultSet.getString("first_name");
                 String lastName=resultSet.getString("family_name");
-                int conversation=resultSet.getInt("id_conversation");
+                int conversation=resultSet.getInt("ucr_of_friend");
 
                 foundFriends.add(new UserHandleDto(friendId,firstName,lastName,conversation));
             }
@@ -59,5 +61,23 @@ public class FriendRepository extends BaseRepository {
         }
     }
 
+    public Set<UserHandleDto> getAllUsers() throws SQLException {
+        String sql="select uu.id,uu.first_name,uu.family_name from unity_user uu";
+        Connection connection = DriverManager.getConnection(JDBC_URL);
 
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            Set<UserHandleDto> foundFriends = new HashSet<>();
+            while (resultSet.next()) {
+                int friendId=resultSet.getInt("id_friend");
+                String firstName=resultSet.getString("first_name");
+                String lastName=resultSet.getString("family_name");
+                int conversation=1;
+
+                foundFriends.add(new UserHandleDto(friendId,firstName,lastName,conversation));
+            }
+            return Collections.unmodifiableSet(foundFriends);
+        }
+    }
 }
