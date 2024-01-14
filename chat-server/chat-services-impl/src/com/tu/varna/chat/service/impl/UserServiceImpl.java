@@ -1,5 +1,6 @@
 package com.tu.varna.chat.service.impl;
 
+import com.tu.varna.chat.common.dto.GroupDto;
 import com.tu.varna.chat.common.dto.UserHandleDto;
 import com.tu.varna.chat.repository.FriendRepository;
 import com.tu.varna.chat.service.UserService;
@@ -31,6 +32,15 @@ public class UserServiceImpl implements UserService {
     public Set<UserHandleDto> allFriends(int userId) {
         try {
             return friendRepository.getFriendOfuser(userId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Set<GroupDto> getAllGroups(int i) {
+        try {
+            return friendRepository.getAllGroups(i);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

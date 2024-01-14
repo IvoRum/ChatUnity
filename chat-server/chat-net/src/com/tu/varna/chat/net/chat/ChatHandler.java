@@ -1,5 +1,6 @@
 package com.tu.varna.chat.net.chat;
 
+import com.tu.varna.chat.common.dto.GroupDto;
 import com.tu.varna.chat.common.dto.MessageReachedPointDto;
 import com.tu.varna.chat.common.dto.UserHandleDto;
 import com.tu.varna.chat.common.net.ChatReachedPoint;
@@ -65,6 +66,8 @@ ChatHandler extends Thread {
                         break;
                     case FRI:
                         break;
+                    case GUG:
+                        getAllGroups(received);
                 }
             } while (!received.equals("QUIT"));
         } catch (
@@ -84,8 +87,18 @@ ChatHandler extends Thread {
         //add ip to blacklist
     }
 
-    private void getAllFriendsList(String received) {
+    private void getAllGroups(String received) {
+        String[] inputPackage = received.split("gug:");
+        socket.getInetAddress();
+        String[] packageParts = inputPackage[1].split("\\s+");
+        for (int i = 1; i < packageParts.length; i++) {
+            Set<GroupDto> frindInfo = userService.getAllGroups(Integer.parseInt(packageParts[i]));
+            System.out.println(frindInfo);
+            output.println(frindInfo);
+        }
+    }
 
+    private void getAllFriendsList(String received) {
         String[] inputPackage = received.split("gfr:");
         socket.getInetAddress();
         String[] packageParts = inputPackage[1].split("\\s+");

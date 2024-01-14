@@ -1,5 +1,6 @@
 package com.tu.varna.chat.repository;
 
+import com.tu.varna.chat.common.dto.GroupDto;
 import com.tu.varna.chat.common.dto.UserHandleDto;
 
 import java.sql.*;
@@ -21,7 +22,7 @@ public class FriendRepository extends BaseRepository {
                 "where fr.id_user = ?";
          */
         // Number of alterations #-3
-        String sql="select  DISTINCT fr.id_friend, uu.first_name, uu.family_name, ucr.id_conversation as ucr_of_friend, cc.id_conversation as ucr_of_user " +
+        String sql = "select  DISTINCT fr.id_friend, uu.first_name, uu.family_name, ucr.id_conversation as ucr_of_friend, cc.id_conversation as ucr_of_user " +
                 "from friend_relation fr " +
                 "         join public.unity_user uu on uu.id = fr.id_friend " +
                 "         join public.user_conversation_relation ucr on fr.id_friend= ucr.id_user " +
@@ -37,12 +38,12 @@ public class FriendRepository extends BaseRepository {
 
             Set<UserHandleDto> foundFriends = new HashSet<>();
             while (resultSet.next()) {
-                int friendId=resultSet.getInt("id_friend");
-                String firstName=resultSet.getString("first_name");
-                String lastName=resultSet.getString("family_name");
-                int conversation=resultSet.getInt("ucr_of_friend");
+                int friendId = resultSet.getInt("id_friend");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("family_name");
+                int conversation = resultSet.getInt("ucr_of_friend");
 
-                foundFriends.add(new UserHandleDto(friendId,firstName,lastName,conversation));
+                foundFriends.add(new UserHandleDto(friendId, firstName, lastName, conversation));
             }
             return Collections.unmodifiableSet(foundFriends);
         }
@@ -50,35 +51,42 @@ public class FriendRepository extends BaseRepository {
 
     public void insertNewFriendRelation(int idUser, int idNewFriend) throws SQLException {
 
-        String sql="insert into friend_relation(id_user, id_friend) VALUES (?,?);";
+        String sql = "insert into friend_relation(id_user, id_friend) VALUES (?,?);";
 
         Connection connection = DriverManager.getConnection(JDBC_URL);
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idUser);
-            statement.setInt(2,idNewFriend);
+            statement.setInt(2, idNewFriend);
 
             statement.executeUpdate();
         }
     }
 
-    public Set<UserHandleDto> getAllUsers() throws SQLException {
-        String sql="select uu.id,uu.first_name,uu.family_name from unity_user uu";
+    public Set<GroupDto> getAllGroups(int userId) throws SQLException {
+        String sql =
+                "SELECT c.conversation_name,c.id as conversation_id, " +
+                        "       array_agg(DISTINCT u.id) AS user_ids, " +
+                        "       COUNT(DISTINCT u.id) AS user_count " +
+                        "FROM public.conversation c " +
+                        "JOIN user_conversation_relation cu ON c.id = cu.id_conversation " +
+                        "JOIN unity_user u ON cu.id_user = u.id " +
+                        "GROUP BY c.conversation_name,c.id " +
+                        "HAVING COUNT(DISTINCT u.id) > 2 AND ARRAY[?]::int[] <@ array_agg(DISTINCT u.id)::int[];";
         Connection connection = DriverManager.getConnection(JDBC_URL);
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
 
-            Set<UserHandleDto> foundFriends = new HashSet<>();
+            Set<GroupDto> foundGroups = new HashSet<>();
             while (resultSet.next()) {
-                int friendId=resultSet.getInt("id_friend");
-                String firstName=resultSet.getString("first_name");
-                String lastName=resultSet.getString("family_name");
-                int conversation=1;
+                String name = resultSet.getString("conversation_name");
+                int conversationId = resultSet.getInt("conversation_id");
 
-                foundFriends.add(new UserHandleDto(friendId,firstName,lastName,conversation));
+                foundGroups.add(new GroupDto(name,conversationId));
             }
-            return Collections.unmodifiableSet(foundFriends);
+            return Collections.unmodifiableSet(foundGroups);
         }
     }
 }
