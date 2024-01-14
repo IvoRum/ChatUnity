@@ -13,26 +13,31 @@ class UserViewModel : ViewModel() {
     private val friendRepo = UnityChatRepo()
     private val _dataFlow = MutableStateFlow<List<MessageReachedPointDto>>(emptyList())
     val dataFlow: StateFlow<List<MessageReachedPointDto>> = _dataFlow
-    private val _logedDataFlow=MutableStateFlow<LogdInUser>(LogdInUser(0,"","",""))
-    val logedDataFlow:StateFlow<LogdInUser> = _logedDataFlow
-    fun getUserMessages(){
+    private val _logedDataFlow = MutableStateFlow<LogdInUser>(LogdInUser(0, "", "", ""))
+    val logedDataFlow: StateFlow<LogdInUser> = _logedDataFlow
+    fun getUserMessages() {
         viewModelScope.launch {
             val da = friendRepo.getMessages()
-            _dataFlow.value = da
+            if (da != null) {
+                _dataFlow.value = da
+            }
             println("User Message:" + _dataFlow.value)
         }
     }
 
-    fun sendMessage(sender: Int, conversation: Int, order: Int, message: String){
-        viewModelScope.launch{
-            friendRepo.sendMessages(sender,conversation,order,message)
+    fun sendMessage(sender: Int, conversation: Int, order: Int, message: String) {
+        viewModelScope.launch {
+            friendRepo.sendMessages(sender, conversation, order, message)
         }
     }
 
-    fun logUser(email:String, password:String){
+    fun logUser(email: String, password: String) {
         viewModelScope.launch {
-            _logedDataFlow.value=friendRepo.logIn(email,password)
-            println("Log in process finished")
+            val da = friendRepo.logIn(email, password)
+            if (da != null) {
+                _logedDataFlow.value = da
+                println("Log in process finished")
+            }
         }
     }
 }

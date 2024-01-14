@@ -19,7 +19,9 @@ class FriendViewModel(val userId:Int) : ViewModel() {
     ) {
         viewModelScope.launch{
             val da =friendRepo.getFriends(userId)
-            _dataFlow.value=da
+            if (da != null) {
+                _dataFlow.value=da
+            }
             println("UserFriends: "+_dataFlow.value)
         }
     }

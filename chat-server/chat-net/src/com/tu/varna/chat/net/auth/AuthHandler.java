@@ -81,7 +81,7 @@ public class AuthHandler extends Thread {
                     new NewUserCredentials(new UserCredentials(packageParts[1], packageParts[2]), packageParts[3],
                             new UserNames(packageParts[4], packageParts[2]))));
         } catch (ServiceException e) {
-            throw new RuntimeException(e);
+            output.println("null");
         }
     }
 

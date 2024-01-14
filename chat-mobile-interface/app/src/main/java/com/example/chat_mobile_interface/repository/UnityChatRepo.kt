@@ -15,7 +15,7 @@ import kotlin.math.log
 
 class UnityChatRepo {
     val SERVER_ADDRESS = "192.168.0.104"
-    suspend fun getFriends(userId: Int): List<UserHandleDto> {
+    suspend fun getFriends(userId: Int): List<UserHandleDto>? {
         var response = GlobalScope.async {
             var da = ""
             val tcpClient = TcpClient(SERVER_ADDRESS,
@@ -28,21 +28,25 @@ class UnityChatRepo {
             tcpClient.execute()
         }
         return runBlocking {
-            val regex =
-                Regex("""UserHandleDto\[id=(\d+), firstName=([^\]]+), familyName=([^\]]+)]""")
-            // Find all matches in the input string
-            val matches = regex.findAll(response.await())
+            if (response.await().equals(null)) {
+                null
+            } else {
+                val regex =
+                    Regex("""UserHandleDto\[id=(\d+), firstName=([^\]]+), familyName=([^\]]+)]""")
+                // Find all matches in the input string
+                val matches = response.await()?.let { regex.findAll(it) }
 
-            // Create a list of UserHandleDto objects from the matches
-            val userHandleDtoList = matches.map {
-                val (id, firstName, familyName) = it.destructured
-                UserHandleDto(id.toInt(), firstName, familyName)
-            }.toList()
-            userHandleDtoList
+                // Create a list of UserHandleDto objects from the matches
+                val userHandleDtoList = matches?.map {
+                    val (id, firstName, familyName) = it.destructured
+                    UserHandleDto(id.toInt(), firstName, familyName)
+                }?.toList()
+                userHandleDtoList
+            }
         }
     }
 
-    suspend fun getMessages(): List<MessageReachedPointDto> {
+    suspend fun getMessages(): List<MessageReachedPointDto>? {
         var response = GlobalScope.async {
             var da = ""
             val tcpClient = TcpClient(SERVER_ADDRESS,
@@ -55,26 +59,28 @@ class UnityChatRepo {
             tcpClient.execute()
         }
         return runBlocking {
-            val regex =
-                Regex("""MessageReachedPointDto\[idSender=(\d+), idReceiver=(\d+), messageOrder=(\d+), content=([^\]]+)""")
-            // Find all matches in the input string
-            val matches = regex.findAll(response.await())
+            if (response.await()!=null) {
+                val regex =
+                    Regex("""MessageReachedPointDto\[idSender=(\d+), idReceiver=(\d+), messageOrder=(\d+), content=([^\]]+)""")
+                // Find all matches in the input string
+                val matches = regex.findAll(response.await()!!)
 
-            // Create a list of UserHandleDto objects from the matches
-            val foundMessages = matches.map {
-                val (id, idReceiver, messageOrder, content) = it.destructured
-                MessageReachedPointDto(
-                    id.toInt(),
-                    idReceiver.toInt(),
-                    messageOrder.toInt(),
-                    content
-                )
-            }.toList()
-            foundMessages
+                // Create a list of UserHandleDto objects from the matches
+                val foundMessages = matches.map {
+                    val (id, idReceiver, messageOrder, content) = it.destructured
+                    MessageReachedPointDto(
+                        id.toInt(),
+                        idReceiver.toInt(),
+                        messageOrder.toInt(),
+                        content
+                    )
+                }.toList()
+                foundMessages
+            }else{null}
         }
     }
 
-    suspend fun sendMessages(sender: Int, conversation: Int, order: Int, message: String) {
+    suspend fun sendMessages(sender: Int, conversation: Int, order: Int, message: String):Boolean {
         println("Message: sende: $sender; Coversation: $conversation; Content:$message; Order:$order")
         var response = GlobalScope.async {
             var da = ""
@@ -90,11 +96,16 @@ class UnityChatRepo {
             tcpClient.execute()
         }
         return runBlocking {
-            println(response.await())
+            if (response.await().equals(null)) {
+                false
+            } else {
+                println(response.await())
+                true
+            }
         }
     }
 
-    suspend fun logIn(email: String, password: String): LogdInUser {
+    suspend fun logIn(email: String, password: String): LogdInUser? {
         var response = GlobalScope.async {
             var serverResponce = ""
             val tcpClient = TcpClient(SERVER_ADDRESS,
@@ -109,16 +120,19 @@ class UnityChatRepo {
             if (response.await().equals("null")) {
                 LogdInUser(404, "", "", "")
             } else {
+                if (response.await()==null) {
+                    null
+                } else {
+                    val regex =
+                        Regex("""LogdInUser\[id=(\d+), firstName=([A-Za-z]+), familyName=([A-Za-z]+), email=([A-Za-z@.]+)\]""")
+                    val matches = response.await()?.let { regex.findAll(it) }
 
-                val regex =
-                    Regex("""LogdInUser\[id=(\d+), firstName=([A-Za-z]+), familyName=([A-Za-z]+), email=([A-Za-z@.]+)\]""")
-                val matches = regex.findAll(response.await())
-
-                val userHandleDtoList = matches.map {
-                    val (id, firstName, familyName, email) = it.destructured
-                    LogdInUser(id.toInt(), firstName, familyName, email)
-                }.toList()
-                userHandleDtoList.get(0)
+                    val userHandleDtoList = matches?.map {
+                        val (id, firstName, familyName, email) = it.destructured
+                        LogdInUser(id.toInt(), firstName, familyName, email)
+                    }?.toList()
+                    userHandleDtoList?.get(0)
+                }
             }
         }
     }
@@ -133,10 +147,15 @@ class TcpClient(
 
     private var receivedMessage: String? = null
 
-    fun execute(): String {
+    fun execute(): String? {
         var socket: Socket? = null
         try {
             socket = Socket(serverIp, serverPort)
+        } catch (e: Exception) {
+            return null
+        }
+        try {
+
 
             val out = PrintWriter(socket.getOutputStream(), true)
             out.println(messageToSend)
