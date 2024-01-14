@@ -71,7 +71,7 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
                         text = item.id.toString(), style = bodyLarge
                     )
                     Spacer(modifier = Modifier.width(13.dp))
-                    Text(text = item.familyName, style = bodyLarge)
+                    Text(text = item.firstName, style = bodyLarge)
                     Spacer(modifier = Modifier.width(13.dp))
                     Text(text = item.familyName, style = bodyLarge)
                 }
