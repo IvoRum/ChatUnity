@@ -82,7 +82,7 @@ fun ChatView(
 
     Scaffold(topBar = {
         //TopAppBar(title = { Text(text = "User id is:$conversationId NAME: $name") })
-        TopAppBar(title = { Text(text = "$name ${user.value.familyName}") })
+        TopAppBar(title = { Text(text = "$name") })
     }, bottomBar = {
         Row(modifier = Modifier.padding(10.dp)) {
             TextField(
