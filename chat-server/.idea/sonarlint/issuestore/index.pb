@@ -73,3 +73,5 @@ p
 @chat-net/src/com/tu/varna/chat/net/multi/echo/ClientHandler.java,f\6\f67ea5775289009f9e81f59343d21fb691fb70b2
 r
 Bchat-net/src/com/tu/varna/chat/net/multi/echo/MultiEchoClient.java,1\a\1a18f8465f0cd237565b01589a5accdcba3b3a6d
+c
+3chat-net/src/com/tu/varna/chat/net/chat/Prefix.java,1\8\189c59720d155888838e8f1a87284077b33856b4

@@ -1,6 +1,8 @@
 package com.example.chat_mobile_interface.composable
 
 import android.annotation.SuppressLint
+import androidx.activity.ComponentActivity
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -145,33 +147,35 @@ fun Conversation(viewModel: UserViewModel, userId: Int) {
         }
     }
 }
+class TestActivity : ComponentActivity() {
 
-@Composable
-@Preview
-fun chatViewPreview() {
-    //val viewModel by viewModels<UserViewModel>()
-    val da: State<List<MessageReachedPointDto>> = remember {
-        mutableStateOf(
-            listOf(
-                MessageReachedPointDto(
-                    1,
-                    1, 1,
-                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaao Deme"
-                ), MessageReachedPointDto(
-                    2,
-                    1, 1,
-                    "Da Ivoaaj kf ghj ksdlfgjk lhdfkghkdf ghk kdfghkdf  khk jdfhl fkjaskjdh fjka sfgjkasdhfgkjdshfghljkdfhaaaaa"
-                ), MessageReachedPointDto(
-                    2,
-                    1, 1,
-                    "Da"
+    @Composable
+    @Preview
+    fun chatViewPreview() {
+        val viewModel by viewModels<UserViewModel>()
+
+        val da: State<List<MessageReachedPointDto>> = remember {
+            mutableStateOf(
+                listOf(
+                    MessageReachedPointDto(
+                        1,
+                        1, 1,
+                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaao Deme"
+                    ), MessageReachedPointDto(
+                        2,
+                        1, 1,
+                        "Da Ivoaaj kf ghj ksdlfgjk lhdfkghkdf ghk kdfghkdf  khk jdfhl fkjaskjdh fjka sfgjkasdhfgkjdshfghljkdfhaaaaa"
+                    ), MessageReachedPointDto(
+                        2,
+                        1, 1,
+                        "Da"
+                    )
                 )
             )
-        )
+        }
+        ChatView(viewModel, "1", "Ivan")
     }
-    //ChatView(viewModel, "1", "Ivan")
 }
-
 @Composable
 fun MessageCard(msg: MessageReachedPointDto) {
     // Add padding around our message

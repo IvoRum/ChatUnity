@@ -15,7 +15,7 @@ import java.net.Socket
 import kotlin.math.log
 
 class UnityChatRepo {
-    val SERVER_ADDRESS = "192.168.0.104"
+    val SERVER_ADDRESS = "172.28.104.87"//"192.168.0.104"
     suspend fun getFriends(userId: Int): List<UserHandleDto>? {
         var response = GlobalScope.async {
             var da = ""
