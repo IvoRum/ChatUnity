@@ -45,11 +45,18 @@ public class MassageRepository extends BaseRepository {
     }
 
     public List<MessageReachedPointDto> getAllMessagesForAGivenUser(int idRevicer, int messageOrder) throws SQLException {
-
+        /*
         String sql = "select ms.id_sender, ms.message_order, ms.message_status, ms.content from message ms " +
                 "where id_reciver=? " +
                 "and message_order > ? and message_order < ?";
 
+
+         */
+        String sql = "select uu.first_name, ms.id_sender, ms.message_order, ms.message_status, ms.content " +
+                "from message ms " +
+                "join public.unity_user uu on uu.id = ms.id_sender " +
+                "where id_reciver=? " +
+                "and message_order > ? and message_order < ?";
         Connection connection = DriverManager.getConnection(JDBC_URL);
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -59,13 +66,15 @@ public class MassageRepository extends BaseRepository {
             ResultSet resultSet = statement.executeQuery();
             List<MessageReachedPointDto> foundMessages = new ArrayList<>();
             while (resultSet.next()) {
-                foundMessages.add(new MessageReachedPointDto(resultSet.getInt("id_sender"), idRevicer,resultSet.getInt("message_order"), resultSet.getString("content")));
+                foundMessages.add(new MessageReachedPointDto(resultSet.getString("first_name"),
+                        resultSet.getInt("id_sender"), idRevicer,
+                        resultSet.getInt("message_order"), resultSet.getString("content")));
             }
             return foundMessages;
         }
     }
 
-    public void sendMessage(final int idRevicer,final int idSender, final int messageOrder,final String content) throws SQLException {
+    public void sendMessage(final int idRevicer, final int idSender, final int messageOrder, final String content) throws SQLException {
 
         String sql = "INSERT INTO message(content,id_reciver,id_sender,message_order,message_status,time_stamp) " +
                 " VALUES(?,?,?,?,3,CURRENT_TIMESTAMP)";
@@ -78,7 +87,7 @@ public class MassageRepository extends BaseRepository {
             statement.setInt(3, idSender);
             statement.setInt(4, messageOrder);
             statement.execute();
-            System.out.println("Message:"+content+" Order:"+messageOrder);
+            System.out.println("Message:" + content + " Order:" + messageOrder);
         }
     }
 

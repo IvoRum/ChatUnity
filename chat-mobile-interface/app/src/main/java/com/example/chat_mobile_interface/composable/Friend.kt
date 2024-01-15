@@ -68,7 +68,7 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
                     .padding(10.dp)
             ) {
                 Row(modifier = Modifier.clickable {
-                    val navstring = "chat/${item.conversation}/${item.familyName}";
+                    val navstring = "chat/${item.conversation}/${item.firstName}";
                     navController.navigate(navstring)
                 }) {
                     Text(

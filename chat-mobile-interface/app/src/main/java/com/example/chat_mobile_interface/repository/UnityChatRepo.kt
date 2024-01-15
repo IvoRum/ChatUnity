@@ -93,14 +93,15 @@ class UnityChatRepo {
         return runBlocking {
             if (response.await() != null) {
                 val regex =
-                    Regex("""MessageReachedPointDto\[idSender=(\d+), idReceiver=(\d+), messageOrder=(\d+), content=([^\]]+)""")
+                    Regex("""MessageReachedPointDto\[firstName=([^\]]+), idSender=(\d+), idReceiver=(\d+), messageOrder=(\d+), content=([^\]]+)""")
                 // Find all matches in the input string
                 val matches = regex.findAll(response.await()!!)
 
                 // Create a list of UserHandleDto objects from the matches
                 val foundMessages = matches.map {
-                    val (id, idReceiver, messageOrder, content) = it.destructured
+                    val (firstName, id, idReceiver, messageOrder, content) = it.destructured
                     MessageReachedPointDto(
+                        firstName,
                         id.toInt(),
                         idReceiver.toInt(),
                         messageOrder.toInt(),

@@ -147,35 +147,7 @@ fun Conversation(viewModel: UserViewModel, userId: Int) {
         }
     }
 }
-class TestActivity : ComponentActivity() {
 
-    @Composable
-    @Preview
-    fun chatViewPreview() {
-        val viewModel by viewModels<UserViewModel>()
-
-        val da: State<List<MessageReachedPointDto>> = remember {
-            mutableStateOf(
-                listOf(
-                    MessageReachedPointDto(
-                        1,
-                        1, 1,
-                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaao Deme"
-                    ), MessageReachedPointDto(
-                        2,
-                        1, 1,
-                        "Da Ivoaaj kf ghj ksdlfgjk lhdfkghkdf ghk kdfghkdf  khk jdfhl fkjaskjdh fjka sfgjkasdhfgkjdshfghljkdfhaaaaa"
-                    ), MessageReachedPointDto(
-                        2,
-                        1, 1,
-                        "Da"
-                    )
-                )
-            )
-        }
-        ChatView(viewModel, "1", "Ivan")
-    }
-}
 @Composable
 fun MessageCard(msg: MessageReachedPointDto) {
     // Add padding around our message
@@ -194,7 +166,7 @@ fun MessageCard(msg: MessageReachedPointDto) {
                         .clip(CircleShape)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = msg.sende.toString(), modifier = Modifier.padding(0.dp, 10.dp))
+                Text(text = msg.firstName, modifier = Modifier.padding(0.dp, 10.dp))
             }
             Spacer(modifier = Modifier.height(4.dp))
             Column(
