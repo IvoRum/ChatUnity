@@ -1,14 +1,12 @@
 package com.example.chat_mobile_interface.service
 
-import android.annotation.SuppressLint
-import android.app.Notification
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.chat_mobile_interface.R
 
-class RunningService : Service() {
+class MessageService : Service() {
     override fun onBind(intent: Intent?): IBinder? {
         return null;
     }
