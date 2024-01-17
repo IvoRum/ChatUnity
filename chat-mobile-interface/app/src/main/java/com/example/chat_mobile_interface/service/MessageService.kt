@@ -20,9 +20,9 @@ class MessageService : Service() {
     }
 
     private fun start() {
-        val notification = NotificationCompat.Builder(this, "running_channel")
+        val notification = NotificationCompat.Builder(this, "ms_channel")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Run is active")
+            .setContentTitle("New MS!!!")
             .setContentText("Time 5:00")
             .build()
         startForeground(1,notification)

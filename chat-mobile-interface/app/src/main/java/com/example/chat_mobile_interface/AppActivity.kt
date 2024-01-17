@@ -22,7 +22,7 @@ class AppActivity : Application() {
         super.onCreate()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                "running_channel", "Running notification", NotificationManager.IMPORTANCE_HIGH
+                "ms_channel", "Message notification", NotificationManager.IMPORTANCE_HIGH
             )
             val notificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
