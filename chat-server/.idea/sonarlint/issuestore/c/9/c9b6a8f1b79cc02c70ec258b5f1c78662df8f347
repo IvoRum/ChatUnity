@@ -1,19 +1,21 @@
 
-g	java:S1127"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8èö×ßĞ1
+g	java:S1127"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ä»£´Ñ1
 W
-java:S11414"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8÷ö×ßĞ1
-L	java:S106L"+Replace this use of System.out by a logger.(ó¨¯‰üÿÿÿÿ8ÇôäÅÍ1
-L	java:S106P"+Replace this use of System.out by a logger.(‡ñùÍüÿÿÿÿ8ËôäÅÍ1
-L	java:S106T"+Replace this use of System.out by a logger.(ü£€Ãşÿÿÿÿ8Ú÷×ßĞ1
-L	java:S106`"+Replace this use of System.out by a logger.(ÏôÊ¤úÿÿÿÿ8ê÷×ßĞ1
-L	java:S106k"+Replace this use of System.out by a logger.(ÏôÊ¤úÿÿÿÿ8ü÷×ßĞ1
-M	java:S106ƒ"+Replace this use of System.out by a logger.(Ğçúÿÿÿÿ8§ø×ßĞ1
+java:S11414"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8è»£´Ñ1
+h
+java:S22592"FA "NullPointerException" could be thrown; "received" is nullable here.(³•èÑıÿÿÿÿ8˜¼£´Ñ1
+L	java:S106L"+Replace this use of System.out by a logger.(ó¨¯‰üÿÿÿÿ8ê÷×ßĞ1
+L	java:S106P"+Replace this use of System.out by a logger.(‡ñùÍüÿÿÿÿ8ü÷×ßĞ1
+L	java:S106T"+Replace this use of System.out by a logger.(ü£€Ãşÿÿÿÿ8§ø×ßĞ1
+L	java:S106`"+Replace this use of System.out by a logger.(ÏôÊ¤úÿÿÿÿ8Èø×ßĞ1
+L	java:S106k"+Replace this use of System.out by a logger.(ÏôÊ¤úÿÿÿÿ8Íø×ßĞ1
+M	java:S106ƒ"+Replace this use of System.out by a logger.(Ğçúÿÿÿÿ8Ê¼£´Ñ1
 Y	java:S125"<This block of commented-out lines of code should be removed.(¦ ˆÙ8¬ø×ßĞ1
 _
 java:S1854 "<Remove this useless assignment to local variable "received".(„äÚıÿÿÿÿ8äâÄĞÄ1
 P
 java:S1481Ÿ"-Remove this unused "received" local variable.(“Ï‹˜øÿÿÿÿ8åâÄĞÄ1
-M	java:S106¥"+Replace this use of System.out by a logger.(‡ñùÍüÿÿÿÿ8Èø×ßĞ1
-M	java:S106©"+Replace this use of System.out by a logger.(ü£€Ãşÿÿÿÿ8Íø×ßĞ1
+M	java:S106¥"+Replace this use of System.out by a logger.(‡ñùÍüÿÿÿÿ8Ó¼£´Ñ1
+M	java:S106©"+Replace this use of System.out by a logger.(ü£€Ãşÿÿÿÿ8Ô¼£´Ñ1
 V
 java:S1144"3Remove this unused private "testConnection" method.(©¨ùÿÿÿÿ8€ùˆÑÄ1

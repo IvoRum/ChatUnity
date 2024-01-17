@@ -1,4 +1,4 @@
-package com.tu.varna.chat.net.chat;
+package com.tu.varna.chat.net.handler;
 
 public enum Prefix {
     SMS("sms"),

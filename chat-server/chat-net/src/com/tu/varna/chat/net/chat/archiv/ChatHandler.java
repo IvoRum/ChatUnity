@@ -1,9 +1,10 @@
-package com.tu.varna.chat.net.chat;
+package com.tu.varna.chat.net.chat.archiv;
 
 import com.tu.varna.chat.common.dto.GroupDto;
 import com.tu.varna.chat.common.dto.MessageReachedPointDto;
 import com.tu.varna.chat.common.dto.UserHandleDto;
 import com.tu.varna.chat.common.net.ChatReachedPoint;
+import com.tu.varna.chat.net.handler.Prefix;
 import com.tu.varna.chat.service.ChatService;
 import com.tu.varna.chat.service.UserService;
 import com.tu.varna.chat.service.impl.ChatServiceImpl;

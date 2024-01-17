@@ -1,13 +1,13 @@
-package com.tu.varna.chat.net.auth;
+package com.tu.varna.chat.net.chat.archiv;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class AuthNet extends Thread {
+public class ChatNet extends Thread {
 
     private static ServerSocket serverSocket;
-    private static final int PORT=1301;
+    private static final int PORT=1300;
 
     public void run(){
         try {
@@ -24,9 +24,9 @@ public class AuthNet extends Thread {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("\n New client Accepted! \n");
+            System.out.println("\n New client Accepted! \n"+clientSocket.getInetAddress().getHostAddress());
 
-            Thread handler = new AuthHandler(clientSocket);
+            Thread handler = new ChatHandler(clientSocket);
             handler.start();
         }while (true);
     }

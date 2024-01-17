@@ -1,11 +1,9 @@
 package com.tu.varna.chat.test.net.chat;
 
-import com.tu.varna.chat.net.chat.ChatHandler;
+import com.tu.varna.chat.net.chat.archiv.ChatHandler;
 import org.junit.jupiter.api.Test;
 
 import java.net.Socket;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ChatHandlerTest {
 

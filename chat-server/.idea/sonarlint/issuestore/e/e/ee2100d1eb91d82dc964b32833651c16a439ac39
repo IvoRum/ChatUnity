@@ -1,6 +1,9 @@
 
-F	java:S106"+Replace this use of System.out by a logger.(‘‚¸k8˜ŒŸÊÍ1
-F	java:S106"+Replace this use of System.out by a logger.(éîÊ8œŒŸÊÍ1
+‰
+java:S1130"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(œû¿Ø8Þ„û´Ñ1
+\
+java:S1128"?Remove this unused import 'com.tu.varna.chat.net.auth.AuthNet'.(¿œ’‚8á„û´Ñ1
+b
+java:S1128"FRemove this unused import 'com.tu.varna.chat.net.chat.archiv.ChatNet'.(ó¸Þd8á„û´Ñ1
 L
-java:S1068
-"*Remove this unused "socket" private field.(Å’¬Úþÿÿÿÿ8¾ŒŸÊÍ1
+java:S1068"*Remove this unused "socket" private field.(Å’¬Úþÿÿÿÿ8¾ŒŸÊÍ1

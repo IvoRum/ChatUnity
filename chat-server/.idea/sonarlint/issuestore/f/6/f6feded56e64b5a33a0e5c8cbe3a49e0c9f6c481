@@ -1,10 +1,11 @@
 
-_
-java:S1172,"BRemove these unused method parameters "idRevicer", "messageOrder".(¸ë˜È8Ó¬ôË1
-J	java:S1083")Either remove or fill this block of code.(£ã¥²øÿÿÿÿ8Ôõ¢¦Ê1
+d
+java:S1192"HDefine a constant instead of duplicating this literal "content" 3 times.(äœÍk8¶İ«Ñ1
+]	java:S1253"<This block of commented-out lines of code should be removed.(óŸ·òùÿÿÿÿ8æİ«Ñ1
+F	java:S106Z"+Replace this use of System.out by a logger.(ä™±M8îİ«Ñ1
 h
 java:S1128"FRemove this unused import 'com.tu.varna.chat.common.PropertiesLoader'.(Ò¤‰ıÿÿÿÿÿ8İ¬ôË1
 `
-java:S1128">Remove this unused import 'jakarta.persistence.EntityManager'.(·ïŸéúÿÿÿÿ8İ¬ôË1
+java:S1128">Remove this unused import 'jakarta.persistence.EntityManager'.(·ïŸéúÿÿÿÿ8İ¬ôË1
 \
-java:S1128":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8İ¬ôË1
+java:S1128":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8İ¬ôË1
