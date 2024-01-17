@@ -1,5 +1,8 @@
 package com.tu.varna.chat.net.handler;
 
+import com.tu.varna.chat.net.auth.LogIn;
+import com.tu.varna.chat.net.chat.GetFriend;
+import com.tu.varna.chat.net.chat.GetGroup;
 import com.tu.varna.chat.net.chat.GetMessage;
 import com.tu.varna.chat.net.chat.SendMessage;
 import com.tu.varna.chat.net.chat.archiv.ChatHandler;
@@ -58,20 +61,27 @@ public class MainHandler extends Thread{
                     case GMS:
                         Thread getMs = new GetMessage(clientSocket,received);
                         getMs.start();
-                        //getAllConversationsForAgivenUser(received);
                         break;
                     case SMS:
                         Thread sendMs = new SendMessage(clientSocket,received);
                         sendMs.start();
-                        //sendMessage(received);
                         break;
                     case GFR:
-                        //getAllFriendsList(received);
+                        Thread getFr = new GetFriend(clientSocket,received);
+                        getFr.start();
                         break;
                     case FRI:
                         break;
                     case GUG:
-                        //getAllGroups(received);
+                        Thread getGr = new GetGroup(clientSocket,received);
+                        getGr.start();
+                        break;
+                    case LOG:
+                        Thread logIn = new LogIn(clientSocket,received);
+                        logIn.start();
+                        break;
+                    case REG:
+                        break;
                 }
             } while (!received.equals("QUIT"));
         } catch (

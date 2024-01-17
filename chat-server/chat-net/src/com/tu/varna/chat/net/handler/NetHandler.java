@@ -27,7 +27,7 @@ public class NetHandler extends Thread {
             }
             System.out.println("\n New client Accepted! \n" + clientSocket.getInetAddress().getHostAddress());
 
-            Thread handler = new ChatHandler(clientSocket);
+            Thread handler = new MainHandler(clientSocket);
             handler.start();
         } while (true);
     }

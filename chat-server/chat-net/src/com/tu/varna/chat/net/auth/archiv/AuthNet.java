@@ -1,4 +1,4 @@
-package com.tu.varna.chat.net.auth;
+package com.tu.varna.chat.net.auth.archiv;
 
 import java.io.IOException;
 import java.net.ServerSocket;

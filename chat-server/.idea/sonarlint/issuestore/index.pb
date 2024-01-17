@@ -103,3 +103,17 @@ g
 7chat-net/src/com/tu/varna/chat/net/chat/GetMessage.java,1\3\13e59b9c4a49f857c17ad91157103d2af59f8699
 r
 Bchat-net/test/com/tu/varna/chat/test/net/chat/ChatHandlerTest.java,b\9\b9bb12f4197dd0293ab3c9e95c50882921e042f0
+f
+6chat-net/src/com/tu/varna/chat/net/chat/GetFriend.java,3\8\3841939fbc6aa874ca3ca0737bad5a3aab14d007
+e
+5chat-net/src/com/tu/varna/chat/net/chat/GetGroup.java,9\c\9c6e706b5e7ec83b3fb5929aa52fba806b979d17
+k
+;chat-net/src/com/tu/varna/chat/net/auth/BaseAuthAction.java,0\5\05ba51ca1b464842cc4ba50750f1bd4a1f19dc8e
+o
+?chat-net/src/com/tu/varna/chat/net/auth/archiv/AuthHandler.java,e\1\e1695b5bb849820d6eb5b954bca94fe8b77b7d45
+k
+;chat-net/src/com/tu/varna/chat/net/auth/archiv/AuthNet.java,f\f\ff3854b4bde8998b2ba5b434cea7b7b958f6ca2a
+b
+2chat-net/src/com/tu/varna/chat/net/auth/LogIn.java,2\0\20ab1d71f567f4f212a502c0735d5595fa7cfd2c
+o
+?chat-net/src/com/tu/varna/chat/net/auth/archiv/AuthNetTest.java,9\9\9902e6479f51ea63d049e571e7b7c58bcf74fb75

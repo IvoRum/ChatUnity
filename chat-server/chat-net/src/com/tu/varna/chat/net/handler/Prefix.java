@@ -5,7 +5,9 @@ public enum Prefix {
     GMS("gms"),
     GFR("gfr"),
     FRI("frh"),
-    GUG("gug");
+    GUG("gug"),
+    LOG("log"),
+    REG("reg");
 
     private final String code;
 

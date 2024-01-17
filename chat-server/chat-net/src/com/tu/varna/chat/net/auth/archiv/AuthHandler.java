@@ -1,4 +1,4 @@
-package com.tu.varna.chat.net.auth;
+package com.tu.varna.chat.net.auth.archiv;
 
 import com.tu.varna.chat.common.net.NewUserCredentials;
 import com.tu.varna.chat.common.net.UserCredentials;

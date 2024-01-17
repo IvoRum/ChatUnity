@@ -1,6 +1,4 @@
-package com.tu.varna.chat.net.auth;
-
-import static org.junit.jupiter.api.Assertions.*;
+package com.tu.varna.chat.net.auth.archiv;
 
 class AuthNetTest {
 
