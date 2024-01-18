@@ -12,6 +12,8 @@ public interface ChatService {
     void createChat(int userSender,int userReceiver);
     void sendMessage(int userSender,int userReceiver,int order,String content);
     List<MessageReachedPointDto> receiveMessage(ChatReachedPoint chatReachedPoint);
+    List<MessageReachedPointDto> reloadMessage(ChatReachedPoint chatReachedPoint);
+
     void getChatrelation(int userSender,int userReceiver);
     ChatDuo getChatDuo();
     Set<UserDto> getChatsUsers();

@@ -35,6 +35,14 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public List<MessageReachedPointDto> receiveMessage(ChatReachedPoint chatReachedPoint) {
         try {
+            return massageRepository.getAllMessagesForAGivenUserSetToRead(chatReachedPoint.conversationId(),chatReachedPoint.orderReached());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override public List<MessageReachedPointDto> reloadMessage(final ChatReachedPoint chatReachedPoint) {
+        try {
             return massageRepository.getAllMessagesForAGivenUser(chatReachedPoint.conversationId(),chatReachedPoint.orderReached());
         } catch (SQLException e) {
             throw new RuntimeException(e);
