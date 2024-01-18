@@ -1,8 +1,6 @@
 package com.example.chat_mobile_interface.composable
 
 import android.annotation.SuppressLint
-import androidx.activity.ComponentActivity
-import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -103,7 +101,7 @@ fun ChatView(
                                 messages.value.get(messages.value.size - 1).messageOrder + 1,
                                 text
                             )
-                            viewModel.getUserMessages(user.value.id,Integer.parseInt(conversationId))
+                            viewModel.reloadMessages(user.value.id,Integer.parseInt(conversationId))
                             text = ""
                         },
                         tint = Color.Blue

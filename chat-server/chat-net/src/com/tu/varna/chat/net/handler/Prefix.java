@@ -3,6 +3,7 @@ package com.tu.varna.chat.net.handler;
 public enum Prefix {
     SMS("sms"),
     GMS("gms"),
+    RMS("rms"),
     GFR("gfr"),
     FRI("frh"),
     GUG("gug"),

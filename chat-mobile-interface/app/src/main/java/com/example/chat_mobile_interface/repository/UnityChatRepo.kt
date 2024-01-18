@@ -115,6 +115,44 @@ class UnityChatRepo {
         }
     }
 
+
+    suspend fun reloadMessages(userId: Int, coversation: Int): List<MessageReachedPointDto>? {
+        var response = GlobalScope.async {
+            var da = ""
+            val tcpClient = TcpClient(SERVER_ADDRESS,
+                1300, "rms: $userId $coversation@0", object : TcpClient.OnMessageReceivedListener {
+                    override fun onMessageReceived(message: String) {
+                        da = message
+                        println(message)
+                    }
+                })
+            tcpClient.execute()
+        }
+        return runBlocking {
+            if (response.await() != null) {
+                val regex =
+                    Regex("""MessageReachedPointDto\[firstName=([^\]]+), idSender=(\d+), idReceiver=(\d+), messageOrder=(\d+), content=([^\]]+)""")
+                // Find all matches in the input string
+                val matches = regex.findAll(response.await()!!)
+
+                // Create a list of UserHandleDto objects from the matches
+                val foundMessages = matches.map {
+                    val (firstName, id, idReceiver, messageOrder, content) = it.destructured
+                    MessageReachedPointDto(
+                        firstName,
+                        id.toInt(),
+                        idReceiver.toInt(),
+                        messageOrder.toInt(),
+                        content
+                    )
+                }.toList()
+                foundMessages
+            } else {
+                null
+            }
+        }
+    }
+
     suspend fun sendMessages(sender: Int, conversation: Int, order: Int, message: String): Boolean {
         println("Message: sende: $sender; Coversation: $conversation; Content:$message; Order:$order")
         var response = GlobalScope.async {

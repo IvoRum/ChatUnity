@@ -1,10 +1,7 @@
 package com.tu.varna.chat.net.handler;
 
 import com.tu.varna.chat.net.auth.LogIn;
-import com.tu.varna.chat.net.chat.GetFriend;
-import com.tu.varna.chat.net.chat.GetGroup;
-import com.tu.varna.chat.net.chat.GetMessage;
-import com.tu.varna.chat.net.chat.SendMessage;
+import com.tu.varna.chat.net.chat.*;
 import com.tu.varna.chat.net.chat.archiv.ChatHandler;
 import com.tu.varna.chat.service.ChatService;
 import com.tu.varna.chat.service.UserService;
@@ -17,7 +14,7 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class MainHandler extends Thread{
+public class MainHandler extends Thread {
     private Socket clientSocket;
     private Scanner input;
     private PrintWriter output;
@@ -47,7 +44,6 @@ public class MainHandler extends Thread{
         String received = "";
         try {
             do {
-
                 received = input.nextLine();
                 assert received == null : "Pack must not be null";
                 String firstThreeCharacters = received.substring(0, 3);
@@ -59,25 +55,29 @@ public class MainHandler extends Thread{
                 }
                 switch (prefix) {
                     case GMS:
-                        Thread getMs = new GetMessage(clientSocket,received);
+                        Thread getMs = new GetMessage(clientSocket, received);
                         getMs.start();
                         break;
+                    case RMS:
+                        Thread rMs = new ReloadMessage(clientSocket, received);
+                        rMs.start();
+                        break;
                     case SMS:
-                        Thread sendMs = new SendMessage(clientSocket,received);
+                        Thread sendMs = new SendMessage(clientSocket, received);
                         sendMs.start();
                         break;
                     case GFR:
-                        Thread getFr = new GetFriend(clientSocket,received);
+                        Thread getFr = new GetFriend(clientSocket, received);
                         getFr.start();
                         break;
                     case FRI:
                         break;
                     case GUG:
-                        Thread getGr = new GetGroup(clientSocket,received);
+                        Thread getGr = new GetGroup(clientSocket, received);
                         getGr.start();
                         break;
                     case LOG:
-                        Thread logIn = new LogIn(clientSocket,received);
+                        Thread logIn = new LogIn(clientSocket, received);
                         logIn.start();
                         break;
                     case REG:
@@ -88,7 +88,7 @@ public class MainHandler extends Thread{
                 NoSuchElementException e) {
             // Client disconnected, handle accordingly
             System.out.println("Client disconnected");
-        } finally {
+        }finally {
             try {
                 if (clientSocket != null && !clientSocket.isClosed()) {
                     System.out.println("Closing down connection");

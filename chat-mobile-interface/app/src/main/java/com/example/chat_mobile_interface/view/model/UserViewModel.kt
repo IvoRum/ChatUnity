@@ -41,4 +41,15 @@ class UserViewModel : ViewModel() {
             }
         }
     }
+
+    fun reloadMessages(userId: Int, coversation: Int) {
+        println("Try to sernt a Message:" + _dataFlow.value+ "by: $userId to conversation: $coversation")
+        viewModelScope.launch {
+            val da = friendRepo.reloadMessages(userId, coversation)
+            if (da != null) {
+                _dataFlow.value = da
+            }
+            println("User Message:" + _dataFlow.value)
+        }
+    }
 }
