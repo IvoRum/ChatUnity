@@ -1,14 +1,12 @@
 package com.example.chat_mobile_interface.service
 
-import android.annotation.SuppressLint
-import android.app.Notification
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.chat_mobile_interface.R
 
-class RunningService : Service() {
+class MessageService : Service() {
     override fun onBind(intent: Intent?): IBinder? {
         return null;
     }
@@ -22,9 +20,9 @@ class RunningService : Service() {
     }
 
     private fun start() {
-        val notification = NotificationCompat.Builder(this, "running_channel")
+        val notification = NotificationCompat.Builder(this, "ms_channel")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Run is active")
+            .setContentTitle("New MS!!!")
             .setContentText("Time 5:00")
             .build()
         startForeground(1,notification)
