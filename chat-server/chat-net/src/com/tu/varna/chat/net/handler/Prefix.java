@@ -4,6 +4,7 @@ public enum Prefix {
     SMS("sms"),
     GMS("gms"),
     RMS("rms"),
+    URM("urm"),
     GFR("gfr"),
     FRI("frh"),
     GUG("gug"),

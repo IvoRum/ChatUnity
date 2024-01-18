@@ -2,6 +2,7 @@ package com.tu.varna.chat.service.impl;
 
 import com.tu.varna.chat.common.dto.ChatDuo;
 import com.tu.varna.chat.common.dto.MessageReachedPointDto;
+import com.tu.varna.chat.common.dto.UnreadMessage;
 import com.tu.varna.chat.common.dto.UserDto;
 import com.tu.varna.chat.common.net.ChatReachedPoint;
 import com.tu.varna.chat.repository.MassageRepository;
@@ -44,6 +45,14 @@ public class ChatServiceImpl implements ChatService {
     @Override public List<MessageReachedPointDto> reloadMessage(final ChatReachedPoint chatReachedPoint) {
         try {
             return massageRepository.getAllMessagesForAGivenUser(chatReachedPoint.conversationId(),chatReachedPoint.orderReached());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override public List<UnreadMessage> getUnreadMessage(final int userId) {
+        try {
+            return massageRepository.getUnreadMessages(userId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -2,11 +2,13 @@ package com.example.chat_mobile_interface
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -14,6 +16,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,12 +40,14 @@ import com.example.chat_mobile_interface.composable.Groups
 import com.example.chat_mobile_interface.composable.Home
 import com.example.chat_mobile_interface.composable.LogIn
 import com.example.chat_mobile_interface.composable.Profile
+import com.example.chat_mobile_interface.service.MessageService
 import com.example.chat_mobile_interface.ui.theme.ChatmobileinterfaceTheme
 import com.example.chat_mobile_interface.view.model.UserViewModel
 
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<UserViewModel>()
 
+    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +60,10 @@ class MainActivity : ComponentActivity() {
                     Manifest.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING
                 ), 0
             )
+        }
+        Intent(applicationContext,MessageService::class.java).also {
+            it.action=MessageService.Actions.START.toString()
+            startService(it)
         }
         val brush = Brush.horizontalGradient(listOf(Color(80, 120, 230), Color.White))
         setContent {

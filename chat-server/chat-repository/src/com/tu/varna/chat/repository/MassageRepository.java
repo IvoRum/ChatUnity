@@ -2,11 +2,14 @@ package com.tu.varna.chat.repository;
 
 import com.tu.varna.chat.common.PropertiesLoader;
 import com.tu.varna.chat.common.dto.MessageReachedPointDto;
+import com.tu.varna.chat.common.dto.UnreadMessage;
 import jakarta.persistence.EntityManager;
 
 import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class MassageRepository extends BaseRepository {
@@ -127,6 +130,29 @@ public class MassageRepository extends BaseRepository {
             statement.setInt(2, messageOrder);
             statement.setInt(3, messageOrder + 100);
             statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<UnreadMessage> getUnreadMessages(final int userId) throws SQLException {
+        String sql = "select us.first_name,ms.content from message ms " +
+                "join conversation co on co.id=ms.id_reciver " +
+                "join user_conversation_relation ucr on ucr.id_conversation = co.id " +
+                "join unity_user uu on uu.id=ucr.id_user " +
+                "join unity_user us on us.id=ms.id_sender " +
+                "where uu.id=? " +
+                "and ms.message_status=2";
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            List<UnreadMessage> foundMessages = new ArrayList<>();
+            while (resultSet.next()) {
+                foundMessages.add(new UnreadMessage(resultSet.getString("first_name"), resultSet.getString("content")));
+            }
+            return foundMessages != Collections.EMPTY_LIST ? foundMessages : null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

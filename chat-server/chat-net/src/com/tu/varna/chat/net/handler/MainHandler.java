@@ -62,6 +62,10 @@ public class MainHandler extends Thread {
                         Thread rMs = new ReloadMessage(clientSocket, received);
                         rMs.start();
                         break;
+                    case URM:
+                        Thread getUnreadMs = new GetUnreadMessages(clientSocket, received);
+                        getUnreadMs.start();
+                        break;
                     case SMS:
                         Thread sendMs = new SendMessage(clientSocket, received);
                         sendMs.start();

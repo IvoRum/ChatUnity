@@ -20,6 +20,7 @@ class MessageService : Service() {
     }
 
     private fun start() {
+
         val notification = NotificationCompat.Builder(this, "ms_channel")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("New MS!!!")

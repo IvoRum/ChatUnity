@@ -52,3 +52,12 @@ JOIN user_conversation_relation cu ON c.id = cu.id_conversation
 JOIN unity_user u ON cu.id_user = u.id
 GROUP BY c.conversation_name,c.id
 HAVING COUNT(DISTINCT u.id) > 2 AND ARRAY[2]::int[] <@ array_agg(DISTINCT u.id)::int[];
+
+
+/* Select unread messages*/
+select uu.first_name from message ms
+join conversation co on co.id=ms.id_reciver
+join user_conversation_relation ucr on ucr.id_conversation = co.id
+join unity_user uu on uu.id=ucr.id_user
+where uu.id=2
+and ms.message_status=2

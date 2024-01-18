@@ -2,6 +2,7 @@ package com.tu.varna.chat.service;
 
 import com.tu.varna.chat.common.dto.ChatDuo;
 import com.tu.varna.chat.common.dto.MessageReachedPointDto;
+import com.tu.varna.chat.common.dto.UnreadMessage;
 import com.tu.varna.chat.common.dto.UserDto;
 import com.tu.varna.chat.common.net.ChatReachedPoint;
 
@@ -13,6 +14,8 @@ public interface ChatService {
     void sendMessage(int userSender,int userReceiver,int order,String content);
     List<MessageReachedPointDto> receiveMessage(ChatReachedPoint chatReachedPoint);
     List<MessageReachedPointDto> reloadMessage(ChatReachedPoint chatReachedPoint);
+
+    List<UnreadMessage> getUnreadMessage(int userId);
 
     void getChatrelation(int userSender,int userReceiver);
     ChatDuo getChatDuo();
