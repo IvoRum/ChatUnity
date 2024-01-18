@@ -3,7 +3,6 @@ package com.example.chat_mobile_interface.view.model
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.chat_mobile_interface.model.GroupDto
-import com.example.chat_mobile_interface.model.LogdInUser
 import com.example.chat_mobile_interface.model.UserHandleDto
 import com.example.chat_mobile_interface.repository.UnityChatRepo
 import kotlinx.coroutines.flow.MutableStateFlow

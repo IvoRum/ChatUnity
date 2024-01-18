@@ -1,7 +1,4 @@
 package com.example.chat_mobile_interface.model
-
-data class Message(val author: String, val body: String)
-
 data class MessageReachedPointDto(
     val firstName: String,
     val sende: Int,
@@ -9,3 +6,4 @@ data class MessageReachedPointDto(
     val messageOrder: Int,
     val content: String
 )
+data class UnreadMessage(val userSender: String, val content: String)

@@ -3,6 +3,7 @@ package com.example.chat_mobile_interface.repository
 import com.example.chat_mobile_interface.model.GroupDto
 import com.example.chat_mobile_interface.model.LogdInUser
 import com.example.chat_mobile_interface.model.MessageReachedPointDto
+import com.example.chat_mobile_interface.model.UnreadMessage
 import com.example.chat_mobile_interface.model.UserHandleDto
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -74,6 +75,41 @@ class UnityChatRepo {
                     GroupDto(name, id.toInt())
                 }?.toList()
                 userHandleDtoList
+            }
+        }
+    }
+
+    suspend fun getUnreadMs(userId: Int): List<UnreadMessage>? {
+        var response = GlobalScope.async {
+            var da = ""
+            val tcpClient = TcpClient(SERVER_ADDRESS,
+                1300, "urm: $userId", object : TcpClient.OnMessageReceivedListener {
+                    override fun onMessageReceived(message: String) {
+                        da = message
+                        //println(message)
+                    }
+                })
+            tcpClient.execute()
+        }
+        return runBlocking {
+            if (response.await().equals(null)) {
+                null
+            } else {
+                if (response.await().equals("null")) {
+                   null
+                } else {
+                    val regex =
+                        Regex("""\[UnreadMessage\[userSender=([^\[\]]+),\s*content=([^\[\]]+)\]\]""")
+                    // Find all matches in the input string
+                    val matches = response.await()?.let { regex.findAll(it) }
+
+                    // Create a list of UserHandleDto objects from the matches
+                    val userHandleDtoList = matches?.map {
+                        val (userSender, content) = it.destructured
+                        UnreadMessage(userSender, content)
+                    }?.toList()
+                    userHandleDtoList
+                }
             }
         }
     }

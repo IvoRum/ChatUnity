@@ -2,7 +2,10 @@ package com.example.chat_mobile_interface
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -31,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
+import androidx.core.content.edit
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -46,7 +50,6 @@ import com.example.chat_mobile_interface.view.model.UserViewModel
 
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<UserViewModel>()
-
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
@@ -60,10 +63,6 @@ class MainActivity : ComponentActivity() {
                     Manifest.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING
                 ), 0
             )
-        }
-        Intent(applicationContext,MessageService::class.java).also {
-            it.action=MessageService.Actions.START.toString()
-            startService(it)
         }
         val brush = Brush.horizontalGradient(listOf(Color(80, 120, 230), Color.White))
         setContent {
@@ -149,6 +148,13 @@ class MainActivity : ComponentActivity() {
                                 Profile(viewModel)
                             }
                             composable("home") {
+                                if (!isServiceRunning(MessageService::class.java.name)) {
+                                    Intent(applicationContext, MessageService::class.java).also {
+                                        it.putExtra("userId", userData.value.id)
+                                        it.action = MessageService.Actions.START.toString()
+                                        startService(it)
+                                    }
+                                }
                                 Home(viewModel, navController, userData)
                             }
                             composable("groups") {
@@ -167,5 +173,22 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private fun isServiceRunning(serviceClassName: String): Boolean {
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val services = manager.getRunningServices(Integer.MAX_VALUE)
+
+        for (service in services) {
+            if (serviceClassName == service.service.className) {
+                // The service is running
+                return true
+            }
+        }
+
+        // The service is not running
+        return false
+    }
 }
+
+
 
