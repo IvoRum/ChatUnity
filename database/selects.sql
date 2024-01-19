@@ -91,6 +91,12 @@ INSERT INTO message(content,id_reciver,id_sender,message_order,message_status,ti
 VALUES('Hello',(select cc.id from conversation cc
 order by cc.id desc limit 1),8,1,2,CURRENT_TIMESTAMP);
 
+/* Get all user that are not frieds of a given user*/
+
+select * from unity_user
+where unity_user.id not in(select fr.id_friend from friend_relation fr
+where fr.id_user=2) and unity_user.id <>2
+
 /*Old selects*/
 
 select uu.first_name, ms.id_sender, ms.message_order, ms.message_status, ms.content 

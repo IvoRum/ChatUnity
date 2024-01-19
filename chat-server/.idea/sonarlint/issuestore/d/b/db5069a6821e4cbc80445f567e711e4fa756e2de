@@ -1,11 +1,0 @@
-
-g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(à©¤üÿÿÿÿ8¦•ÖÉ1
-D
-java:S2189""Add an end condition to this loop.(ü§è½ùÿÿÿÿ8ò©ˆáĞ1
-}
-java:S1450"[Remove the "serverSocket" field and declare it as a local variable in the relevant methods.(±²º”üÿÿÿÿ8”–êÓÀ1
-L	java:S106"+Replace this use of System.out by a logger.(™‹•àùÿÿÿÿ8ª¦•ÖÉ1
-L	java:S106"+Replace this use of System.out by a logger.(¢éƒùÿÿÿÿ8«¦•ÖÉ1
-L	java:S106"+Replace this use of System.out by a logger.(±åâôúÿÿÿÿ8¯¦•ÖÉ1
-h
-java:S1128"KRemove this unused import 'com.tu.varna.chat.net.multi.echo.ClientHandler'.(İóå8Ã«ˆáĞ1
