@@ -32,6 +32,12 @@ class UserViewModel : ViewModel() {
         }
     }
 
+    fun addFriend(userId:Int, friend:Int) {
+        viewModelScope.launch {
+            friendRepo.addFriend(userId, friend)
+        }
+    }
+
     fun logUser(email: String, password: String) {
         viewModelScope.launch {
             val da = friendRepo.logIn(email, password)

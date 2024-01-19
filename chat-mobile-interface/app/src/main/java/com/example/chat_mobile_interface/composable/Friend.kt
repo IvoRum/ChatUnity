@@ -9,7 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -33,7 +38,7 @@ import com.example.chat_mobile_interface.view.model.FriendViewModel
 import com.example.chat_mobile_interface.view.model.UserViewModel
 
 @Composable
-fun Home(viewModel: UserViewModel,navController: NavHostController, userData: State<LogdInUser>) {
+fun Home(viewModel: UserViewModel, navController: NavHostController, userData: State<LogdInUser>) {
     val user = viewModel.logedDataFlow.collectAsState()
     val friendViewModel =
         viewModel<FriendViewModel>(factory = object : ViewModelProvider.Factory {
@@ -84,7 +89,11 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
 }
 
 @Composable
-fun AddFriend(viewModel: UserViewModel,navController: NavHostController, userData: State<LogdInUser>) {
+fun AddFriend(
+    viewModel: UserViewModel,
+    navController: NavHostController,
+    userData: State<LogdInUser>
+) {
     val user = viewModel.logedDataFlow.collectAsState()
     val friendViewModel =
         viewModel<FriendViewModel>(factory = object : ViewModelProvider.Factory {
@@ -115,9 +124,19 @@ fun AddFriend(viewModel: UserViewModel,navController: NavHostController, userDat
             ) {
                 Row(modifier = Modifier.clickable {}) {
                     Spacer(modifier = Modifier.width(13.dp))
-                    Text(text = item.familyName, style = bodyLarge)
+                    Text(text = item.firstName, style = bodyLarge)
                     Spacer(modifier = Modifier.width(13.dp))
                     Text(text = item.familyName, style = bodyLarge)
+                    IconButton(onClick = {
+                        viewModel.addFriend(viewModel.logedDataFlow.value.id, item.id)
+                        friendViewModel.getNonFriendsUserHandle(user.value.id)
+                    })
+                    {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = "Localized description"
+                        )
+                    }
                 }
             }
         }
@@ -126,7 +145,11 @@ fun AddFriend(viewModel: UserViewModel,navController: NavHostController, userDat
 }
 
 @Composable
-fun Groups(viewModel: UserViewModel,navController: NavHostController, userData: State<LogdInUser>) {
+fun Groups(
+    viewModel: UserViewModel,
+    navController: NavHostController,
+    userData: State<LogdInUser>
+) {
     val user = viewModel.logedDataFlow.collectAsState()
     val friendViewModel =
         viewModel<FriendViewModel>(factory = object : ViewModelProvider.Factory {

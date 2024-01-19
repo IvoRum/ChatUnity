@@ -215,6 +215,30 @@ class UnityChatRepo {
         }
     }
 
+    suspend fun addFriend(userId:Int, friend:Int): Boolean {
+        var response = GlobalScope.async {
+            var da = ""
+            val tcpClient = TcpClient(SERVER_ADDRESS,
+                1300,
+                "afr: $userId $friend",
+                object : TcpClient.OnMessageReceivedListener {
+                    override fun onMessageReceived(message: String) {
+                        da = message
+                        println(message)
+                    }
+                })
+            tcpClient.execute()
+        }
+        return runBlocking {
+            if (response.await().equals(null)) {
+                false
+            } else {
+                println(response.await())
+                true
+            }
+        }
+    }
+
     suspend fun logIn(email: String, password: String): LogdInUser? {
         var response = GlobalScope.async {
             var serverResponce = ""
