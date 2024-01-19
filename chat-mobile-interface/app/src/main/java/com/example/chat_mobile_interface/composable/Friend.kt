@@ -10,12 +10,16 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
@@ -26,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -88,6 +93,7 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
     Divider()
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddFriend(
     viewModel: UserViewModel,
@@ -113,6 +119,8 @@ fun AddFriend(
     var friends by remember {
         mutableStateOf(statingList)
     }
+    var showDialog by remember { mutableStateOf(false) }
+    val openAlertDialog = remember { mutableStateOf(false) }
     Divider()
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(friends.value) { item ->
@@ -129,6 +137,7 @@ fun AddFriend(
                     Text(text = item.familyName, style = bodyLarge)
                     IconButton(onClick = {
                         viewModel.addFriend(viewModel.logedDataFlow.value.id, item.id)
+                        showDialog = true
                         friendViewModel.getNonFriendsUserHandle(user.value.id)
                     })
                     {
@@ -138,6 +147,29 @@ fun AddFriend(
                         )
                     }
                 }
+            }
+
+            if (showDialog) {
+                AlertDialog(
+                    onDismissRequest = {
+                        // Dismiss the dialog when the user clicks outside the dialog or presses the back button
+                        showDialog = false
+                    },
+                    title = {
+                        Text("You have added a new friend!")
+                    },
+                    icon = { Icon(Icons.Default.AccountBox, contentDescription = "Friend") },
+                    confirmButton = {
+                        Button(
+                            onClick = {
+                                // Handle the dialog confirmation action
+                                showDialog = false
+                            }
+                        ) {
+                            Text("OK")
+                        }
+                    }
+                )
             }
         }
     }
