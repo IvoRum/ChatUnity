@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.chat_mobile_interface.model.GroupDto
 import com.example.chat_mobile_interface.model.UserHandleDto
+import com.example.chat_mobile_interface.model.UserNotFriendDto
 import com.example.chat_mobile_interface.repository.UnityChatRepo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,6 +14,9 @@ class FriendViewModel(val userId:Int) : ViewModel() {
     private val friendRepo = UnityChatRepo()
     private val _dataFlow = MutableStateFlow<List<UserHandleDto>>(emptyList())
     val dataFlow: StateFlow<List<UserHandleDto>> = _dataFlow
+
+    private val _nonFrDataFlow = MutableStateFlow<List<UserNotFriendDto>>(emptyList())
+    val nonFrDataFlow: StateFlow<List<UserNotFriendDto>> = _nonFrDataFlow
 
     private val _groupDataFlow = MutableStateFlow<List<GroupDto>>(emptyList())
     val groupDataFlow: StateFlow<List<GroupDto>> = _groupDataFlow
@@ -26,6 +30,18 @@ class FriendViewModel(val userId:Int) : ViewModel() {
                 _dataFlow.value=da
             }
             println("UserFriends: "+_dataFlow.value)
+        }
+    }
+
+    fun getNonFriendsUserHandle(
+        id: Int?
+    ) {
+        viewModelScope.launch{
+            val da =friendRepo.getNonFriends(userId)
+            if (da != null) {
+                _nonFrDataFlow.value=da
+            }
+            println("UserNonFriends: "+_dataFlow.value)
         }
     }
 

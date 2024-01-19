@@ -5,6 +5,7 @@ import com.example.chat_mobile_interface.model.LogdInUser
 import com.example.chat_mobile_interface.model.MessageReachedPointDto
 import com.example.chat_mobile_interface.model.UnreadMessage
 import com.example.chat_mobile_interface.model.UserHandleDto
+import com.example.chat_mobile_interface.model.UserNotFriendDto
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
@@ -242,6 +243,37 @@ class UnityChatRepo {
                     }?.toList()
                     userHandleDtoList?.get(0)
                 }
+            }
+        }
+    }
+
+    fun getNonFriends(userId: Int): List<UserNotFriendDto>? {
+        var response = GlobalScope.async {
+            var da = ""
+            val tcpClient = TcpClient(SERVER_ADDRESS,
+                1300, "gnf: $userId", object : TcpClient.OnMessageReceivedListener {
+                    override fun onMessageReceived(message: String) {
+                        da = message
+                        //println(message)
+                    }
+                })
+            tcpClient.execute()
+        }
+        return runBlocking {
+            if (response.await().equals(null)) {
+                null
+            } else {
+                val regex =
+                    Regex("""UserNotFriendDto\[id=(\d+), firstName=([^\]]+), familyName=([^\]]+)]""")
+                // Find all matches in the input string
+                val matches = response.await()?.let { regex.findAll(it) }
+
+                // Create a list of UserHandleDto objects from the matches
+                val userHandleDtoList = matches?.map {
+                    val (id,firstName,familyName) = it.destructured
+                    UserNotFriendDto(id.toInt(),firstName,familyName)
+                }?.toList()
+                userHandleDtoList
             }
         }
     }

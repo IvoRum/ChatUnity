@@ -85,7 +85,44 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
 
 @Composable
 fun AddFriend(viewModel: UserViewModel,navController: NavHostController, userData: State<LogdInUser>) {
-    
+    val user = viewModel.logedDataFlow.collectAsState()
+    val friendViewModel =
+        viewModel<FriendViewModel>(factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return FriendViewModel(
+                    userData.value.id
+                ) as T
+            }
+        })
+    val statingList = friendViewModel.nonFrDataFlow.collectAsState()
+    DisposableEffect(Unit) {
+        friendViewModel.getNonFriendsUserHandle(user.value.id)
+        onDispose { }
+    }
+
+
+    var friends by remember {
+        mutableStateOf(statingList)
+    }
+    Divider()
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        items(friends.value) { item ->
+            Divider()
+            Row(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(10.dp)
+            ) {
+                Row(modifier = Modifier.clickable {}) {
+                    Spacer(modifier = Modifier.width(13.dp))
+                    Text(text = item.familyName, style = bodyLarge)
+                    Spacer(modifier = Modifier.width(13.dp))
+                    Text(text = item.familyName, style = bodyLarge)
+                }
+            }
+        }
+    }
+    Divider()
 }
 
 @Composable
