@@ -8,11 +8,13 @@ import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.chat_mobile_interface.R
+import com.example.chat_mobile_interface.model.UnreadMessage
 import com.example.chat_mobile_interface.repository.UnityChatRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.ArrayList
 
 class MessageService() : Service() {
     private val repo = UnityChatRepo()
@@ -48,19 +50,38 @@ class MessageService() : Service() {
         )
         notificationManager.createNotificationChannel(channel)
         val context: Context = this
-
+        var temp = emptyList<UnreadMessage>()
         serviceScope.launch {
             while (true) {
                 delay(20000L)
                 var unreadMs = repo.getUnreadMs(userId)
                 if (unreadMs != null) {
                     if (unreadMs.size != 0) {
-                        val notification = NotificationCompat.Builder(context, "ms_channel")
-                            .setContentTitle(unreadMs.get(0).userSender)
-                            .setContentText(unreadMs.get(0).content)
-                            .setSmallIcon(R.drawable.chat2)
-                            .build()
-                        notificationManager.notify(1, notification)
+                        if (!unreadMs.equals(temp)) {
+                            temp=unreadMs
+                            var br = 2
+                            unreadMs.forEach { ms ->
+                                val notification = NotificationCompat.Builder(context, "ms_channel")
+                                    .setContentTitle(ms.userSender)
+                                    .setContentText(ms.content)
+                                    .setSmallIcon(R.drawable.chat2)
+                                    .build()
+                                notificationManager.notify(br, notification)
+                                br++
+                            }
+                        }
+                        /*
+                        if (unreadMs.size != 0) {
+                            val notification = NotificationCompat.Builder(context, "ms_channel")
+                                .setContentTitle(unreadMs.get(0).userSender)
+                                .setContentText(unreadMs.get(0).content)
+                                .setSmallIcon(R.drawable.chat2)
+                                .build()
+                            notificationManager.notify(1, notification)
+                        }
+
+
+                         */
                     }
                 }
                 //delay(100000L)

@@ -61,3 +61,52 @@ join user_conversation_relation ucr on ucr.id_conversation = co.id
 join unity_user uu on uu.id=ucr.id_user
 where uu.id=2
 and ms.message_status=2
+
+/* Get last conversation id */
+
+select cc.id from conversation cc
+order by cc.id desc limit 1
+
+/* Add friend */
+
+INSERT INTO friend_relation(id_friend,id_user)
+VALUES(8,11);
+
+INSERT INTO friend_relation(id_friend,id_user)
+VALUES(11,8);
+
+INSERT INTO conversation(conversation_name,id)
+VALUES('8_7',((select cc.id from conversation cc
+order by cc.id desc limit 1)+1));
+
+INSERT INTO user_conversation_relation(id_conversation,id_user)
+VALUES((select cc.id from conversation cc
+order by cc.id desc limit 1),8);
+
+INSERT INTO user_conversation_relation(id_conversation,id_user)
+VALUES((select cc.id from conversation cc
+order by cc.id desc limit 1),11);
+
+INSERT INTO message(content,id_reciver,id_sender,message_order,message_status,time_stamp)
+VALUES('Hello',(select cc.id from conversation cc
+order by cc.id desc limit 1),8,1,2,CURRENT_TIMESTAMP);
+
+/*Old selects*/
+
+select uu.first_name, ms.id_sender, ms.message_order, ms.message_status, ms.content 
+from message ms 
+join public.unity_user uu on uu.id = ms.id_sender 
+where id_reciver=1
+and message_order > 3 and message_order < 103
+
+
+update public.message set message_status=4 where id_reciver=1 and message_order > 3 and message_order < 103
+
+select us.first_name,ms.content from message ms
+join conversation co on co.id=ms.id_reciver
+join user_conversation_relation ucr on ucr.id_conversation = co.id
+join unity_user uu on uu.id=ucr.id_user
+join unity_user us on us.id=ms.id_sender
+where uu.id=2
+and ms.message_status=2
+

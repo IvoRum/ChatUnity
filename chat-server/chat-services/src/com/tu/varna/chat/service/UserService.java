@@ -6,7 +6,7 @@ import com.tu.varna.chat.common.dto.UserHandleDto;
 import java.util.Set;
 
 public interface UserService {
-    void addFriend(int userSender,int userReceiver);
+    void addFriend(int idUser,int idNewFriend);
     void acceptFriendRequest(int idUser, int idNewFriend);
     Set<UserHandleDto> allFriends(int userId);
     Set<GroupDto> getAllGroups(int i);

@@ -180,12 +180,9 @@ class MainActivity : ComponentActivity() {
 
         for (service in services) {
             if (serviceClassName == service.service.className) {
-                // The service is running
                 return true
             }
         }
-
-        // The service is not running
         return false
     }
 }

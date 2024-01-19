@@ -99,7 +99,7 @@ class UnityChatRepo {
                    null
                 } else {
                     val regex =
-                        Regex("""\[UnreadMessage\[userSender=([^\[\]]+),\s*content=([^\[\]]+)\]\]""")
+                        Regex("""UnreadMessage\[userSender=([^\[\]]+),\s*content=([^\[\]]+)\]""")
                     // Find all matches in the input string
                     val matches = response.await()?.let { regex.findAll(it) }
 

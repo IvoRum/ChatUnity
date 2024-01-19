@@ -89,4 +89,37 @@ public class FriendRepository extends BaseRepository {
             return Collections.unmodifiableSet(foundGroups);
         }
     }
+
+    public boolean addFriedn(final int userId, final int friendId) throws SQLException {
+        String sql="INSERT INTO friend_relation(id_friend,id_user) " +
+                "VALUES(?,?); " +
+                "INSERT INTO friend_relation(id_friend,id_user) " +
+                "VALUES(?,?); " +
+                "INSERT INTO conversation(conversation_name,id) " +
+                "VALUES(?,((select cc.id from conversation cc " +
+                "order by cc.id desc limit 1)+1)); " +
+                "INSERT INTO user_conversation_relation(id_conversation,id_user) " +
+                "VALUES((select cc.id from conversation cc " +
+                "order by cc.id desc limit 1),?); " +
+                "INSERT INTO user_conversation_relation(id_conversation,id_user) " +
+                "VALUES((select cc.id from conversation cc " +
+                "order by cc.id desc limit 1),?); ";// +
+                //"INSERT INTO message(content,id_reciver,id_sender,message_order,message_status,time_stamp); ";// +
+                //"VALUES('Hello',(select cc.id from conversation cc " +
+               // "order by cc.id desc limit 1),?,1,2,CURRENT_TIMESTAMP);";
+
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, friendId);
+            statement.setInt(2, userId);
+            statement.setInt(3, userId);
+            statement.setInt(4, friendId);
+            statement.setString(5,String.valueOf(userId)+String.valueOf(friendId));
+            statement.setInt(6,userId);
+            statement.setInt(7,friendId);
+
+            return statement.execute();
+        }
+    }
 }

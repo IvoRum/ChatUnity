@@ -74,7 +74,9 @@ public class MainHandler extends Thread {
                         Thread getFr = new GetFriend(clientSocket, received);
                         getFr.start();
                         break;
-                    case FRI:
+                    case AFR:
+                        Thread addFriend = new AddFriend(clientSocket, received);
+                        addFriend.start();
                         break;
                     case GUG:
                         Thread getGr = new GetGroup(clientSocket, received);
