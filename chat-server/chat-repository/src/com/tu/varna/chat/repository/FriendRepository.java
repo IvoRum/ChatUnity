@@ -2,6 +2,7 @@ package com.tu.varna.chat.repository;
 
 import com.tu.varna.chat.common.dto.GroupDto;
 import com.tu.varna.chat.common.dto.UserHandleDto;
+import com.tu.varna.chat.common.dto.UserNotFriendDto;
 
 import java.sql.*;
 import java.util.*;
@@ -120,6 +121,31 @@ public class FriendRepository extends BaseRepository {
             statement.setInt(7,friendId);
 
             return statement.execute();
+        }
+    }
+
+    public List<UserNotFriendDto> getfriendsToAdd(final int userId) throws SQLException {
+        String sql="select unity_user.id,unity_user.first_name,unity_user.family_name from unity_user " +
+                "where unity_user.id not in(select fr.id_friend from friend_relation fr " +
+                "where fr.id_user=?) and unity_user.id <>?";
+
+        Connection connection = DriverManager.getConnection(JDBC_URL);
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, userId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            List<UserNotFriendDto> foundFriends = new ArrayList<>();
+            while (resultSet.next()) {
+                int friendId = resultSet.getInt("id");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("family_name");
+
+                foundFriends.add(new UserNotFriendDto(friendId, firstName, lastName));
+            }
+            return Collections.unmodifiableList(foundFriends);
         }
     }
 }

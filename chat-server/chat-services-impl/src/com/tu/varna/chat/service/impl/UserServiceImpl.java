@@ -2,10 +2,12 @@ package com.tu.varna.chat.service.impl;
 
 import com.tu.varna.chat.common.dto.GroupDto;
 import com.tu.varna.chat.common.dto.UserHandleDto;
+import com.tu.varna.chat.common.dto.UserNotFriendDto;
 import com.tu.varna.chat.repository.FriendRepository;
 import com.tu.varna.chat.service.UserService;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 public class UserServiceImpl implements UserService {
@@ -45,6 +47,14 @@ public class UserServiceImpl implements UserService {
     public Set<GroupDto> getAllGroups(int i) {
         try {
             return friendRepository.getAllGroups(i);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override public List<UserNotFriendDto> getNotFriend(final int userId) {
+        try {
+            return friendRepository.getfriendsToAdd(userId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

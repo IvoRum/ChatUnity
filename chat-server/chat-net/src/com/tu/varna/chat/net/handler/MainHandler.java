@@ -78,6 +78,10 @@ public class MainHandler extends Thread {
                         Thread addFriend = new AddFriend(clientSocket, received);
                         addFriend.start();
                         break;
+                    case GNF:
+                        Thread getNonFr = new GetNotFriend(clientSocket, received);
+                        getNonFr.start();
+                        break;
                     case GUG:
                         Thread getGr = new GetGroup(clientSocket, received);
                         getGr.start();

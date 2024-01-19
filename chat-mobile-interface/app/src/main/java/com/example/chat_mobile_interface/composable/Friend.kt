@@ -85,7 +85,7 @@ fun Greeting3(navController: NavHostController, statingList: State<List<UserHand
 
 @Composable
 fun AddFriend(viewModel: UserViewModel,navController: NavHostController, userData: State<LogdInUser>) {
-
+    
 }
 
 @Composable

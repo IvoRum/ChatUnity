@@ -8,6 +8,7 @@ public enum Prefix {
     GFR("gfr"),
     FRI("frh"),
     AFR("afr"),
+    GNF("gnf"),
     GUG("gug"),
     LOG("log"),
     REG("reg");
