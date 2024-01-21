@@ -16,7 +16,6 @@ public class LogIn extends BaseAuthAction{
         logInUser();
     }
     private void logInUser() {
-        //TODO SLoji proverka za prazni sivoli sled log:->>>
         String[] inputPackage = received.split("log:");
         String[] packageParts = inputPackage[1].split("\\s+");
         try {

@@ -141,7 +141,6 @@ fun Conversation(viewModel: UserViewModel, userId: Int) {
             } else {
                 MessageCard(message)
             }
-
         }
     }
 }
