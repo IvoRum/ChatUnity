@@ -1,0 +1,18 @@
+
+g	java:S1126"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8‹Ê¶¸Ñ1
+W
+java:S11413"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Ê¶¸Ñ1
+h
+java:S22591"FA "NullPointerException" could be thrown; "received" is nullable here.(³•èÑıÿÿÿÿ8œšˆÒ1
+u	java:S1318"YComplete cases by adding the missing enum constants or add a default case to this switch.(ùö£8«šˆÒ1
+L	java:S106d"+Replace this use of System.out by a logger.(ó¨¯‰üÿÿÿÿ8¢Ê¶¸Ñ1
+L	java:S106h"+Replace this use of System.out by a logger.(‡ñùÍüÿÿÿÿ8£Ê¶¸Ñ1
+L	java:S106l"+Replace this use of System.out by a logger.(ü£€Ãşÿÿÿÿ8£Ê¶¸Ñ1
+l
+java:S1128"JRemove this unused import 'com.tu.varna.chat.net.chat.archiv.ChatHandler'.(ˆæé¹úÿÿÿÿ8®šˆÒ1
+G
+java:S1068"*Remove this unused "output" private field.(£›ê®8£Ê¶¸Ñ1
+Q
+java:S1068"/Remove this unused "chatService" private field.(‘ñÆ…úÿÿÿÿ8£Ê¶¸Ñ1
+L
+java:S1068"/Remove this unused "userService" private field.(Ó©†Ï8£Ê¶¸Ñ1

@@ -1,0 +1,6 @@
+
+L	java:S106"+Replace this use of System.out by a logger.(ÏôÊ¤úÿÿÿÿ8Ä˜…ˆÒ1
+d
+java:S1128"GRemove this unused import 'com.tu.varna.chat.common.dto.UserHandleDto'.(¹š8İšˆÒ1
+L
+java:S1128"*Remove this unused import 'java.util.Set'.(ö²„¤şÿÿÿÿ8İšˆÒ1

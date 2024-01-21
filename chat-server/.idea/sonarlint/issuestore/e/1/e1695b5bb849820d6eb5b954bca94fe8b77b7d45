@@ -1,0 +1,18 @@
+
+^
+java:S49734"<Strings and Boxed types should be compared using "equals()".(ƒ¶Ûïşÿÿÿÿ8ÖåŸÏÄ1
+O
+java:S11352"2Complete the task associated to this TODO comment.(äõà8æåŸÏÄ1
+L	java:S106B"+Replace this use of System.out by a logger.(‡ñùÍüÿÿÿÿ8à¶ÆÇÄ1
+L	java:S106F"+Replace this use of System.out by a logger.(ü£€Ãşÿÿÿÿ8à¶ÆÇÄ1
+G	java:S106P"+Replace this use of System.out by a logger.(Œîí8á¶ÆÇÄ1
+T
+java:S1135Y"2Complete the task associated to this TODO comment.(¾¾øÿÿÿÿ8ëÓ¹´Ñ1
+L	java:S106_"+Replace this use of System.out by a logger.(£âÁÅüÿÿÿÿ8ôÓ¹´Ñ1
+]	java:S125c"<This block of commented-out lines of code should be removed.(şĞåäúÿÿÿÿ8÷Ó¹´Ñ1
+d
+java:S1128"BRemove this unused import 'com.tu.varna.chat.service.ChatService'.(†´Ñÿÿÿÿÿ8÷Ó¹´Ñ1
+h
+java:S1128	"KRemove this unused import 'com.tu.varna.chat.service.impl.ChatServiceImpl'.( ¦„ä8ùÓ¹´Ñ1
+O
+java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8úÓ¹´Ñ1
