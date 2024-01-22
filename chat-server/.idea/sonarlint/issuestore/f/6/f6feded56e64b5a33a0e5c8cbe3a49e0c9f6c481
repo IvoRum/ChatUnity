@@ -1,22 +1,24 @@
 
-h	java:S112†"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ÑìªäÑ1
-h	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ÑìªäÑ1
+h	java:S112‰"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8¯¹‚Ó1
+h	java:S112 "FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8²¹‚Ó1
 d
-java:S1192"HDefine a constant instead of duplicating this literal "content" 5 times.(äœÍk8ÒìªäÑ1
+java:S1192"HDefine a constant instead of duplicating this literal "content" 5 times.(äœÍk8¹¹‚Ó1
 m
-java:S1192G"KDefine a constant instead of duplicating this literal "first_name" 3 times.(”¥‚½ıÿÿÿÿ8ÎçÍäÑ1
+java:S1192H"KDefine a constant instead of duplicating this literal "first_name" 3 times.(”¥‚½ıÿÿÿÿ8¹¹‚Ó1
 v
-java:S1192$"TDefine a constant instead of duplicating this literal "where id_reciver=? " 3 times.(Ãä¥Øüÿÿÿÿ8ÓìªäÑ1
+java:S1192$"TDefine a constant instead of duplicating this literal "where id_reciver=? " 3 times.(Ãä¥Øüÿÿÿÿ8¹¹‚Ó1
 \
-java:S1596›">Replace "Collections.EMPTY_LIST" by "Collections.emptyList()".(İí®§8ÕìªäÑ1
-]	java:S1257"<This block of commented-out lines of code should be removed.(óŸ·òùÿÿÿÿ8òìªäÑ1
-X	java:S125K"<This block of commented-out lines of code should be removed.(„²Æ8ôìªäÑ1
-F	java:S106v"+Replace this use of System.out by a logger.(ä™±M8øìªäÑ1
+java:S1596">Replace "Collections.EMPTY_LIST" by "Collections.emptyList()".(İí®§8º¹‚Ó1
+]	java:S1257"<This block of commented-out lines of code should be removed.(óŸ·òùÿÿÿÿ8Û¹‚Ó1
+X	java:S125L"<This block of commented-out lines of code should be removed.(„²Æ8İ¹‚Ó1
+>
+java:S1116Y"Remove this empty statement.(Åñ­õşÿÿÿÿ8ß¹‚Ó1
+F	java:S106y"+Replace this use of System.out by a logger.(ä™±M8â¹‚Ó1
 h
-java:S1128"FRemove this unused import 'com.tu.varna.chat.common.PropertiesLoader'.(Ò¤‰ıÿÿÿÿÿ8åõÖäÑ1
+java:S1128"FRemove this unused import 'com.tu.varna.chat.common.PropertiesLoader'.(Ò¤‰ıÿÿÿÿÿ8æ¹‚Ó1
 `
-java:S1128">Remove this unused import 'jakarta.persistence.EntityManager'.(·ïŸéúÿÿÿÿ8æõÖäÑ1
+java:S1128">Remove this unused import 'jakarta.persistence.EntityManager'.(·ïŸéúÿÿÿÿ8æ¹‚Ó1
 \
-java:S1128":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8æõÖäÑ1
+java:S1128":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8æ¹‚Ó1
 S
-java:S1128"1Remove this unused import 'java.util.Collection'.(¹ÉĞšùÿÿÿÿ8æõÖäÑ1
+java:S1128"1Remove this unused import 'java.util.Collection'.(¹ÉĞšùÿÿÿÿ8ç¹‚Ó1

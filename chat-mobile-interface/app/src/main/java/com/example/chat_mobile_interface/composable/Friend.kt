@@ -217,9 +217,6 @@ fun GreetingGroup(navController: NavHostController, statingList: State<List<Grou
                     val navstring = "chat/${item.id}/${item.name}";
                     navController.navigate(navstring)
                 }) {
-                    Text(
-                        text = item.id.toString(), style = bodyLarge
-                    )
                     Spacer(modifier = Modifier.width(13.dp))
                     Text(text = "${item.name}", style = bodyLarge)
                     //todo add user details to the chat windows

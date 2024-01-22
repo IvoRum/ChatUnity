@@ -52,6 +52,7 @@ import com.example.chat_mobile_interface.view.model.UserViewModel
 
 private var chatPossituin = 0
 val chatBubbleShape = RoundedCornerShape(30.dp)
+
 @Composable
 fun Chat(viewModel: UserViewModel, backStackEntry: NavBackStackEntry, userData: State<LogdInUser>) {
     val user = viewModel.logedDataFlow.collectAsState()
@@ -59,7 +60,7 @@ fun Chat(viewModel: UserViewModel, backStackEntry: NavBackStackEntry, userData: 
     val userName = backStackEntry.arguments?.getString("userName") ?: ""
 
     DisposableEffect(Unit) {
-        viewModel.getUserMessages(user.value.id,Integer.parseInt(userId))
+        viewModel.getUserMessages(user.value.id, Integer.parseInt(userId))
         onDispose { }
     }
 
@@ -95,14 +96,31 @@ fun ChatView(
                         Icons.Default.ArrowForward,
                         contentDescription = "Send message",
                         modifier = Modifier.clickable {
-                            viewModel.sendMessage(
-                                viewModel.logedDataFlow.value.id,
-                                Integer.parseInt(conversationId),
-                                messages.value.get(messages.value.size - 1).messageOrder + 1,
-                                text
-                            )
-                            viewModel.reloadMessages(user.value.id,Integer.parseInt(conversationId))
-                            text = ""
+                            if (messages.value.size == 0) {
+                                viewModel.sendMessage(
+                                    viewModel.logedDataFlow.value.id,
+                                    Integer.parseInt(conversationId),
+                                    1,
+                                    text
+                                )
+                                viewModel.reloadMessages(
+                                    user.value.id,
+                                    Integer.parseInt(conversationId)
+                                )
+                                text = ""
+                            } else {
+                                viewModel.sendMessage(
+                                    viewModel.logedDataFlow.value.id,
+                                    Integer.parseInt(conversationId),
+                                    messages.value.get(messages.value.size - 1).messageOrder + 1,
+                                    text
+                                )
+                                viewModel.reloadMessages(
+                                    user.value.id,
+                                    Integer.parseInt(conversationId)
+                                )
+                                text = ""
+                            }
                         },
                         tint = Color.Blue
                     )

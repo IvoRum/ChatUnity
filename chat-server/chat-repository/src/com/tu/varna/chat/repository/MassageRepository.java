@@ -34,7 +34,7 @@ public class MassageRepository extends BaseRepository {
 
         String sql = "select ms.id_sender, ms.message_order, ms.message_status, ms.content from message ms " +
                 "where id_reciver=? " +
-                "and message_order > ?";
+                "and message_order > ? ";
 
         Connection connection = DriverManager.getConnection(JDBC_URL);
 
@@ -58,7 +58,8 @@ public class MassageRepository extends BaseRepository {
                 "from message ms " +
                 "join public.unity_user uu on uu.id = ms.id_sender " +
                 "where id_reciver=? " +
-                "and message_order > ? and message_order < ?";
+                "and message_order > ? and message_order < ? " +
+                "order by ms.message_order asc";
         Connection connection = DriverManager.getConnection(JDBC_URL);
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -83,7 +84,9 @@ public class MassageRepository extends BaseRepository {
                 "from message ms " +
                 "join public.unity_user uu on uu.id = ms.id_sender " +
                 "where id_reciver=? " +
-                "and message_order > ? and message_order < ?";
+                "and message_order > ? and message_order < ? " +
+                "order by ms.message_order asc";
+        ;
         Connection connection = DriverManager.getConnection(JDBC_URL);
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
